@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoriesController;
+use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Livewire\Auth\Login;
@@ -54,3 +56,12 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', LogoutController::class)
         ->name('logout');
 });
+
+Route::get('admin', function () {
+    return view('admin.dashboard');
+})->name('admin');
+
+Route::get('admin/products/create', [ProductsController::class, 'create']);
+Route::post('admin/products/create', [ProductsController::class, 'store']);
+
+Route::get('admin/categories', [CategoriesController::class, 'index'])->name('admin.categories');
