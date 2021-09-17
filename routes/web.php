@@ -61,6 +61,7 @@ Route::get('admin', function () {
     return view('admin.dashboard');
 })->name('admin');
 
+Route::get('admin/products', [ProductsController::class, 'index'])->middleware('admin')->name('admin.products');
 Route::get('admin/products/create', [ProductsController::class, 'create']);
 Route::post('admin/products/create', [ProductsController::class, 'store']);
 

@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="flex flex-col items-center justify-center flex-1 h-full min-h-screen p-4 overflow-x-hidden overflow-y-auto">
+<div class="flex flex-col items-center justify-center flex-1 p-4 overflow-x-hidden overflow-y-auto">
     <h1 class="mb-4 text-2xl font-semibold text-center md:text-3xl">Mini + One Columns Sidebar</h1>
     <div class="mb-4">
         <div class="relative flex p-1 space-x-1 bg-white shadow-md w-80 h-72 dark:bg-darker">
