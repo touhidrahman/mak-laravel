@@ -13,7 +13,7 @@ class ProductsController extends Controller
         return view('admin.products.index');
     }
 
-    public function create()
+    public function show()
     {
         return view('admin.products.create');
     }

@@ -10,15 +10,24 @@ class CategoriesController extends Controller
 {
     public function index()
     {
-        return view('admin.categories.index');
+        return view('admin.categories.index', [
+            'categories' => Category::all(),
+        ]);
+    }
+
+    public function show()
+    {
+        return view('admin.categories.create');
     }
 
     public function store()
     {
-        $attr = request()->validate([]);
+        $attr = request()->validate([
+            'name' => 'required|unique:categories,name',
+        ]);
 
         Category::create($attr);
 
-        return back()->with('success', 'Category created');
+        return redirect('/admin/categories')->with('success', 'Category created');
     }
 }

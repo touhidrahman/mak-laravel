@@ -20,4 +20,6 @@
         </section>
     </main>
 
+    <x-alert/>
+
 @endsection
