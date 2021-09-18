@@ -70,6 +70,8 @@ Route::middleware('auth')->group(function () {
     Route::get('admin/categories', [CategoriesController::class, 'index'])->name('admin.categories');
     Route::get('admin/categories/create', [CategoriesController::class, 'show']);
     Route::post('admin/categories/create', [CategoriesController::class, 'store']);
+    Route::get('admin/categories/{category}/edit', [CategoriesController::class, 'edit'])->name('admin.categories.edit');
+    Route::post('admin/categories/{category}/edit', [CategoriesController::class, 'update'])->name('admin.categories.update');
 
     Route::get('admin/subcategories', [SubcategoryController::class, 'index'])->name('admin.subcategories');
     Route::get('admin/subcategories/create', [SubcategoryController::class, 'show']);

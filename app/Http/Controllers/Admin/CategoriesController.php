@@ -30,4 +30,24 @@ class CategoriesController extends Controller
 
         return redirect('/admin/categories')->with('success', 'Category created');
     }
+
+    public function edit($id)
+    {
+        $category = Category::findOrFail($id);
+        return view('admin.categories.edit', [
+            'category' => $category
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $attr = request()->validate([
+            'name' => 'required|unique:categories,name',
+        ]);
+
+        Category::findOrFail($id)->update($attr);
+
+        return redirect()->route('admin.categories')->with('success', 'Category updated');
+    }
+
 }
