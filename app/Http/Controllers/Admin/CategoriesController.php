@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CategoriesController extends Controller
 {
@@ -48,6 +49,13 @@ class CategoriesController extends Controller
         Category::findOrFail($id)->update($attr);
 
         return redirect()->route('admin.categories')->with('success', 'Category updated');
+    }
+
+    public function destroy($id)
+    {
+        Category::findOrFail($id)->delete();
+        Alert::success('Sucess', 'Category deleted!');
+        return redirect()->back();
     }
 
 }

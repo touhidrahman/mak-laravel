@@ -5,7 +5,8 @@
     <x-admin.page-toolbar>
 
         <x-admin.button-primary class="">
-            <a href=" /admin/subcategories/create" class="block py-2 px-4">Add Subcategory</a>
+            <a href=" /admin/subcategories/create" class="block py-2 px-4">Add
+            Subcategory</a>
         </x-admin.button-primary>
 
     </x-admin.page-toolbar>
@@ -60,9 +61,27 @@
                                     </span>
                                 </td>
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">
+                                    <a href="{{ route('admin.subcategories.edit', $subcategory->id) }}"
+                                        class="text-indigo-600 hover:text-indigo-900">
                                         Edit
                                     </a>
+                                    <button @click="showModal = true"
+                                        class="bg-transparent text-indigo-600 hover:text-indigo-900">
+                                        Delete
+                                    </button>
+                                    <x-modal.simple title="Delete {{ $subcategory->name }}?">
+                                        <form action="{{ route('admin.subcategories.delete', $subcategory->id) }}"
+                                             method="POST">
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <button type="submit">OK</button>
+
+                                        </form>
+
+                                        <x-slot name="footer">
+                                        </x-slot>
+                                    </x-modal.simple>
                                 </td>
                             </tr>
                         @endforeach
@@ -113,6 +132,7 @@
 
 
     </section>
+
 
 
 @endsection

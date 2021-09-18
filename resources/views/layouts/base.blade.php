@@ -28,9 +28,11 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>
 
-    <body>
+    <body x-data="{ 'showModal': false }" @keydown.escape="showModal = false" x-cloak>
         @yield('body')
 
+        @include('sweetalert::alert')
+        @include('components.alert')
         @livewireScripts
     </body>
 </html>
