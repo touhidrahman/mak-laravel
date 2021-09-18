@@ -4,7 +4,8 @@
     <x-form.label name="{{ $name }}" required="{{ $required }}"></x-form.label>
 
     <input type="{{ $type }}" name="{{ $name }}" id="{{ $name }}" value="{{ old($name) }}"
-        placeholder="{{ $placeholder }}" {{ $attributes }}/>
+        class="mt-1 rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+        placeholder="{{ $placeholder }}" {{ $attributes }} />
 
     <x-form.error name="{{ $name }}" message="{{ $message }}"></x-form.error>
 </x-form.field>

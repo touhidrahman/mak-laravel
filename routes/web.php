@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\ProductsController;
+use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Livewire\Auth\Login;
@@ -69,4 +70,8 @@ Route::middleware('auth')->group(function () {
     Route::get('admin/categories', [CategoriesController::class, 'index'])->name('admin.categories');
     Route::get('admin/categories/create', [CategoriesController::class, 'show']);
     Route::post('admin/categories/create', [CategoriesController::class, 'store']);
+
+    Route::get('admin/subcategories', [SubcategoryController::class, 'index'])->name('admin.subcategories');
+    Route::get('admin/subcategories/create', [SubcategoryController::class, 'show']);
+    Route::post('admin/subcategories/create', [SubcategoryController::class, 'store']);
 // });

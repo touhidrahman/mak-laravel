@@ -19,6 +19,11 @@ class Category extends Model
         $this->hasMany(Product::class);
     }
 
+    public function subcategory()
+    {
+        $this->hasMany(Subcategory::class);
+    }
+
     /**
      * Get the options for generating the slug.
      */

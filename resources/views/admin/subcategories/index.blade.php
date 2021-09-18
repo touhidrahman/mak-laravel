@@ -5,7 +5,7 @@
     <x-admin.page-toolbar>
 
         <x-admin.button-primary class="">
-        <a href=" /admin/categories/create" class="block py-2 px-4">Add Category</a>
+            <a href=" /admin/subcategories/create" class="block py-2 px-4">Add Subcategory</a>
         </x-admin.button-primary>
 
     </x-admin.page-toolbar>
@@ -28,10 +28,6 @@
                             </th>
                             <th scope="col"
                                 class="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal">
-                                Subsubcategory
-                            </th>
-                            <th scope="col"
-                                class="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal">
                                 Product Counts
                             </th>
                             <th scope="col"
@@ -40,38 +36,35 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($categories as $category)
-                        <tr>
-                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <p class="text-gray-900 whitespace-no-wrap">
-                                    {{ $category->name }}
-                                </p>
-                            </td>
-                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <p class="text-gray-900 whitespace-no-wrap">
-                                    Admin
-                                </p>
-                            </td>
-                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <p class="text-gray-900 whitespace-no-wrap">
-                                    12/09/2020
-                                </p>
-                            </td>
-                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                                    <span aria-hidden="true" class="absolute inset-0 bg-green-200 opacity-50 rounded-full">
+                        @foreach ($subcategories as $subcategory)
+                            <tr>
+                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                    <p class="text-gray-900 whitespace-no-wrap">
+                                        {{ $subcategory->name }}
+                                    </p>
+                                </td>
+                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                    <p class="text-gray-900 whitespace-no-wrap">
+                                        {{ $subcategory->category?->name }}
+                                    </p>
+                                </td>
+                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                    <span
+                                        class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                        <span aria-hidden="true"
+                                            class="absolute inset-0 bg-green-200 opacity-50 rounded-full">
+                                        </span>
+                                        <span class="relative">
+                                            0
+                                        </span>
                                     </span>
-                                    <span class="relative">
-                                        active
-                                    </span>
-                                </span>
-                            </td>
-                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <a href="#" class="text-indigo-600 hover:text-indigo-900">
-                                    Edit
-                                </a>
-                            </td>
-                        </tr>
+                                </td>
+                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">
+                                        Edit
+                                    </a>
+                                </td>
+                            </tr>
                         @endforeach
 
                     </tbody>

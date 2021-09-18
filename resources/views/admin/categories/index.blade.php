@@ -8,6 +8,14 @@
         <a href=" /admin/categories/create" class="block py-2 px-4">Add Category</a>
         </x-admin.button-primary>
 
+        <x-admin.button-primary class="">
+        <a href=" /admin/subcategories" class="block py-2 px-4">Subcategories</a>
+        </x-admin.button-primary>
+
+        <x-admin.button-primary class="">
+        <a href=" /admin/subsubcategories" class="block py-2 px-4">Sub-subcategories</a>
+        </x-admin.button-primary>
+
     </x-admin.page-toolbar>
 
     <section class="mt-10">
@@ -37,16 +45,6 @@
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                 <p class="text-gray-900 whitespace-no-wrap">
                                     {{ $category->name }}
-                                </p>
-                            </td>
-                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <p class="text-gray-900 whitespace-no-wrap">
-                                    Admin
-                                </p>
-                            </td>
-                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <p class="text-gray-900 whitespace-no-wrap">
-                                    12/09/2020
                                 </p>
                             </td>
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
