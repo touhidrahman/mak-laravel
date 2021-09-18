@@ -18,6 +18,8 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ url(mix('css/app.css')) }}">
+        <link href="https://cdn.jsdelivr.net/npm/daisyui@1.14.0/dist/full.css" rel="stylesheet" type="text/css" />
+
         @livewireStyles
 
         <!-- Scripts -->
@@ -32,7 +34,7 @@
         @yield('body')
 
         @include('sweetalert::alert')
-        @include('components.alert')
+
         @livewireScripts
     </body>
 </html>

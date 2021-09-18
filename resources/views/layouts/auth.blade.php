@@ -7,7 +7,7 @@
 
         <section class="flex-1 min-h-screen">
             {{-- Navbar --}}
-            @include('admin.admin-searchbar')
+            {{-- @include('admin.admin-searchbar') --}}
 
 
             <article class="py-8 sm:px-6 lg:px-8">
@@ -19,7 +19,5 @@
             </article>
         </section>
     </main>
-
-    <x-alert/>
 
 @endsection

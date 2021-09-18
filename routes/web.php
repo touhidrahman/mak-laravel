@@ -68,14 +68,14 @@ Route::middleware('auth')->group(function () {
     Route::post('admin/products/create', [ProductsController::class, 'store']);
 
     Route::get('admin/categories', [CategoriesController::class, 'index'])->name('admin.categories');
-    Route::get('admin/categories/create', [CategoriesController::class, 'show']);
+    Route::get('admin/categories/create', [CategoriesController::class, 'show'])->name('admin.categories.show');
     Route::post('admin/categories/create', [CategoriesController::class, 'store']);
     Route::get('admin/categories/{category}/edit', [CategoriesController::class, 'edit'])->name('admin.categories.edit');
     Route::post('admin/categories/{category}/edit', [CategoriesController::class, 'update'])->name('admin.categories.update');
     Route::delete('admin/categories/{category}', [CategoriesController::class, 'destroy'])->name('admin.categories.delete');
 
     Route::get('admin/subcategories', [SubcategoryController::class, 'index'])->name('admin.subcategories');
-    Route::get('admin/subcategories/create', [SubcategoryController::class, 'show']);
+    Route::get('admin/subcategories/create', [SubcategoryController::class, 'show'])->name('admin.subcategories.show');
     Route::post('admin/subcategories/create', [SubcategoryController::class, 'store']);
     Route::get('admin/subcategories/{subcategory}/edit', [SubcategoryController::class, 'edit'])->name('admin.subcategories.edit');
     Route::post('admin/subcategories/{subcategory}/edit', [SubcategoryController::class, 'update'])->name('admin.subcategories.update');

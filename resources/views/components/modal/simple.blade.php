@@ -30,10 +30,8 @@
 
         <!--Footer-->
         <div class="flex justify-end pt-2">
-            {{ $footer }}
+            {{ $footer ?? '' }}
 
-            {{-- <button class="modal-close ml-2 px-4 bg-indigo-700 py-2 rounded-lg text-white hover:bg-indigo-600"
-                @click="showModal = false">Close</button> --}}
         </div>
 
 
