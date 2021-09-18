@@ -7,47 +7,12 @@
     <form class="lg:col-span-2" action="/admin/products/create" method="POST">
         @csrf
 
-        <div class="flex flex-col max-w-xl mb-4">
-            <label for="" class="text-gray-700 ">
-                Name
-            </label>
-            <input type="text" name="name" placeholder="Product name" />
-        </div>
-
-        <div class="flex flex-col max-w-xl mb-4">
-            <label for="" class="text-gray-700 ">
-                Brand
-            </label>
-            <input type="text" name="name" placeholder="Product name" />
-        </div>
-
-        <div class="flex flex-col max-w-xl mb-4">
-            <label for="" class="text-gray-700 ">
-                Season
-            </label>
-            <input type="text" name="name" placeholder="Product name" />
-        </div>
-
-        <div class="flex flex-col max-w-xl mb-4">
-            <label for="" class="text-gray-700 ">
-                Material
-            </label>
-            <input type="text" name="name" placeholder="Product name" />
-        </div>
-
-        <div class="flex flex-col max-w-xl mb-4">
-            <label for="" class="text-gray-700 ">
-                Product Code
-            </label>
-            <input type="text" name="name" placeholder="Product name" />
-        </div>
-
-        <div class="flex flex-col max-w-xl mb-4">
-            <label for="" class="text-gray-700 ">
-                Tags
-            </label>
-            <input type="text" name="name" placeholder="Product name" />
-        </div>
+        <x-form.input name="name" :required="true" placeholder="Product Name"></x-form.input>
+        <x-form.input name="brand" placeholder=""></x-form.input>
+        <x-form.input name="season" placeholder=""></x-form.input>
+        <x-form.input name="material" placeholder=""></x-form.input>
+        <x-form.input name="product code" placeholder=""></x-form.input>
+        <x-form.input name="tags" placeholder=""></x-form.input>
 
         <div class="flex flex-col max-w-xl mb-4">
             <label for="" class="text-gray-700 ">
@@ -63,8 +28,7 @@
             <input type="text" name="name" placeholder="Product name" />
         </div>
 
-
-        <button type="submit" class="px-4 py-2 bg-indigo-600 text-white">Save</button>
+        <x-form.submit>Save</x-form.submit>
     </form>
 
 @endsection
