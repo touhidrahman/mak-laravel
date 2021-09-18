@@ -57,12 +57,15 @@ Route::middleware('auth')->group(function () {
         ->name('logout');
 });
 
-Route::get('admin', function () {
-    return view('admin.dashboard');
-})->name('admin');
+// Route::middleware('admin')->group(function() {
+    Route::get('admin', function () {
+        return view('admin.dashboard');
+    })->name('admin');
 
-Route::get('admin/products', [ProductsController::class, 'index'])->name('admin.products');
-Route::get('admin/products/create', [ProductsController::class, 'create']);
-Route::post('admin/products/create', [ProductsController::class, 'store']);
+    Route::get('admin/products', [ProductsController::class, 'index'])->name('admin.products');
+    Route::get('admin/products/create', [ProductsController::class, 'create']);
+    Route::post('admin/products/create', [ProductsController::class, 'store']);
 
-Route::get('admin/categories', [CategoriesController::class, 'index'])->name('admin.categories');
+    Route::get('admin/categories', [CategoriesController::class, 'index'])->name('admin.categories');
+    Route::post('admin/categories/create', [CategoriesController::class, 'store']);
+// });
