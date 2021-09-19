@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h1 class="text-2xl font-bold mb-10">Subcategories</h1>
+    <h1 class="text-2xl font-bold mb-10">Sub-subcategories</h1>
 
     @include('admin.admin-categories-toolbar')
 
@@ -25,6 +25,10 @@
                             </th>
                             <th scope="col"
                                 class="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal">
+                                Sub-subcategory
+                            </th>
+                            <th scope="col"
+                                class="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal">
                                 Product Counts
                             </th>
                             <th scope="col"
@@ -33,16 +37,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($subcategories as $subcategory)
+                        @foreach ($subsubcategories as $subsubcategory)
                             <tr>
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                     <p class="text-gray-900 whitespace-no-wrap">
-                                        {{ $subcategory->name }}
+                                        {{ $subsubcategory->category?->name }}
                                     </p>
                                 </td>
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                     <p class="text-gray-900 whitespace-no-wrap">
-                                        {{ $subcategory->category?->name }}
+                                        {{ $subsubcategory->subcategory?->name }}
+                                    </p>
+                                </td>
+                                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                    <p class="text-gray-900 whitespace-no-wrap">
+                                        {{ $subsubcategory->name }}
                                     </p>
                                 </td>
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
@@ -57,7 +66,7 @@
                                     </span>
                                 </td>
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                    <a href="{{ route('admin.subcategories.edit', $subcategory->id) }}"
+                                    <a href="{{ route('admin.subsubcategories.edit', $subsubcategory->id) }}"
                                         class="text-indigo-600 hover:text-indigo-900">
                                         Edit
                                     </a>
@@ -65,8 +74,8 @@
                                         class="ml-2 bg-transparent text-indigo-600 hover:text-indigo-900">
                                         Delete
                                     </button>
-                                    <x-modal.delete title="Delete {{ $subcategory->name }}?"
-                                        actionRoute="{{ route('admin.subcategories.delete', $subcategory->id) }}">
+                                    <x-modal.delete title="Delete {{ $subsubcategory->name }}?"
+                                        actionRoute="{{ route('admin.subsubcategories.delete', $subsubcategory->id) }}">
                                     </x-modal.delete>
                                 </td>
                             </tr>
@@ -76,7 +85,7 @@
                 </table>
 
                 <div class="bg-white">
-                    {{ $subcategories->links() }}
+                    {{ $subsubcategories->links() }}
                 </div>
             </div>
         </div>

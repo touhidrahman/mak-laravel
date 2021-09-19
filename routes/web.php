@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\SubcategoryController;
+use App\Http\Controllers\Admin\SubsubcategoryController;
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Livewire\Auth\Login;
@@ -69,21 +70,22 @@ Route::middleware('auth')->group(function () {
 
     Route::get('admin/categories', [CategoriesController::class, 'index'])->name('admin.categories');
     Route::get('admin/categories/create', [CategoriesController::class, 'show'])->name('admin.categories.show');
-    Route::post('admin/categories/create', [CategoriesController::class, 'store']);
+    Route::post('admin/categories/create', [CategoriesController::class, 'store'])->name('admin.categories.store');
     Route::get('admin/categories/{category}/edit', [CategoriesController::class, 'edit'])->name('admin.categories.edit');
     Route::post('admin/categories/{category}/edit', [CategoriesController::class, 'update'])->name('admin.categories.update');
     Route::delete('admin/categories/{category}', [CategoriesController::class, 'destroy'])->name('admin.categories.delete');
+    Route::get('admin/categories/ajax/{category}', [CategoriesController::class, 'ajaxGetSubcategories']);
 
     Route::get('admin/subcategories', [SubcategoryController::class, 'index'])->name('admin.subcategories');
     Route::get('admin/subcategories/create', [SubcategoryController::class, 'show'])->name('admin.subcategories.show');
-    Route::post('admin/subcategories/create', [SubcategoryController::class, 'store']);
+    Route::post('admin/subcategories/create', [SubcategoryController::class, 'store'])->name('admin.subcategories.store');
     Route::get('admin/subcategories/{subcategory}/edit', [SubcategoryController::class, 'edit'])->name('admin.subcategories.edit');
     Route::post('admin/subcategories/{subcategory}/edit', [SubcategoryController::class, 'update'])->name('admin.subcategories.update');
     Route::delete('admin/subcategories/{subcategory}', [SubcategoryController::class, 'destroy'])->name('admin.subcategories.delete');
 
     Route::get('admin/subsubcategories', [SubsubcategoryController::class, 'index'])->name('admin.subsubcategories');
     Route::get('admin/subsubcategories/create', [SubsubcategoryController::class, 'show'])->name('admin.subsubcategories.show');
-    Route::post('admin/subsubcategories/create', [SubsubcategoryController::class, 'store']);
+    Route::post('admin/subsubcategories/create', [SubsubcategoryController::class, 'store'])->name('admin.subsubcategories.store');
     Route::get('admin/subsubcategories/{subsubcategory}/edit', [SubsubcategoryController::class, 'edit'])->name('admin.subsubcategories.edit');
     Route::post('admin/subsubcategories/{subsubcategory}/edit', [SubsubcategoryController::class, 'update'])->name('admin.subsubcategories.update');
     Route::delete('admin/subsubcategories/{subsubcategory}', [SubsubcategoryController::class, 'destroy'])->name('admin.subsubcategories.delete');

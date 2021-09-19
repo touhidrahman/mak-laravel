@@ -13,7 +13,7 @@ class SubsubcategoryController extends Controller
     public function index()
     {
         return view('admin.subsubcategories.index', [
-            'subcategories' => Subsubcategory::paginate(50),
+            'subsubcategories' => Subsubcategory::paginate(50),
         ]);
     }
 
@@ -28,19 +28,25 @@ class SubsubcategoryController extends Controller
     {
         $attr = request()->validate([
             'name' => 'required',
-            'category_id' => 'required'
+            'category_id' => 'required',
+            'subcategory_id' => 'required',
         ]);
 
-        @Subcategory::create($attr);
+        @Subsubcategory::create($attr);
 
-        return redirect('/admin/subcategories')->with('success', 'Subcategory created');
+        toast('Sub-subcategory created', 'success');
+        return redirect()->route('admin.subsubcategories');
     }
 
     public function edit($id)
     {
+        $subsubcategory = Subsubcategory::findOrFail($id);
+        $subcategories = Subcategory::where('category_id', $subsubcategory->category_id)->orderBy('name', 'ASC')->get();
+
         return view('admin.subsubcategories.edit', [
             'categories' => Category::orderBy('name', 'ASC')->get(),
-            'subcategory' => Subcategory::findOrFail($id),
+            'subcategories' => $subcategories,
+            'subsubcategory' => $subsubcategory,
         ]);
     }
 
@@ -48,18 +54,20 @@ class SubsubcategoryController extends Controller
     {
         $attr = request()->validate([
             'name' => 'required',
-            'category_id' => 'required'
+            'category_id' => 'required',
+            'subcategory_id' => 'required',
         ]);
 
-        @Subcategory::findOrFail($id)->update($attr);
+        @Subsubcategory::findOrFail($id)->update($attr);
 
-        return redirect()->route('admin.subsubcategories')->with('success', 'Subcategory Updated');
+        toast('Sub-subcategory updated', 'success');
+        return redirect()->route('admin.subsubcategories');
     }
 
-    public function destroy(Subcategory $subcategory)
+    public function destroy(Subsubcategory $subsubcategory)
     {
-        $subcategory->delete();
-        toast('Subcategory deleted', 'success');
+        $subsubcategory->delete();
+        toast('Sub-subcategory deleted', 'success');
         return redirect()->route('admin.subsubcategories');
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Subcategory;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class CategoriesController extends Controller
@@ -56,6 +57,12 @@ class CategoriesController extends Controller
         $category->delete();
         toast('Category deleted!', 'success');
         return redirect()->route('admin.categories');
+    }
+
+    public function ajaxGetSubcategories($category_id)
+    {
+        $subcategories = Subcategory::where('category_id', $category_id)->orderBy('name', 'ASC')->get();
+        return json_encode($subcategories);
     }
 
 }

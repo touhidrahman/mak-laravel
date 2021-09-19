@@ -14,7 +14,7 @@
                 </span>
             </button>
         </x-admin.sidebar-link>
-        <x-admin.sidebar-link label="Categories" url="/admin/categories"></x-admin.sidebar-link>
+        <x-admin.sidebar-link label="Categories" url="/admin/subsubcategories"></x-admin.sidebar-link>
         <x-admin.sidebar-link label="Settings" url="/admin/settings"></x-admin.sidebar-link>
     </nav>
 </aside>
