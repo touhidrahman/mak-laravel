@@ -4,33 +4,42 @@
     <h2 class="font-semibold text-xl text-gray-600">Create Product</h2>
     <p class="text-gray-500 mb-6"></p>
 
-    <form class="lg:col-span-2" action="/admin/products/create" method="POST">
+    <form class="grid grid-cols-3 gap-8" action="/admin/products/create" method="POST">
         @csrf
+        <div class="">
+            <x-admin.category-select :categories=" $categories">
+            </x-admin.category-select>
+            <x-form.input name="name" :required="true" placeholder="Product Name"></x-form.input>
+            <x-form.input name="brand" placeholder=""></x-form.input>
+            <x-form.input name="season" placeholder=""></x-form.input>
+            <x-form.input name="material" placeholder=""></x-form.input>
+            <x-form.input name="code" label="Product Code"></x-form.input>
+            <x-form.input name="qty" label="Quantity"></x-form.input>
+            <x-form.input name="tags" placeholder=""></x-form.input>
 
-        <x-admin.category-select :categories="$categories"></x-admin.category-select>
+            <div class="flex flex-col max-w-xl mb-4">
+                <label for="" class="text-gray-700 ">
+                    Size
+                </label>
+                <input type="text" name="name" placeholder="Product name" />
+            </div>
 
-        <x-form.input name="name" :required="true" placeholder="Product Name"></x-form.input>
-        <x-form.input name="brand" placeholder=""></x-form.input>
-        <x-form.input name="season" placeholder=""></x-form.input>
-        <x-form.input name="material" placeholder=""></x-form.input>
-        <x-form.input name="product code" placeholder=""></x-form.input>
-        <x-form.input name="tags" placeholder=""></x-form.input>
-
-        <div class="flex flex-col max-w-xl mb-4">
-            <label for="" class="text-gray-700 ">
-                Size
-            </label>
-            <input type="text" name="name" placeholder="Product name" />
+            <div class="flex flex-col max-w-xl mb-4">
+                <label for="" class="text-gray-700 ">
+                    Color
+                </label>
+                <input type="text" name="name" placeholder="Product name" />
+            </div>
         </div>
 
-        <div class="flex flex-col max-w-xl mb-4">
-            <label for="" class="text-gray-700 ">
-                Color
-            </label>
-            <input type="text" name="name" placeholder="Product name" />
+        <div class="col-span-2">
+            <x-form.textarea name="seo_text" label="Search engine description (Short)"></x-form.textarea>
+            <x-form.textarea name="description"></x-form.textarea>
+
+            <x-form.submit>Save</x-form.submit>
+
         </div>
 
-        <x-form.submit>Save</x-form.submit>
     </form>
 
 @endsection
