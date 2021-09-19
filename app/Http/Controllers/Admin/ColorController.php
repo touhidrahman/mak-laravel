@@ -11,7 +11,7 @@ class ColorController extends Controller
 {
     public function index()
     {
-        return view('admin.colors.index', [
+        return view('admin.settings.index', [
             'colors' => Color::all(),
         ]);
     }
@@ -26,13 +26,13 @@ class ColorController extends Controller
         Color::create($data);
         toast('Color saved', 'success');
 
-        return redirect()->route('admin.colors');
+        return redirect()->route('admin.settings');
     }
 
     public function destroy(Color $color)
     {
         $color->delete();
         toast('Color deleted', 'success');
-        return redirect()->route('admin.colors');
+        return redirect()->route('admin.settings');
     }
 }

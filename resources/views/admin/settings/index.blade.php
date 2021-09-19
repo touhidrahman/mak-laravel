@@ -2,13 +2,7 @@
 
 @section('content')
 
-    <x-admin.page-toolbar>
-
-        <a href="{{ route('admin.colors') }}" class="btn btn-primary">Colors</a>
-        <a href="{{ route('admin.colors') }}" class="btn btn-secondary btn-outline">Add Color</a>
-
-    </x-admin.page-toolbar>
-
+    <h1 class="text-3xl font-bold">Colors</h1>
     <section class="mt-10 grid gap-8 grid-cols-4">
         <div class="col-span-3">
             <table class="table w-full">
@@ -43,14 +37,14 @@
         </div>
 
         <div class="">
-            <h1 class="text-lg font-semibold mb-6">Add Color</h1>
+            <h1 class=" text-lg font-semibold mb-6">Add Color</h1>
             <form action=" {{ route('admin.colors.store') }}" method="post">
-            @csrf
+                @csrf
 
-            <x-form.input name="name"></x-form.input>
-            <x-form.input name="hex" label="HEX Value"></x-form.input>
+                <x-form.input name="name"></x-form.input>
+                <x-form.input name="hex" label="HEX Value"></x-form.input>
 
-            <x-form.submit>Save</x-form.submit>
+                <x-form.submit>Save</x-form.submit>
             </form>
         </div>
     </section>
