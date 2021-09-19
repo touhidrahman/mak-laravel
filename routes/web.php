@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\Admin\SubsubcategoryController;
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Admin\ColorController;
 use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Auth\Passwords\Confirm;
 use App\Http\Livewire\Auth\Passwords\Email;
@@ -90,5 +91,9 @@ Route::middleware('auth')->group(function () {
     Route::get('admin/subsubcategories/{subsubcategory}/edit', [SubsubcategoryController::class, 'edit'])->name('admin.subsubcategories.edit');
     Route::post('admin/subsubcategories/{subsubcategory}/edit', [SubsubcategoryController::class, 'update'])->name('admin.subsubcategories.update');
     Route::delete('admin/subsubcategories/{subsubcategory}', [SubsubcategoryController::class, 'destroy'])->name('admin.subsubcategories.delete');
+
+    Route::get('admin/colors', [ColorController::class, 'index'])->name('admin.colors');
+    Route::post('admin/colors', [ColorController::class, 'store'])->name('admin.colors.store');
+    Route::delete('admin/colors/{color}', [ColorController::class, 'destroy'])->name('admin.colors.destroy');
 
 // });
