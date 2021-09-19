@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Color;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,8 @@ class ProductsController extends Controller
     public function show()
     {
         return view('admin.products.create', [
-            'categories' => Category::all(),
+            'categories' => Category::orderBy('name', 'ASC')->get(),
+            'colors' => Color::orderBy('name', 'ASC')->get(),
         ]);
     }
 
