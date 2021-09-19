@@ -66,8 +66,8 @@ Route::middleware('auth')->group(function () {
     })->name('admin');
 
     Route::get('admin/products', [ProductsController::class, 'index'])->name('admin.products');
-    Route::get('admin/products/create', [ProductsController::class, 'show']);
-    Route::post('admin/products/create', [ProductsController::class, 'store']);
+    Route::get('admin/products/create', [ProductsController::class, 'show'])->name('admin.products.show');
+    Route::post('admin/products/create', [ProductsController::class, 'store'])->name('admin.products.store');
 
     Route::get('admin/categories', [CategoriesController::class, 'index'])->name('admin.categories');
     Route::get('admin/categories/create', [CategoriesController::class, 'show'])->name('admin.categories.show');

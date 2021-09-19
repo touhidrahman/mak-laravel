@@ -4,7 +4,7 @@
     <h2 class="font-semibold text-xl text-gray-600">Create Product</h2>
     <p class="text-gray-500 mb-6"></p>
 
-    <form class="grid grid-cols-3 gap-8" action="/admin/products/create" method="POST">
+    <form class="grid grid-cols-3 gap-8" action="/admin/products/create" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="">
@@ -35,6 +35,17 @@
         </div>
 
         <div class="col-span-2">
+            <x-form.field>
+                <x-form.label name="Cover Image 1" required="true"></x-form.label>
+                <input type="file" name="thumb_1" id="thumb_1">
+                <x-form.error name="thumb_1"></x-form.error>
+            </x-form.field>
+            <x-form.field>
+                <x-form.label name="Cover Image 2" required="true"></x-form.label>
+                <input type="file" name="thumb_2" id="thumb_2">
+                <x-form.error name="thumb_2"></x-form.error>
+            </x-form.field>
+
             <x-form.textarea name="seo_text" label="Search engine description (Short)"></x-form.textarea>
             <x-form.textarea name="description"></x-form.textarea>
 
