@@ -29,28 +29,3 @@
     </form>
 
 @endsection
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
-
-<script type="text/javascript">
-$(document).ready(function() {
-    $('select[name="category_id"]').on('change', function() {
-        var category_id = $(this).val();
-        if (category_id) {
-            $.ajax({
-                url: "{{ url('/admin/categories/ajax') }}/" + category_id,
-                type: "GET",
-                dataType: "json",
-                success: function(data) {
-                    var d = $('select[name="subcategory_id"]').empty();
-                    $.each(data, function(key, value) {
-                        $('select[name="subcategory_id"]').append(
-                            '<option value="' + value.id + '">' + value.name + '</option>'
-                        );
-                    });
-                },
-            });
-        }
-    });
-});
-</script>

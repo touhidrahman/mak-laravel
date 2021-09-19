@@ -7,6 +7,8 @@
     <form class="lg:col-span-2" action="/admin/products/create" method="POST">
         @csrf
 
+        <x-admin.category-select :categories="$categories"></x-admin.category-select>
+
         <x-form.input name="name" :required="true" placeholder="Product Name"></x-form.input>
         <x-form.input name="brand" placeholder=""></x-form.input>
         <x-form.input name="season" placeholder=""></x-form.input>

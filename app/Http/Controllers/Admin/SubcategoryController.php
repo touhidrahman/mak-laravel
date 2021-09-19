@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Subcategory;
+use App\Models\Subsubcategory;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Toaster;
 
@@ -61,5 +62,11 @@ class SubcategoryController extends Controller
         $subcategory->delete();
         toast('Subcategory deleted', 'success');
         return redirect()->route('admin.subcategories');
+    }
+
+    public function ajaxGetSubsubcategories($subcategory_id)
+    {
+        $subsubcategories = Subsubcategory::where('subcategory_id', $subcategory_id)->orderBy('name', 'ASC')->get();
+        return json_encode($subsubcategories);
     }
 }
