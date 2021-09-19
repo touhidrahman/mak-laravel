@@ -28,9 +28,9 @@ class CreateProductsTable extends Migration
             $table->string('thumb_2');
             $table->integer('selling_price');
             $table->integer('discount_price');
-            $table->foreignId('category_id');
-            $table->foreignId('subcategory_id');
-            $table->foreignId('subsubcategory_id');
+            $table->foreignId('category_id')->nullable();
+            $table->foreignId('subcategory_id')->nullable();
+            $table->foreignId('subsubcategory_id')->nullable();
             $table->boolean('status');
             $table->longText('description');
             $table->text('seo_text');
