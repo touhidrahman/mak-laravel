@@ -2,7 +2,9 @@
 
 @section('content')
     <h2 class="font-semibold text-xl text-gray-600">Create Product</h2>
-    <p class="text-gray-500 mb-6"></p>
+    <p class="text-gray-500"></p>
+
+    @include('admin.products._products-toolbar')
 
     <form class="grid grid-cols-3 gap-8" action="/admin/products/create" method="POST" enctype="multipart/form-data">
         @csrf

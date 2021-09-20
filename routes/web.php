@@ -69,6 +69,7 @@ Route::middleware('auth')->group(function () {
     Route::get('admin/products/create', [ProductsController::class, 'show'])->name('admin.products.show');
     Route::post('admin/products/create', [ProductsController::class, 'store'])->name('admin.products.store');
     Route::get('admin/products/{product}/manage', [ProductsController::class, 'manage'])->name('admin.products.manage');
+    Route::post('admin/products/{product}/manage', [ProductsController::class, 'uploadImages'])->name('admin.products.uploadImages');
 
     Route::get('admin/categories', [CategoriesController::class, 'index'])->name('admin.categories');
     Route::get('admin/categories/create', [CategoriesController::class, 'show'])->name('admin.categories.show');

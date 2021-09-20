@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Color;
 use App\Models\Product;
+use App\Models\ProductImages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -29,11 +30,6 @@ class ProductsController extends Controller
 
     public function store(Request $request)
     {
-        // if (($request->hasFile('thumb_1') == false || $request->hasFile('thumb_2') == false)) {
-        //     toast('Cover images are required', 'error');
-        //     return back();
-        // }
-
         $data = $request->validate([
             'name' => 'required',
             'category_id' => 'required|integer',
@@ -64,29 +60,53 @@ class ProductsController extends Controller
     {
         return view('admin.products.manage', [
             'product' => Product::find($id),
+            'images' => ProductImages::where('product_id', $id)->get(),
         ]);
     }
 
-    public function uploadThumbnails(Request $request, $key)
+    public function uploadImages(Request $request)
     {
         $data = $request->validate([
-            'thumb_1' => 'required|mimes:jpg,png,jpeg|max:2048',
-            'thumb_2' => 'required|mimes:jpg,png,jpeg|max:2048',
+            'thumb_1' => 'mimes:jpg,png,jpeg|max:2048',
+            'thumb_2' => 'mimes:jpg,png,jpeg|max:2048',
         ]);
 
-        // TODO heavily wrong
-        if ($request->hasFile($key)) {
-            $file = $request->file($key);
-            $newName =  $request->name . '-' . time() . '.' . $file->getClientOriginalExtension();
-            $filepath = $file->storeAs('catalog_images', $newName, 's3');
+        $toSave = [];
+        foreach(['thumb_1', 'thumb_2'] as $key) {
+            if ($request->hasFile($key)) {
+                $file = $request->file($key);
+                $url = $this->doUpload($file, $request->id);
+                $toSave[$key] = $url;
+            }
+        }
 
-            Product::findOrFail($request->id)->update(['thumb_1' => $filepath]);
+        $images = $request->file('images');
+        $i = 0;
+        foreach($images as $image) {
+            ProductImages::insert([
+                'product_id' => $request->id,
+                'path' => $this->doUpload($image, $request->id),
+                'serial' => $i,
+            ]);
+            $i++;
+        }
 
-            toast('Thumbnail uploaded', 'success');
+        if (count($toSave) > 0) {
+            Product::findOrFail($request->id)->update($toSave);
+
+            toast('Images uploaded', 'success');
             return back();
         }
 
-        toast('Uploading thumbnail failed', 'error');
+        toast('Uploading images failed', 'error');
         return back();
+    }
+
+    private function doUpload($file, $productId)
+    {
+        $newName =  $productId . '/' . hexdec(uniqid()) . '.' . $file->getClientOriginalExtension();
+        $filepath = $file->storeAs('catalog_images', $newName, 's3');
+        Storage::disk('s3')->setVisibility($filepath, 'public');
+        return Storage::disk('s3')->url($filepath);
     }
 }
