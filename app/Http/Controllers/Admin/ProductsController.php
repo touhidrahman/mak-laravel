@@ -13,7 +13,10 @@ class ProductsController extends Controller
 {
     public function index()
     {
-        return view('admin.products.index');
+        $products = Product::paginate(20);
+        return view('admin.products.index', [
+            'products' => $products,
+        ]);
     }
 
     public function show()
@@ -47,15 +50,9 @@ class ProductsController extends Controller
             'tags' => '',
             'size' => '',
             'color' => '',
-            'qty' => 'integer',
             'selling_price' => 'integer',
             'discount_price' => 'integer',
-            'thumb_1' => 'required|mimes:jpg,png,jpeg|max:2048',
-            'thumb_2' => 'required|mimes:jpg,png,jpeg|max:2048',
         ]);
-
-        $data['thumb_1'] = $this->uploadThumbnails($request, 'thumb_1');
-        $data['thumb_2'] = $this->uploadThumbnails($request, 'thumb_2');
 
         Product::create($data);
 
@@ -63,17 +60,33 @@ class ProductsController extends Controller
         return redirect()->route('admin.products');
     }
 
-    /**
-     * Returns uploaded URL
-     */
-    private function uploadThumbnails($request, $key)
+    public function manage($id)
     {
+        return view('admin.products.manage', [
+            'product' => Product::find($id),
+        ]);
+    }
+
+    public function uploadThumbnails(Request $request, $key)
+    {
+        $data = $request->validate([
+            'thumb_1' => 'required|mimes:jpg,png,jpeg|max:2048',
+            'thumb_2' => 'required|mimes:jpg,png,jpeg|max:2048',
+        ]);
+
+        // TODO heavily wrong
         if ($request->hasFile($key)) {
             $file = $request->file($key);
             $newName =  $request->name . '-' . time() . '.' . $file->getClientOriginalExtension();
             $filepath = $file->storeAs('catalog_images', $newName, 's3');
-            return $filepath;
+
+            Product::findOrFail($request->id)->update(['thumb_1' => $filepath]);
+
+            toast('Thumbnail uploaded', 'success');
+            return back();
         }
-        return '';
+
+        toast('Uploading thumbnail failed', 'error');
+        return back();
     }
 }

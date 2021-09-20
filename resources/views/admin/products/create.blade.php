@@ -8,48 +8,24 @@
         @csrf
 
         <div class="">
-            <x-admin.category-select :categories=" $categories">
-            </x-admin.category-select>
+            <x-admin.category-select :categories=" $categories"></x-admin.category-select>
             <x-form.input name="name" :required="true" placeholder="Product Name"></x-form.input>
             <x-form.input name="brand" placeholder=""></x-form.input>
             <x-form.input name="season" placeholder=""></x-form.input>
             <x-form.input name="material" placeholder=""></x-form.input>
             <x-form.input name="code" label="Product Code"></x-form.input>
-            <x-form.input name="qty" label="Quantity"></x-form.input>
-            <x-form.input name="tags" placeholder=""></x-form.input>
-            <x-form.select name="size" label="Size">
-                <option value="" selected disabled>Select size</option>
-                <option value="XS">XS</option>
-                <option value="S">S</option>
-                <option value="M">M</option>
-                <option value="L">L</option>
-                <option value="XL">XL</option>
-                <option value="XXL">XXL</option>
-            </x-form.select>
-            <x-form.select name="color_id" label="Color">
-                <option value="" selected disabled>Select color</option>
-                @foreach ($colors as $color)
-                    <option value="{{ $color->id }}">{{ $color->name }}</option>
-                @endforeach
-            </x-form.select>
         </div>
 
         <div class="col-span-2">
-            <x-form.field>
-                <x-form.label name="Cover Image 1" required="true"></x-form.label>
-                <input type="file" name="thumb_1" id="thumb_1">
-                <x-form.error name="thumb_1"></x-form.error>
-            </x-form.field>
-            <x-form.field>
-                <x-form.label name="Cover Image 2" required="true"></x-form.label>
-                <input type="file" name="thumb_2" id="thumb_2">
-                <x-form.error name="thumb_2"></x-form.error>
-            </x-form.field>
-
+            <div class="grid grid-cols-2 gap-8 max-w-xl">
+                <x-form.input name="selling_price" label="Selling Price (Eurocent)" type="number"></x-form.input>
+                <x-form.input name="discounted_price" label="Discounted Price (Eurocent)" type="number"></x-form.input>
+            </div>
             <x-form.textarea name="seo_text" label="Search engine description (Short)"></x-form.textarea>
             <x-form.textarea name="description"></x-form.textarea>
+            <x-form.input name="tags" placeholder=""></x-form.input>
 
-            <x-form.submit>Save</x-form.submit>
+            <x-form.submit-cancel cancelRoute="{{ route('admin.products') }}"></x-form.submit-cancel>
         </div>
     </form>
 

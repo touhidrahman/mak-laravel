@@ -27,10 +27,10 @@ class CreateProductsTable extends Migration
             $table->string('slug')->unique();
             $table->string('code')->nullable();
             $table->string('tags')->nullable();
-            $table->string('thumb_1');
-            $table->string('thumb_2');
+            $table->string('thumb_1')->nullable();
+            $table->string('thumb_2')->nullable();
             $table->integer('selling_price');
-            $table->integer('discounted_price');
+            $table->integer('discounted_price')->nullable();
             $table->boolean('active')->default(false);
             $table->longText('description');
             $table->text('seo_text');
