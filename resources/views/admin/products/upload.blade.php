@@ -12,11 +12,10 @@
         <input type="hidden" name="id" value="{{ $product->id }}">
         <div class="">
             <x-form.field>
-                <img id=" thumb_1_slot" src="{{ $product->thumb_1 }}"
-            class="w-32 h-32 block">
-            <x-form.label name="Cover Image 1" required="true"></x-form.label>
-            <input type="file" name="thumb_1" id="thumb_1" onChange="thumbnailPreview(this, 'thumb_1_slot')" />
-            <x-form.error name="thumb_1"></x-form.error>
+                <img id="thumb_1_slot" src="{{ $product->thumb_1 }}" class="w-32 h-32 block">
+                <x-form.label name="Cover Image 1" required="true"></x-form.label>
+                <input type="file" name="thumb_1" id="thumb_1" onChange="thumbnailPreview(this, 'thumb_1_slot')" />
+                <x-form.error name="thumb_1"></x-form.error>
             </x-form.field>
 
             <x-form.field>

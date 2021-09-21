@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\SubsubcategoryController;
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Admin\ColorController;
+use App\Http\Controllers\StockController;
 use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Auth\Passwords\Confirm;
 use App\Http\Livewire\Auth\Passwords\Email;
@@ -72,6 +73,8 @@ Route::middleware('auth')->group(function () {
     Route::post('admin/products/{product}/upload', [ProductsController::class, 'uploadImages'])->name('admin.products.uploadImages');
     Route::get('admin/products/{product}/manage', [ProductsController::class, 'showManageForm'])->name('admin.products.showManageForm');
     Route::post('admin/products/{product}/manage', [ProductsController::class, 'manage'])->name('admin.products.manage');
+
+    Route::post('admin/products/{product}/stocks', [StockController::class, 'store'])->name('admin.stocks.store');
 
     Route::get('admin/categories', [CategoriesController::class, 'index'])->name('admin.categories');
     Route::get('admin/categories/create', [CategoriesController::class, 'show'])->name('admin.categories.show');

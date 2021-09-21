@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Color;
 use App\Models\Product;
 use App\Models\ProductImages;
+use App\Models\Stock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -14,7 +15,7 @@ class ProductsController extends Controller
 {
     public function index()
     {
-        $products = Product::with(['category', 'subcategory', 'subsubcategory'])->paginate(20);
+        $products = Product::with(['category', 'subcategory', 'subsubcategory'])->orderBy('created_at', 'DESC')->paginate(20);
         return view('admin.products.index', [
             'products' => $products,
         ]);
@@ -109,6 +110,9 @@ class ProductsController extends Controller
     {
         return view('admin.products.manage', [
             'product' => Product::find($id),
+            'colors' => Color::orderBy('name', 'ASC')->get(),
+            'sizes' => ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+            'stocks' => Stock::where('product_id', $id)->get(),
         ]);
     }
 
