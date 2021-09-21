@@ -14,7 +14,7 @@ class ProductsController extends Controller
 {
     public function index()
     {
-        $products = Product::paginate(20);
+        $products = Product::with(['category', 'subcategory', 'subsubcategory'])->paginate(20);
         return view('admin.products.index', [
             'products' => $products,
         ]);
@@ -56,9 +56,9 @@ class ProductsController extends Controller
         return redirect()->route('admin.products');
     }
 
-    public function manage($id)
+    public function showUploadForm($id)
     {
-        return view('admin.products.manage', [
+        return view('admin.products.upload', [
             'product' => Product::find($id),
             'images' => ProductImages::where('product_id', $id)->get(),
         ]);
@@ -81,14 +81,16 @@ class ProductsController extends Controller
         }
 
         $images = $request->file('images');
-        $i = 0;
-        foreach($images as $image) {
-            ProductImages::insert([
-                'product_id' => $request->id,
-                'path' => $this->doUpload($image, $request->id),
-                'serial' => $i,
-            ]);
-            $i++;
+        if ($images && count($images) > 0) {
+            $i = 0;
+            foreach($images as $image) {
+                ProductImages::insert([
+                    'product_id' => $request->id,
+                    'path' => $this->doUpload($image, $request->id),
+                    'serial' => $i,
+                ]);
+                $i++;
+            }
         }
 
         if (count($toSave) > 0) {
@@ -99,6 +101,26 @@ class ProductsController extends Controller
         }
 
         toast('Uploading images failed', 'error');
+        return back();
+    }
+
+
+    public function showManageForm($id)
+    {
+        return view('admin.products.manage', [
+            'product' => Product::find($id),
+        ]);
+    }
+
+    public function manage(Request $request)
+    {
+        $data = $request->validate([
+            'active' => 'required|boolean',
+        ]);
+
+        Product::find($request->id)->update($data);
+
+        toast('Product updated', 'success');
         return back();
     }
 

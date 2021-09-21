@@ -8,11 +8,11 @@
         <x-admin.sidebar-link label="Dashboard" url="/admin"></x-admin.sidebar-link>
         <x-admin.sidebar-link label="Products" url="/admin/products"></x-admin.sidebar-link>
         <x-admin.sidebar-link label="Orders" url="/admin/orders">
-            <button type="button" class="w-6 h-6 text-xs  rounded-full text-white bg-red-500">
+            {{-- <button type="button" class="w-6 h-6 text-xs  rounded-full text-white bg-red-500">
                 <span class="p-1">
                     7
                 </span>
-            </button>
+            </button> --}}
         </x-admin.sidebar-link>
         <x-admin.sidebar-link label="Categories" url="/admin/subsubcategories"></x-admin.sidebar-link>
         <x-admin.sidebar-link label="Settings" url="/admin/settings"></x-admin.sidebar-link>
