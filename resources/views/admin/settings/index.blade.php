@@ -34,6 +34,8 @@
                 </tbody>
             </table>
 
+            {{ $colors->links() }}
+
         </div>
 
         <div class="">
