@@ -16,11 +16,13 @@ class CreateStocksTable extends Migration
         Schema::create('stocks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id');
-            $table->string('sku');
+            $table->string('sku')->unique();
             $table->string('size');
             $table->foreignId('color_id');
             $table->integer('qty');
             $table->timestamps();
+
+            $table->unique(['size', 'color_id']);
         });
     }
 

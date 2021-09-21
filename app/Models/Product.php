@@ -30,6 +30,11 @@ class Product extends Model
         return $this->belongsTo(Subsubcategory::class);
     }
 
+    public function stocks()
+    {
+        return $this->hasMany(Stock::class);
+    }
+
     /**
      * Get the options for generating the slug.
      */

@@ -28,6 +28,7 @@
     <section class="grid gap-8 grid-cols-4">
         {{-- stocks table --}}
         <div class="col-span-3">
+            <h1 class="text-2xl font-bold mb-6">Stocks</h1>
             <div class="overflow-x-auto">
                 <table class="table w-full">
                     <thead>
@@ -59,7 +60,10 @@
                                     @endif
                                 </td>
                                 <td>
-
+                                    <a class="btn btn-xs btn-ghost" href="{{ route('admin.stocks.edit', [
+                                        'product_id' => $stock->product->id,
+                                        'id' => $stock->id
+                                    ]) }}">Edit</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -70,7 +74,7 @@
 
         {{-- Create stock --}}
         <div class="">
-            <h2 class=" text-xl font-semibold mb-6">Create Stock</h2>
+            <h2 class=" text-2xl font-semibold mb-6">Create Stock</h2>
             <form action="{{ route('admin.stocks.store', $product->id) }}" method="POST">
                 @csrf
                 <input type="hidden" name="product_id" value="{{ $product->id }}">
