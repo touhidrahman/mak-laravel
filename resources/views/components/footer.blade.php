@@ -7,7 +7,7 @@
 
                     <li class="pb-2 block">
                         <a href="mailto:test.email0123@elyssi.com"
-                            class="font-hk text-white transition-colors hover:text-primary text-base tracking-wide">test.email0123@elyssi.com</a>
+                            class="font-hk text-white transition-colors hover:text-primary text-base tracking-wide">makleidermerchant@outlook.de</a>
                     </li>
 
                     <li class="pb-2 block">
@@ -18,7 +18,7 @@
 
                     <li class="pb-2 block">
                         <a href="https://elyssi.tailwindmade.com"
-                            class="font-hk text-white transition-colors hover:text-primary text-base tracking-wide">Elyssi</a>
+                            class="font-hk text-white transition-colors hover:text-primary text-base tracking-wide">M&A Kleid</a>
                     </li>
 
                 </ul>
