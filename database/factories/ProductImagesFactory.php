@@ -23,8 +23,8 @@ class ProductImagesFactory extends Factory
     {
         return [
             'product_id' => $this->faker->numberBetween(1, 100),
-            'path' => $this->faker->slug(),
-            'serial' => $this->faker->numberBetween(1, 5),
+            'path' => $this->faker->imageUrl(),
+            'serial' => $this->faker->numberBetween(1, 10),
         ];
     }
 }

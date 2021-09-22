@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Stock;
+use App\Models\ProductImages;
 use Illuminate\Database\Seeder;
 
-class StockSeeder extends Seeder
+class ProductImageSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class StockSeeder extends Seeder
      */
     public function run()
     {
-        Stock::factory(5000)->create();
+        ProductImages::factory(1000)->create();
     }
 }

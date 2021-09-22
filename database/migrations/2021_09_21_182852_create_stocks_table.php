@@ -22,7 +22,7 @@ class CreateStocksTable extends Migration
             $table->integer('qty');
             $table->timestamps();
 
-            $table->unique(['size', 'color_id']);
+            $table->unique(['product_id', 'size', 'color_id']);
         });
     }
 
