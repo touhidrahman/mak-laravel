@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\SubsubcategoryController;
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Admin\ColorController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StockController;
 use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Auth\Passwords\Confirm;
@@ -27,7 +28,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'welcome')->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::middleware('guest')->group(function () {
     Route::get('login', Login::class)

@@ -3,7 +3,7 @@
 @section('body')
 
     <div id="main">
-        <x-navbar></x-navbar>
+        <x-navbar :categories="$categories" :subcategories="$subcategories" :subsubcategories="$subsubcategories"></x-navbar>
 
 
         <div class="absolute inset-x-0 opacity-0 pointer-events-none z-50"

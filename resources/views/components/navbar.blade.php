@@ -1,3 +1,9 @@
+@props([
+    'categories' => [],
+    'subcategories' => [],
+    'subsubcategories' => [],
+])
+
 <div class="container relative">
     <div class="shadow-xs py-6 lg:py-10 z-50 relative">
         <div class="flex justify-between items-center">
@@ -22,8 +28,8 @@
                         class="w-5 sm:w-6 md:w-8 h-5 sm:h-6 md:h-8 hidden group-hover:block" alt="icon heart hover" />
                 </a>
             </div>
-            <a href="/">
-                <img src="/img/logo-elyssi.svg" class="w-28 sm:w-48 h-auto" alt="logo" />
+            <a class="md:text-5xl text-2xl font-bold" href="/">
+                M&A <span class="text-primary">Kleid</span>
             </a>
 
             <div class="flex items-center">
@@ -60,135 +66,37 @@
         <div class="justify-center lg:pt-8 hidden lg:flex">
             <ul class="list-reset flex items-center">
 
-                @foreach ([1,2,3] as $item)
+                @foreach ($categories as $category)
                 <li class="mr-10 hidden lg:block group">
                     <div class="border-b-2 border-white transition-colors group-hover:border-primary flex items-center">
-                        <span
-                            class="cursor-pointer text-lg font-hk group-hover:font-bold text-secondary group-hover:text-primary px-2 transition-all">Men</span>
-                        <i
-                            class="bx bx-chevron-down text-secondary group-hover:text-primary pl-2 px-2 transition-colors"></i>
+                        <span class="cursor-pointer text-lg font-hk group-hover:font-bold text-secondary group-hover:text-primary px-2 transition-all">
+                            {{ $category->name }}
+                        </span>
+                        <i class="bx bx-chevron-down text-secondary group-hover:text-primary pl-2 px-2 transition-colors"></i>
                     </div>
-                    <div
-                        class="pt-10 absolute mt-40 top-0 left-0 right-0 z-50 w-2/3 mx-auto opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto ">
+                    <div class="pt-10 absolute mt-40 top-0 left-0 right-0 z-50 w-2/3 mx-auto opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto ">
                         <div class="transition-all flex bg-white shadow-lg p-8 rounded-b relative ">
 
+                            @foreach ($subcategories as $subcategory)
+                            @if ($subcategory->category_id == $category->id)
                             <div class="flex-1 relative z-20">
-                                <h4 class="font-hkbold text-base text-secondary mb-2">Man</h4>
+                                <h4 class="font-hkbold text-base text-secondary mb-2">{{$subcategory->name}}</h4>
+
                                 <ul>
-
+                                    @foreach ($subsubcategories as $subsubcategory)
+                                    @if ($subsubcategory->subcategory_id == $subcategory->id)
                                     <li>
-                                        <a href="/collection-grid"
-                                            class="text-sm font-hk text-secondary-lighter leading-loose border-b border-transparent hover:border-secondary-lighter">Boots</a>
+                                        <a href="/" class="text-sm font-hk text-secondary-lighter leading-loose border-b border-transparent hover:border-secondary-lighter">
+                                            {{ $subsubcategory->name }}
+                                        </a>
                                     </li>
-
-                                    <li>
-                                        <a href="/collection-grid"
-                                            class="text-sm font-hk text-secondary-lighter leading-loose border-b border-transparent hover:border-secondary-lighter">Blutcher
-                                            Boot</a>
-                                    </li>
-
-                                    <li>
-                                        <a href="/collection-grid"
-                                            class="text-sm font-hk text-secondary-lighter leading-loose border-b border-transparent hover:border-secondary-lighter">Chelsea
-                                            Boot</a>
-                                    </li>
-
-                                    <li>
-                                        <a href="/collection-grid"
-                                            class="text-sm font-hk text-secondary-lighter leading-loose border-b border-transparent hover:border-secondary-lighter">Chukka
-                                            Boot</a>
-                                    </li>
-
-                                    <li>
-                                        <a href="/collection-grid"
-                                            class="text-sm font-hk text-secondary-lighter leading-loose border-b border-transparent hover:border-secondary-lighter">Dress
-                                            Boot</a>
-                                    </li>
-
-                                    <li>
-                                        <a href="/collection-grid"
-                                            class="text-sm font-hk text-secondary-lighter leading-loose border-b border-transparent hover:border-secondary-lighter">Work
-                                            Boot</a>
-                                    </li>
-
+                                    @endif
+                                    @endforeach
                                 </ul>
                             </div>
+                            @endif
+                            @endforeach
 
-                            <div class="flex-1 relative z-20">
-                                <h4 class="font-hkbold text-base text-secondary mb-2">Woman</h4>
-                                <ul>
-
-                                    <li>
-                                        <a href="/collection-grid"
-                                            class="text-sm font-hk text-secondary-lighter leading-loose border-b border-transparent hover:border-secondary-lighter">Accessories</a>
-                                    </li>
-
-                                    <li>
-                                        <a href="/collection-grid"
-                                            class="text-sm font-hk text-secondary-lighter leading-loose border-b border-transparent hover:border-secondary-lighter">Belts</a>
-                                    </li>
-
-                                    <li>
-                                        <a href="/collection-grid"
-                                            class="text-sm font-hk text-secondary-lighter leading-loose border-b border-transparent hover:border-secondary-lighter">Caps</a>
-                                    </li>
-
-                                    <li>
-                                        <a href="/collection-grid"
-                                            class="text-sm font-hk text-secondary-lighter leading-loose border-b border-transparent hover:border-secondary-lighter">Laces</a>
-                                    </li>
-
-                                    <li>
-                                        <a href="/collection-grid"
-                                            class="text-sm font-hk text-secondary-lighter leading-loose border-b border-transparent hover:border-secondary-lighter">Socks</a>
-                                    </li>
-
-                                </ul>
-                            </div>
-
-                            <div class="flex-1 relative z-20">
-                                <h4 class="font-hkbold text-base text-secondary mb-2">Kids</h4>
-                                <ul>
-
-                                    <li>
-                                        <a href="/collection-grid"
-                                            class="text-sm font-hk text-secondary-lighter leading-loose border-b border-transparent hover:border-secondary-lighter">Shoes</a>
-                                    </li>
-
-                                    <li>
-                                        <a href="/collection-grid"
-                                            class="text-sm font-hk text-secondary-lighter leading-loose border-b border-transparent hover:border-secondary-lighter">Derby
-                                            Shoes</a>
-                                    </li>
-
-                                    <li>
-                                        <a href="/collection-grid"
-                                            class="text-sm font-hk text-secondary-lighter leading-loose border-b border-transparent hover:border-secondary-lighter">Belts</a>
-                                    </li>
-
-                                    <li>
-                                        <a href="/collection-grid"
-                                            class="text-sm font-hk text-secondary-lighter leading-loose border-b border-transparent hover:border-secondary-lighter">Caps</a>
-                                    </li>
-
-                                    <li>
-                                        <a href="/collection-grid"
-                                            class="text-sm font-hk text-secondary-lighter leading-loose border-b border-transparent hover:border-secondary-lighter">Laces</a>
-                                    </li>
-
-                                    <li>
-                                        <a href="/collection-grid"
-                                            class="text-sm font-hk text-secondary-lighter leading-loose border-b border-transparent hover:border-secondary-lighter">Socks</a>
-                                    </li>
-
-                                </ul>
-                            </div>
-
-                            <div class="flex-1">
-                                <div class="z-0 bg-contain bg-right-bottom bg-no-repeat absolute inset-0"
-                                    style="background-image: url(https://source.unsplash.com/1000x640/?-menu)">
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </li>
@@ -208,89 +116,53 @@
     </div>
 </div>
 
+{{-- mobile menu --}}
 <div class="fixed inset-x-0 pt-20 md:top-28 z-50 opacity-0 pointer-events-none transition-all "
     :class="{ 'opacity-100 pointer-events-auto': mobileMenu }">
     <div class="w-full sm:w-1/2 absolute left-0 top-0 px-6 z-40 bg-white shadow-sm">
         <a href="/"
-            class="w-full py-3 cursor-pointer font-hk font-medium text-secondary border-b border-grey-dark block ">Home
+            class="w-full py-3 cursor-pointer font-hk font-medium text-secondary border-b border-grey-dark block ">
+            Home
         </a>
-        <a href="/account/wishlist.html"
-            class="w-full py-3 cursor-pointer font-hk font-medium text-secondary border-b border-grey-dark block">Wishlist
-        </a>
-        <div class="w-full py-3 border-b border-grey-dark block" x-data="{
-            isParentAccordionOpen: false
-        }">
+
+        <div class="w-full py-3 border-b border-grey-dark block" x-data="{ isParentAccordionOpen: false }">
             <div class="flex items-center justify-between" @click="isParentAccordionOpen = !isParentAccordionOpen">
                 <span class="font-hk font-medium block transition-colors"
                     :class="isParentAccordionOpen ? 'text-primary' : 'text-secondary'">Collections</span>
                 <i class="bx text-secondary text-xl"
                     :class="isParentAccordionOpen ? 'bx-chevron-down' : 'bx-chevron-left'"></i>
             </div>
+
             <div class="transition-all" :class="isParentAccordionOpen ? 'max-h-infinite' : 'max-h-0 overflow-hidden'">
-                <div x-data="{
-                isAccordionOpen: false
-            }">
+                <div x-data="{ isAccordionOpen: false }">
                     <div class="flex items-center pt-3" @click="isAccordionOpen = !isAccordionOpen">
                         <i class="bx text-xl pr-3 transition-colors"
                             :class="isAccordionOpen ? 'bx-chevron-down text-secondary' : 'bx-chevron-right text-grey-darkest'"></i>
                         <a href="/collection-grid.html" class="font-hk font-medium transition-colors"
                             :class="isAccordionOpen ? 'text-primary' : 'text-grey-darkest'">Men's Fashion</a>
                     </div>
-                    <div class="pl-12 transition-all"
-                        :class="isAccordionOpen ? 'max-h-infinite' : 'max-h-0 overflow-hidden'">
-                        <a href="/collection-grid.html"
-                            class="font-hk font-medium text-secondary block mt-2">T-Shirts</a>
+                    <div class="pl-12 transition-all" :class="isAccordionOpen ? 'max-h-infinite' : 'max-h-0 overflow-hidden'">
                         <a href="/collection-grid.html" class="font-hk font-medium text-secondary block mt-2">Shirts</a>
-                        <a href="/collection-grid.html" class="font-hk font-medium text-secondary block mt-2">Men’s
-                            Bags</a>
-                        <a href="/collection-grid.html" class="font-hk font-medium text-secondary block mt-2">Travel
-                            Essentials</a>
                     </div>
                 </div>
+
                 <div class="flex items-center pt-3">
                     <i class="bx bx-chevron-right text-grey-darkest text-xl pr-3"></i>
-                    <a href="/collection-grid.html" class="font-hk font-medium text-grey-darkest">Women's
-                        Fashion</a>
-                </div>
-                <div class="flex items-center pt-3">
-                    <i class="bx bx-chevron-right text-grey-darkest text-xl pr-3"></i>
-                    <a href="/collection-grid.html" class="font-hk font-medium text-grey-darkest">Baggage</a>
-                </div>
-                <div class="flex items-center pt-3">
-                    <i class="bx bx-chevron-right text-grey-darkest text-xl pr-3"></i>
-                    <a href="/collection-grid.html" class="font-hk font-medium text-grey-darkest">Camp</a>
-                </div>
-                <div class="flex items-center pt-3">
-                    <i class="bx bx-chevron-right text-grey-darkest text-xl pr-3"></i>
-                    <a href="/collection-grid.html" class="font-hk font-medium text-grey-darkest">Personal Care</a>
-                </div>
-                <div class="flex items-center pt-3">
-                    <i class="bx bx-chevron-right text-grey-darkest text-xl pr-3"></i>
-                    <a href="/collection-grid.html" class="font-hk font-medium text-grey-darkest">Backpacks</a>
-                </div>
-                <div class="flex items-center pt-3">
-                    <i class="bx bx-chevron-right text-grey-darkest text-xl pr-3"></i>
-                    <a href="/collection-grid.html" class="font-hk font-medium text-grey-darkest">Pullovers</a>
+                    <a href="/collection-grid.html" class="font-hk font-medium text-grey-darkest">Women's Fashion</a>
                 </div>
             </div>
         </div>
-        <a href="/about.html"
-            class="w-full py-3 cursor-pointer font-hk font-medium text-secondary border-b border-grey-dark block">About
+
+        <a href="/services"
+            class="w-full py-3 cursor-pointer font-hk font-medium text-secondary border-b border-grey-dark block">Services
         </a>
-        <a href="/contact#faq"
-            class="w-full py-3 cursor-pointer font-hk font-medium text-secondary border-b border-grey-dark block">FAQ
+        <a href="/b2b"
+            class="w-full py-3 cursor-pointer font-hk font-medium text-secondary border-b border-grey-dark block">B2B
         </a>
-        <a href="/blog.html"
-            class="w-full py-3 cursor-pointer font-hk font-medium text-secondary border-b border-grey-dark block">Blog
-        </a>
-        <a href="/contact.html"
-            class="w-full py-3 cursor-pointer font-hk font-medium text-secondary border-b border-grey-dark block">Contact
-        </a>
+
         <div class="my-8">
             <a href="/login" class="btn btn-primary w-full mb-4" aria-label="Login button">Login Account</a>
-
-            <a href="/register" class="font-hk text-secondary md:text-lg pl-3 underline text-center block">Create
-                your account</a>
+            <a href="/register" class="font-hk text-secondary md:text-lg pl-3 underline text-center block">Create your account</a>
         </div>
     </div>
 </div>
