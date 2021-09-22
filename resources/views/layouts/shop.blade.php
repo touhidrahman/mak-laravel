@@ -7,7 +7,7 @@
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
     <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
 
-    <title>Home | M&A Kleid</title>
+    <title>M&A Kleid</title>
 
     <meta property="og:title" content="M&A Kleid" />
     <meta property="og:locale" content="de_DE" />

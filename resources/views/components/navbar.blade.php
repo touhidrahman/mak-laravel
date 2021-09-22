@@ -1,7 +1,24 @@
+@php
+use App\Models\Category;
+use App\Models\Subcategory;
+use App\Models\Subsubcategory;
+use Illuminate\Support\Facades\Cache;
+
+$categories = Cache::remember('categories', 3600 * 24, function () {
+    return Category::all();
+});
+$subcategories = Cache::remember('subcategories', 3600 * 24, function () {
+    return Subcategory::all();
+});
+$subsubcategories = Cache::remember('subsubcategories', 3600 * 24, function () {
+    return Subsubcategory::all();
+});
+@endphp
+
 @props([
-    'categories' => [],
-    'subcategories' => [],
-    'subsubcategories' => [],
+    'categories' => $categories,
+    'subcategories' => $subcategories,
+    'subsubcategories' => $subsubcategories,
 ])
 
 <div class="container relative">
@@ -67,39 +84,45 @@
             <ul class="list-reset flex items-center">
 
                 @foreach ($categories as $category)
-                <li class="mr-10 hidden lg:block group">
-                    <div class="border-b-2 border-white transition-colors group-hover:border-primary flex items-center">
-                        <span class="cursor-pointer text-lg font-hk group-hover:font-bold text-secondary group-hover:text-primary px-2 transition-all">
-                            {{ $category->name }}
-                        </span>
-                        <i class="bx bx-chevron-down text-secondary group-hover:text-primary pl-2 px-2 transition-colors"></i>
-                    </div>
-                    <div class="pt-10 absolute mt-40 top-0 left-0 right-0 z-50 w-2/3 mx-auto opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto ">
-                        <div class="transition-all flex bg-white shadow-lg p-8 rounded-b relative ">
-
-                            @foreach ($subcategories as $subcategory)
-                            @if ($subcategory->category_id == $category->id)
-                            <div class="flex-1 relative z-20">
-                                <h4 class="font-hkbold text-base text-secondary mb-2">{{$subcategory->name}}</h4>
-
-                                <ul>
-                                    @foreach ($subsubcategories as $subsubcategory)
-                                    @if ($subsubcategory->subcategory_id == $subcategory->id)
-                                    <li>
-                                        <a href="/" class="text-sm font-hk text-secondary-lighter leading-loose border-b border-transparent hover:border-secondary-lighter">
-                                            {{ $subsubcategory->name }}
-                                        </a>
-                                    </li>
-                                    @endif
-                                    @endforeach
-                                </ul>
-                            </div>
-                            @endif
-                            @endforeach
-
+                    <li class="mr-10 hidden lg:block group">
+                        <div
+                            class="border-b-2 border-white transition-colors group-hover:border-primary flex items-center">
+                            <span
+                                class="cursor-pointer text-lg font-hk group-hover:font-bold text-secondary group-hover:text-primary px-2 transition-all">
+                                {{ $category->name }}
+                            </span>
+                            <i
+                                class="bx bx-chevron-down text-secondary group-hover:text-primary pl-2 px-2 transition-colors"></i>
                         </div>
-                    </div>
-                </li>
+                        <div
+                            class="pt-10 absolute mt-40 top-0 left-0 right-0 z-50 w-2/3 mx-auto opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto ">
+                            <div class="transition-all flex bg-white shadow-lg p-8 rounded-b relative ">
+
+                                @foreach ($subcategories as $subcategory)
+                                    @if ($subcategory->category_id == $category->id)
+                                        <div class="flex-1 relative z-20">
+                                            <h4 class="font-hkbold text-base text-secondary mb-2">
+                                                {{ $subcategory->name }}</h4>
+
+                                            <ul>
+                                                @foreach ($subsubcategories as $subsubcategory)
+                                                    @if ($subsubcategory->subcategory_id == $subcategory->id)
+                                                        <li>
+                                                            <a href="/"
+                                                                class="text-sm font-hk text-secondary-lighter leading-loose border-b border-transparent hover:border-secondary-lighter">
+                                                                {{ $subsubcategory->name }}
+                                                            </a>
+                                                        </li>
+                                                    @endif
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+                                @endforeach
+
+                            </div>
+                        </div>
+                    </li>
                 @endforeach
 
                 <li class="mr-10">
@@ -134,22 +157,26 @@
             </div>
 
             <div class="transition-all" :class="isParentAccordionOpen ? 'max-h-infinite' : 'max-h-0 overflow-hidden'">
-                <div x-data="{ isAccordionOpen: false }">
-                    <div class="flex items-center pt-3" @click="isAccordionOpen = !isAccordionOpen">
-                        <i class="bx text-xl pr-3 transition-colors"
-                            :class="isAccordionOpen ? 'bx-chevron-down text-secondary' : 'bx-chevron-right text-grey-darkest'"></i>
-                        <a href="/collection-grid.html" class="font-hk font-medium transition-colors"
-                            :class="isAccordionOpen ? 'text-primary' : 'text-grey-darkest'">Men's Fashion</a>
+                @foreach ($categories as $category)
+                    <div x-data="{ isAccordionOpen: false }">
+                        <div class="flex items-center pt-3" @click="isAccordionOpen = !isAccordionOpen">
+                            <i class="bx text-xl pr-3 transition-colors"
+                                :class="isAccordionOpen ? 'bx-chevron-down text-secondary' : 'bx-chevron-right text-grey-darkest'"></i>
+                            <a href="/collection-grid.html" class="font-hk font-medium transition-colors"
+                                :class="isAccordionOpen ? 'text-primary' : 'text-grey-darkest'">{{ $category->name }}</a>
+                        </div>
+                        <div class="pl-12 transition-all"
+                            :class="isAccordionOpen ? 'max-h-infinite' : 'max-h-0 overflow-hidden'">
+                            @foreach ($subcategories as $subcategory)
+                                @if ($subcategory->category_id == $category->id)
+                                    <a href="#"
+                                        class="font-hk font-medium text-secondary block mt-2">{{ $subcategory->name }}</a>
+                                @endif
+                            @endforeach
+                        </div>
                     </div>
-                    <div class="pl-12 transition-all" :class="isAccordionOpen ? 'max-h-infinite' : 'max-h-0 overflow-hidden'">
-                        <a href="/collection-grid.html" class="font-hk font-medium text-secondary block mt-2">Shirts</a>
-                    </div>
-                </div>
+                @endforeach
 
-                <div class="flex items-center pt-3">
-                    <i class="bx bx-chevron-right text-grey-darkest text-xl pr-3"></i>
-                    <a href="/collection-grid.html" class="font-hk font-medium text-grey-darkest">Women's Fashion</a>
-                </div>
             </div>
         </div>
 
@@ -162,7 +189,8 @@
 
         <div class="my-8">
             <a href="/login" class="btn btn-primary w-full mb-4" aria-label="Login button">Login Account</a>
-            <a href="/register" class="font-hk text-secondary md:text-lg pl-3 underline text-center block">Create your account</a>
+            <a href="/register" class="font-hk text-secondary md:text-lg pl-3 underline text-center block">Create your
+                account</a>
         </div>
     </div>
 </div>

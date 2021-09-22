@@ -29,6 +29,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/shop', [HomeController::class, 'shop'])->name('shop');
+Route::get('/product/{product}', [HomeController::class, 'productDetails'])->name('productDetails');
 
 Route::middleware('guest')->group(function () {
     Route::get('login', Login::class)

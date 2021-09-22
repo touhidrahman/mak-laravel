@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Product;
 use App\Models\Subcategory;
 use App\Models\Subsubcategory;
 use Illuminate\Http\Request;
@@ -12,20 +13,20 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $categories = Cache::remember('categories', 3600 * 24, function () {
-            return Category::all();
-        });
-        $subcategories = Cache::remember('subcategories', 3600 * 24, function () {
-            return Subcategory::all();
-        });
-        $subsubcategories = Cache::remember('subsubcategories', 3600 * 24, function () {
-            return Subsubcategory::all();
-        });
+        return view('welcome');
+    }
 
-        return view('welcome', [
-            'categories' => $categories,
-            'subcategories' => $subcategories,
-            'subsubcategories' => $subsubcategories,
+    public function shop(Request $request)
+    {
+        return view('shop', [
+            'products' => Product::paginate(24),
+        ]);
+    }
+
+    public function productDetails($id)
+    {
+        return view('product-details', [
+            'product' => Product::find($id)->with(['stocks']),
         ]);
     }
 }

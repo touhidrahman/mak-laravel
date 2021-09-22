@@ -3,8 +3,7 @@
 @section('body')
 
     <div id="main">
-        <x-navbar :categories="$categories" :subcategories="$subcategories" :subsubcategories="$subsubcategories"></x-navbar>
-
+        <x-navbar></x-navbar>
 
         <div class="absolute inset-x-0 opacity-0 pointer-events-none z-50"
             :class="{ 'opacity-100 pointer-events-auto': mobileCart }">
