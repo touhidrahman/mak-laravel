@@ -35,6 +35,26 @@ class Product extends Model
         return $this->hasMany(Stock::class);
     }
 
+    public function available_sizes()
+    {
+        return $this->stocks()->distinct('size')->select('size');
+    }
+
+    public function available_colors()
+    {
+        return $this->colors();
+    }
+
+    public function color()
+    {
+        return $this->stocks()->distinct('color_id')->select('color_id');
+    }
+
+    // public function colors()
+    // {
+    //     return $this->hasManyThrough(Color::class, Stock::class, 'color_id', )
+    // }
+
     /**
      * Get the options for generating the slug.
      */

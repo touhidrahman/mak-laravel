@@ -18,8 +18,16 @@ class HomeController extends Controller
 
     public function shop(Request $request)
     {
-        return view('shop', [
-            'products' => Product::paginate(24),
+        // Product::whereHas('stocks', function($q) {
+        //     $q->where('size', '=', 'XXL');
+        // })->paginate(10);
+
+        $r = Product::whereHas('stocks', function($query) {
+            // return $query->where(['qty', '>', 5]);
+        })->paginate(24);
+
+        return view('product-list', [
+            'products' => Product::where('active', '=', true)->with(['stocks'])->paginate(24),
         ]);
     }
 

@@ -10,4 +10,15 @@ class Color extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    // public function stocks()
+    // {
+    //     return $this->hasMany(Stock::class);
+    // }
+
+    public function products()
+    {
+        return $this->hasManyThrough(Product::class, Stock::class);
+    }
+
 }
