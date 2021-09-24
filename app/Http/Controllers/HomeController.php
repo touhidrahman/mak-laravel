@@ -28,7 +28,7 @@ class HomeController extends Controller
             // return $query->where(['qty', '>', 5]);
         })->paginate(24);
 
-        return view('product-list', [
+        return view('products.list', [
             'products' => Product::where('active', '=', true)->with(['stocks'])->paginate(24),
             'relatedProducts' => Product::where('active', true)->take(6)->get(),
         ]);
@@ -36,7 +36,7 @@ class HomeController extends Controller
 
     public function productDetails($id)
     {
-        return view('product-details', [
+        return view('products.details', [
             'product' => Product::find($id)->with(['stocks']),
         ]);
     }
