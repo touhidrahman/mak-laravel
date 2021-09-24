@@ -5,19 +5,17 @@
     <div id="main">
         <x-navbar></x-navbar>
 
-        <div class="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
+        <div class="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 md:mt-16">
             @foreach ($products as $product)
                 <x-product.card :product="$product"></x-product.card>
             @endforeach
         </div>
 
-        <div class="mt-10 mb-16 container">
+        <div class="mt-16 mb-24 container">
             {{ $products->links() }}
         </div>
 
-        <x-product.slider></x-product.slider>
-
-        <footer class="mt-16">
+        <footer class="mt-24">
             <x-footer></x-footer>
         </footer>
     </div>

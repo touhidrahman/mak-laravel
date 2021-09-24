@@ -13,7 +13,9 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return view('welcome');
+        return view('welcome', [
+            'trendingProducts' => Product::where('active', true)->take(6)->get(),
+        ]);
     }
 
     public function shop(Request $request)
@@ -28,6 +30,7 @@ class HomeController extends Controller
 
         return view('product-list', [
             'products' => Product::where('active', '=', true)->with(['stocks'])->paginate(24),
+            'relatedProducts' => Product::where('active', true)->take(6)->get(),
         ]);
     }
 

@@ -72,20 +72,18 @@
                 <div class="pb-20 md:pb-24 lg:pb-32">
                     <div class="flex flex-col sm:flex-row justify-between items-center sm:pb-4 lg:pb-0 mb-12 sm:mb-10">
                         <div class="text-center sm:text-left">
-                            <h2 class=" font-butler  text-secondary text-3xl md:text-4xl lg:text-4.5xl">Elyssi’s trends
+                            <h2 class=" font-butler  text-secondary text-3xl md:text-4xl lg:text-4.5xl">New Arrivals!
                             </h2>
-                            <p class="font-hk text-secondary-lighter text-lg md:text-xl pt-2">Be styling, no matter the
-                                season!</p>
+                            <p class="font-hk text-secondary-lighter text-lg md:text-xl pt-2">Be stylish, no matter the season!</p>
                         </div>
-                        <a href="/collection-grid"
+                        <a href="/shop"
                             class="flex items-center group pt-1 sm:pt-0 border-b border-primary transition-colors hover:border-primary-light font-hk text-xl text-primary">
                             Show more
-                            <i
-                                class="bx bx-chevron-right text-primary transition-colors group-hover:text-primary-light pl-3 pt-2 text-xl"></i>
+                            <i class="bx bx-chevron-right text-primary transition-colors group-hover:text-primary-light pl-3 pt-2 text-xl"></i>
                         </a>
                     </div>
 
-                    <x-product.slider></x-product.slider>
+                    <x-product.slider :products="$trendingProducts"></x-product.slider>
 
                 </div>
             </div>
@@ -96,13 +94,13 @@
                 <x-product.new-arrival></x-product.new-arrival>
 
                 <div class="pb-20 md:pb-32">
-                    <div class="text-center pb-12">
-                        <h2 class=" font-butler  text-secondary text-3xl md:text-4xl lg:text-4.5xl">On sale, only today
-                        </h2>
-                        <p class="font-hk text-secondary-lighter text-lg md:text-xl">Get it while they last!</p>
-                    </div>
+                    <x-product.slider-title>
+                        Trending
 
-                    <x-product.slider></x-product.slider>
+                        <x-slot name="subtitle">Our trending collection!</x-slot>
+                    </x-product.slider-title>
+
+                    <x-product.slider :products="$trendingProducts"></x-product.slider>
                 </div>
             </div>
 

@@ -1041,7 +1041,10 @@
             </div>
         </div>
 
-        <x-product.slider></x-product.slider>
+        <div class="my-16 container">
+            <h1 class="mx-auto text-4xl mb-10">Related Products</h1>
+            <x-product.slider :products="$relatedProducts"></x-product.slider>
+        </div>
 
         <footer class="mt-16">
             <x-footer></x-footer>
