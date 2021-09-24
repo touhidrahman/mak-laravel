@@ -15,6 +15,7 @@
             </button> --}}
         </x-admin.sidebar-link>
         <x-admin.sidebar-link label="Categories" url="/admin/subsubcategories"></x-admin.sidebar-link>
-        <x-admin.sidebar-link label="Settings" url="/admin/settings"></x-admin.sidebar-link>
+        <x-admin.sidebar-link label="Colors" url="/admin/settings"></x-admin.sidebar-link>
+        <x-admin.sidebar-link label="Featured Images" url="/admin/featured-images"></x-admin.sidebar-link>
     </nav>
 </aside>

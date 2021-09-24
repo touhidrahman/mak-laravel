@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\FeaturedImage;
 use App\Models\Product;
 use App\Models\Subcategory;
 use App\Models\Subsubcategory;

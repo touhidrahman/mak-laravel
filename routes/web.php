@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\FeaturedImageController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StockController;
 use App\Http\Livewire\Auth\Login;
@@ -112,5 +113,10 @@ Route::middleware('auth')->group(function () {
 
     Route::post('admin/colors', [ColorController::class, 'store'])->name('admin.colors.store');
     Route::delete('admin/colors/{color}', [ColorController::class, 'destroy'])->name('admin.colors.destroy');
+
+    Route::get('admin/featured-images', [FeaturedImageController::class, 'index'])->name('admin.featured-images');
+    Route::get('admin/featured-images/create', [FeaturedImageController::class, 'show'])->name('admin.featured-images.show');
+    Route::post('admin/featured-images', [FeaturedImageController::class, 'store'])->name('admin.featured-images.store');
+    Route::delete('admin/featured-images/{id}', [FeaturedImageController::class, 'destroy'])->name('admin.featured-images.destroy');
 
 // });
