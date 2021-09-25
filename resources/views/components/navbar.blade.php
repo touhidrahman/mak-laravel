@@ -45,7 +45,7 @@ $subsubcategories = Cache::remember('subsubcategories', 3600 * 24, function () {
                         class="w-5 sm:w-6 md:w-8 h-5 sm:h-6 md:h-8 hidden group-hover:block" alt="icon heart hover" />
                 </a>
             </div>
-            <a class="md:text-5xl text-2xl font-bold" href="/">
+            <a class="md:text-5xl text-2xl font-bold cursor-pointer" href="/">
                 M&A <span class="text-primary">Kleid</span>
             </a>
 
