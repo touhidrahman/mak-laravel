@@ -1,13 +1,15 @@
-<form action="{{route('checkout.pay')}}" id="stripe" method="post">
-    <input id="card-holder-name" type="text">
+<section class="mx-auto max-w-screen-md">
+    <form action="{{route('checkout.pay')}}" id="stripeForm" method="post">
+        <input id="card-holder-name" type="text">
 
-    <!-- Stripe Elements Placeholder -->
-    <div id="card-element"></div>
-    <input name="pmethod" type="hidden" id="pmethod" value="" />
-    <button id="card-button">
-        Process Payment
-    </button>
-</form>
+        <!-- Stripe Elements Placeholder -->
+        <div id="card-element"></div>
+        <input name="paymentMethodId" type="hidden" id="paymentMethodId" value="" />
+        <button id="card-button">
+            Process Payment
+        </button>
+    </form>
+</section>
 
 <script src="https://js.stripe.com/v3/"></script>
 
@@ -17,7 +19,7 @@
     const cardElement = elements.create('card');
     cardElement.mount('#card-element');
     const cardHolderName = document.getElementById('card-holder-name');
-    const form = document.getElementById('stripe');
+    const form = document.getElementById('stripeForm');
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
         const { paymentMethod, error } = await stripe.createPaymentMethod(
@@ -30,7 +32,7 @@
         } else {
             console.log('Card verified successfully');
             console.log(paymentMethod.id);
-            document.getElementById('pmethod').setAttribute('value', paymentMethod.id);
+            document.getElementById('paymentMethodId').setAttribute('value', paymentMethod.id);
             form.submit();
         }
     });
