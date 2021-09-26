@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
 {
+    public function comingSoon()
+    {
+        return view('coming-soon');
+    }
+
     public function index()
     {
         return view('welcome', [

@@ -32,7 +32,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'comingSoon'])->name('home'); // temp
+Route::get('/home', [HomeController::class, 'index']); // temp
 Route::get('/shop', [HomeController::class, 'shop'])->name('shop');
 Route::get('/products/{product}', [HomeController::class, 'productDetails'])->name('product.details');
 
