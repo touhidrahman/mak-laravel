@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\SubcategoryController;
@@ -66,6 +67,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('password/confirm', Confirm::class)
         ->name('password.confirm');
+
+    Route::get('account', [AccountController::class, 'index'])->name('account');
 });
 
 Route::middleware('auth')->group(function () {
@@ -77,7 +80,7 @@ Route::middleware('auth')->group(function () {
         ->name('logout');
 });
 
-// Route::middleware('admin')->group(function() {
+Route::middleware('admin')->group(function() {
     Route::get('admin', function () {
         return view('admin.dashboard');
     })->name('admin');
@@ -127,4 +130,4 @@ Route::middleware('auth')->group(function () {
     Route::post('admin/featured-images', [FeaturedImageController::class, 'store'])->name('admin.featured-images.store');
     Route::delete('admin/featured-images/{id}', [FeaturedImageController::class, 'destroy'])->name('admin.featured-images.destroy');
 
-// });
+});

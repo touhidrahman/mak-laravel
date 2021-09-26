@@ -29,20 +29,12 @@ $subsubcategories = Cache::remember('subsubcategories', 3600 * 24, function () {
                     <i class="bx bx-menu text-primary text-4xl" @click="mobileMenu = !mobileMenu"></i>
                 </div>
 
-                <button @click="mobileSearch = !mobileSearch"
-                    class="cursor-pointer border-2 transition-colors border-transparent hover:border-primary rounded-full p-2 sm:p-4 ml-2 sm:ml-3 md:ml-5 lg:mr-8 group focus:outline-none">
-                    <img src="{{ asset('img/icons/icon-search.svg') }}"
-                        class="w-5 sm:w-6 md:w-8 h-5 sm:h-6 md:h-8 block group-hover:hidden" alt="icon search" />
-                    <img src="{{ asset('img/icons/icon-search-hover.svg') }}"
-                        class="w-5 sm:w-6 md:w-8 h-5 sm:h-6 md:h-8 hidden group-hover:block" alt="icon search hover" />
-                </button>
-
-                <a href="/account/wishlist"
-                    class="border-2 transition-all border-transparent hover:border-primary rounded-full p-2 sm:p-4 group hidden lg:block">
-                    <img src="{{ asset('img/icons/icon-heart.svg') }}"
-                        class="w-5 sm:w-6 md:w-8 h-5 sm:h-6 md:h-8 block group-hover:hidden" alt="icon heart" />
-                    <img src="/img/icons/icon-heart-hover.svg"
-                        class="w-5 sm:w-6 md:w-8 h-5 sm:h-6 md:h-8 hidden group-hover:block" alt="icon heart hover" />
+                <a href="/account"
+                    class="border-2 transition-all border-transparent hover:border-primary rounded-full p-2 sm:p-4 group">
+                    <img src="/img/icons/icon-user.svg"
+                        class="w-5 sm:w-6 md:w-8 h-5 sm:h-6 md:h-8 block group-hover:hidden" alt="icon user" />
+                    <img src="/img/icons/icon-user-hover.svg"
+                        class="w-5 sm:w-6 md:w-8 h-5 sm:h-6 md:h-8 hidden group-hover:block" alt="icon user hover" />
                 </a>
             </div>
             <a class="md:text-5xl text-2xl font-bold cursor-pointer" href="/">
@@ -50,15 +42,7 @@ $subsubcategories = Cache::remember('subsubcategories', 3600 * 24, function () {
             </a>
 
             <div class="flex items-center">
-                <a href="/account/dashboard"
-                    class="border-2 transition-all border-transparent hover:border-primary rounded-full p-2 sm:p-4 group">
-                    <img src="/img/icons/icon-user.svg"
-                        class="w-5 sm:w-6 md:w-8 h-5 sm:h-6 md:h-8 block group-hover:hidden" alt="icon user" />
-                    <img src="/img/icons/icon-user-hover.svg"
-                        class="w-5 sm:w-6 md:w-8 h-5 sm:h-6 md:h-8 hidden group-hover:block" alt="icon user hover" />
-                </a>
-
-                <a href="/cart/index"
+                <a href="/cart"
                     class="hidden lg:block border-2 transition-all border-transparent hover:border-primary rounded-full p-2 sm:p-4 ml-2 sm:ml-3 md:ml-5 lg:ml-8 group">
                     <img src="/img/icons/icon-cart.svg"
                         class="w-5 sm:w-6 md:w-8 h-5 sm:h-6 md:h-8 block group-hover:hidden" alt="icon cart" />
@@ -85,12 +69,14 @@ $subsubcategories = Cache::remember('subsubcategories', 3600 * 24, function () {
 
                 @foreach ($categories as $category)
                     <li class="mr-10 hidden lg:block group">
-                        <div class="border-b-2 border-white transition-colors group-hover:border-primary flex items-center">
+                        <div
+                            class="border-b-2 border-white transition-colors group-hover:border-primary flex items-center">
                             <span
                                 class="cursor-pointer text-lg font-hk group-hover:font-bold text-secondary group-hover:text-primary px-2 transition-all">
                                 {{ $category->name }}
                             </span>
-                            <i class="bx bx-chevron-down text-secondary group-hover:text-primary pl-2 px-2 transition-colors"></i>
+                            <i
+                                class="bx bx-chevron-down text-secondary group-hover:text-primary pl-2 px-2 transition-colors"></i>
                         </div>
                         <div
                             class="pt-10 absolute mt-40 top-0 left-0 right-0 z-50 w-2/3 mx-auto opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto ">
@@ -100,7 +86,7 @@ $subsubcategories = Cache::remember('subsubcategories', 3600 * 24, function () {
                                     @if ($subcategory->category_id == $category->id)
                                         <div class="flex-1 relative z-20">
                                             <h4 class="font-hkbold text-base text-secondary mb-2">
-                                                <a href="/shop?subcategory_id={{$subcategory->id}}">
+                                                <a href="/shop?subcategory_id={{ $subcategory->id }}">
                                                     {{ $subcategory->name }}
                                                 </a>
                                             </h4>
@@ -109,7 +95,7 @@ $subsubcategories = Cache::remember('subsubcategories', 3600 * 24, function () {
                                                 @foreach ($subsubcategories as $subsubcategory)
                                                     @if ($subsubcategory->subcategory_id == $subcategory->id)
                                                         <li>
-                                                            <a href="/shop?subsubcategory_id={{$subsubcategory->id}}"
+                                                            <a href="/shop?subsubcategory_id={{ $subsubcategory->id }}"
                                                                 class="text-sm font-hk text-secondary-lighter leading-loose border-b border-transparent hover:border-secondary-lighter">
                                                                 {{ $subsubcategory->name }}
                                                             </a>
@@ -163,7 +149,8 @@ $subsubcategories = Cache::remember('subsubcategories', 3600 * 24, function () {
                         <div class="flex items-center pt-3" @click="isAccordionOpen = !isAccordionOpen">
                             <i class="bx text-xl pr-3 transition-colors"
                                 :class="isAccordionOpen ? 'bx-chevron-down text-secondary' : 'bx-chevron-right text-grey-darkest'"></i>
-                            <a href="/shop?category_id={{$category->id}}" class="font-hk font-medium transition-colors"
+                            <a href="/shop?category_id={{ $category->id }}"
+                                class="font-hk font-medium transition-colors"
                                 :class="isAccordionOpen ? 'text-primary' : 'text-grey-darkest'">{{ $category->name }}</a>
                         </div>
                         <div class="pl-12 transition-all"
@@ -190,25 +177,10 @@ $subsubcategories = Cache::remember('subsubcategories', 3600 * 24, function () {
 
         <div class="my-8">
             <a href="/login" class="btn btn-primary w-full mb-4" aria-label="Login button">Login Account</a>
-            <a href="/register" class="font-hk text-secondary md:text-lg pl-3 underline text-center block">Create your
-                account</a>
+            <a href="/register" class="font-hk text-secondary md:text-lg pl-3 underline text-center block">
+                Create your account
+            </a>
         </div>
     </div>
 </div>
 
-
-<div class="absolute inset-x-0 opacity-0 pointer-events-none z-50 top-20 lg:top-28"
-    :class="{ 'opacity-100 pointer-events-auto': mobileSearch }">
-    <div class="container">
-        <div class="w-full sm:w-1/2 lg:w-1/4 z-10 bg-white shadow-sm rounded">
-            <form action="/search" class="border border-grey-dark px-4 py-3 rounded-md flex items-center">
-                <input type="text" name="search"
-                    class="font-hk font-medium text-secondary outline-none border-grey-dark w-full placeholder-grey-darkest focus:ring focus:ring-primary focus:outline-none focus:border-primary"
-                    placeholder="Search for a product" />
-                <button class="flex items-center focus:outline-none focus:border-transparent">
-                    <i class="bx bx-search text-primary text-xl ml-4"></i>
-                </button>
-            </form>
-        </div>
-    </div>
-</div>
