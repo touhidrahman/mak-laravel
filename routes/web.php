@@ -32,7 +32,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/shop', [HomeController::class, 'shop'])->name('shop');
-Route::get('/product/{product}', [HomeController::class, 'productDetails'])->name('productDetails');
+Route::get('/products/{product}', [HomeController::class, 'productDetails'])->name('product.details');
 
 Route::get('/cart', [CheckoutController::class, 'cart'])->name('cart');
 Route::post('/checkout-confirm', [CheckoutController::class, 'confirm'])->name('checkout.confirm');

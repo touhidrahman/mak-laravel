@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Color;
 use App\Models\Product;
-use App\Models\ProductImages;
+use App\Models\ProductImage;
 use App\Models\Stock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -61,7 +61,7 @@ class ProductsController extends Controller
     {
         return view('admin.products.upload', [
             'product' => Product::find($id),
-            'images' => ProductImages::where('product_id', $id)->get(),
+            'images' => ProductImage::where('product_id', $id)->get(),
         ]);
     }
 
@@ -85,7 +85,7 @@ class ProductsController extends Controller
         if ($images && count($images) > 0) {
             $i = 0;
             foreach($images as $image) {
-                ProductImages::insert([
+                ProductImage::insert([
                     'product_id' => $request->id,
                     'path' => $this->doUpload($image, $request->id),
                     'serial' => $i,

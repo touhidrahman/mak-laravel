@@ -64,10 +64,8 @@
             <div class="container" x-data x-init="collectionSliders">
                 <x-shop.hero-slider></x-shop.hero-slider>
 
-                <x-shop.feature></x-shop.feature>
-
-
-                <x-product.grid></x-product.grid>
+                {{-- <x-shop.feature></x-shop.feature>
+                <x-product.grid></x-product.grid> --}}
 
                 <div class="pb-20 md:pb-24 lg:pb-32">
                     <div class="flex flex-col sm:flex-row justify-between items-center sm:pb-4 lg:pb-0 mb-12 sm:mb-10">
@@ -88,7 +86,7 @@
                 </div>
             </div>
 
-            <x-shop.slider-with-grid></x-shop.slider-with-grid>
+            {{-- <x-shop.slider-with-grid></x-shop.slider-with-grid> --}}
 
             <div class="container">
                 <x-product.new-arrival></x-product.new-arrival>
