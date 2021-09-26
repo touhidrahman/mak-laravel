@@ -34,8 +34,13 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/shop', [HomeController::class, 'shop'])->name('shop');
 Route::get('/product/{product}', [HomeController::class, 'productDetails'])->name('productDetails');
 
-Route::get('/checkout', [CheckoutController::class, 'show'])->name('checkout.show');
-Route::post('/checkout', [CheckoutController::class, 'pay'])->name('checkout.pay');
+Route::get('/cart', [CheckoutController::class, 'cart'])->name('cart');
+Route::post('/checkout-confirm', [CheckoutController::class, 'confirm'])->name('checkout.confirm');
+Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
+Route::post('/pay', [CheckoutController::class, 'pay'])->name('checkout.pay');
+Route::get('/stripe-checkout', [CheckoutController::class, 'goToStripe'])->name('checkout.stripe');
+Route::get('/checkout-success', [CheckoutController::class, 'checkoutSuccess'])->name('checkout.success');
+Route::get('/checkout-cancel', [CheckoutController::class, 'show'])->name('checkout.cancel');
 
 Route::middleware('guest')->group(function () {
     Route::get('login', Login::class)
