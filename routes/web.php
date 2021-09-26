@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\SubsubcategoryController;
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Admin\ColorController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\FeaturedImageController;
 use App\Http\Controllers\HomeController;
@@ -35,6 +36,8 @@ Route::get('/shop', [HomeController::class, 'shop'])->name('shop');
 Route::get('/products/{product}', [HomeController::class, 'productDetails'])->name('product.details');
 
 Route::get('/cart', [CheckoutController::class, 'cart'])->name('cart');
+Route::post('/cart', [CartController::class, 'addToCart'])->name('add-to-cart');
+
 Route::post('/checkout-confirm', [CheckoutController::class, 'confirm'])->name('checkout.confirm');
 Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
 Route::post('/pay', [CheckoutController::class, 'pay'])->name('checkout.pay');

@@ -45,6 +45,11 @@ class Product extends Model
         return $this->colors();
     }
 
+    public function color()
+    {
+        return $this->stocks()->distinct('color_id')->select('color_id');
+    }
+
     public function images()
     {
         return $this->hasMany(ProductImage::class);

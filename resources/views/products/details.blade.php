@@ -40,7 +40,7 @@
                 {{-- end gallery --}}
 
                 {{-- product details --}}
-                <form class="lg:w-1/2 pt-8 lg:pt-0 px-5 block">
+                <form action="{{ route('add-to-cart') }}" method="POST" class="lg:w-1/2 pt-8 lg:pt-0 px-5 block">
                     @csrf
                     <div class="border-b border-grey-dark mb-8">
                         <div class="flex items-center">
@@ -72,6 +72,7 @@
                             @endforeach
 
                             <input x-model="selected_color_id" type="hidden" name="selected_color_id" name="selected_color_id" value="">
+                            <input type="hidden" name="product_id" name="product_id" value="{{ $product->id }}">
                         </div>
                     </div>
 
@@ -139,7 +140,7 @@
 
                     <span
                         class="tab-item active bg-white hover:bg-grey-light px-10 py-5 text-center sm:text-left border-t-2 border-transparent font-hk font-bold text-secondary cursor-pointer transition-colors active"
-                        :class="{ 'active': activeTab === 'description' }">
+                        >
                         Description
                     </span>
 

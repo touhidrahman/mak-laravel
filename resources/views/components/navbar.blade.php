@@ -85,14 +85,12 @@ $subsubcategories = Cache::remember('subsubcategories', 3600 * 24, function () {
 
                 @foreach ($categories as $category)
                     <li class="mr-10 hidden lg:block group">
-                        <div
-                            class="border-b-2 border-white transition-colors group-hover:border-primary flex items-center">
+                        <div class="border-b-2 border-white transition-colors group-hover:border-primary flex items-center">
                             <span
                                 class="cursor-pointer text-lg font-hk group-hover:font-bold text-secondary group-hover:text-primary px-2 transition-all">
                                 {{ $category->name }}
                             </span>
-                            <i
-                                class="bx bx-chevron-down text-secondary group-hover:text-primary pl-2 px-2 transition-colors"></i>
+                            <i class="bx bx-chevron-down text-secondary group-hover:text-primary pl-2 px-2 transition-colors"></i>
                         </div>
                         <div
                             class="pt-10 absolute mt-40 top-0 left-0 right-0 z-50 w-2/3 mx-auto opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto ">
@@ -108,7 +106,7 @@ $subsubcategories = Cache::remember('subsubcategories', 3600 * 24, function () {
                                                 @foreach ($subsubcategories as $subsubcategory)
                                                     @if ($subsubcategory->subcategory_id == $subcategory->id)
                                                         <li>
-                                                            <a href="/"
+                                                            <a href="/shop"
                                                                 class="text-sm font-hk text-secondary-lighter leading-loose border-b border-transparent hover:border-secondary-lighter">
                                                                 {{ $subsubcategory->name }}
                                                             </a>
@@ -126,12 +124,12 @@ $subsubcategories = Cache::remember('subsubcategories', 3600 * 24, function () {
                 @endforeach
 
                 <li class="mr-10">
-                    <a href="/contact#faq"
+                    <a href="/service"
                         class="block text-lg font-hk hover:font-bold transition-all text-secondary hover:text-primary border-b-2 border-white hover:border-primary px-2">Service</a>
                 </li>
 
                 <li class="mr-10">
-                    <a href="/contact"
+                    <a href="/b2b"
                         class="block text-lg font-hk hover:font-bold transition-all text-secondary hover:text-primary border-b-2 border-white hover:border-primary px-2">B2B</a>
                 </li>
             </ul>
@@ -169,7 +167,7 @@ $subsubcategories = Cache::remember('subsubcategories', 3600 * 24, function () {
                             :class="isAccordionOpen ? 'max-h-infinite' : 'max-h-0 overflow-hidden'">
                             @foreach ($subcategories as $subcategory)
                                 @if ($subcategory->category_id == $category->id)
-                                    <a href="#"
+                                    <a href="/shop"
                                         class="font-hk font-medium text-secondary block mt-2">{{ $subcategory->name }}</a>
                                 @endif
                             @endforeach

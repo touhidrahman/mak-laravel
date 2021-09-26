@@ -18,8 +18,8 @@ class CreateOrderItemsTable extends Migration
             $table->foreignId('order_id')->constrained();
             $table->foreignId('product_id');
             $table->foreignId('stock_id');
-            $table->timestamp('paid_at');
-            $table->timestamp('dispatched_at');
+            $table->timestamp('paid_at')->nullable();
+            $table->timestamp('dispatched_at')->nullable();
 
             $table->timestamps();
         });
