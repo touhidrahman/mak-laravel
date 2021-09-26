@@ -37,8 +37,23 @@ class HomeController extends Controller
 
     public function productDetails($id)
     {
+        $product =  Product::with(['stocks', 'images'])->find($id);
+        $available_sizes = [];
+        $available_colors = [];
+        foreach($product->stocks as $stock) {
+            if (!in_array($stock->size, $available_sizes)) {
+                array_push($available_sizes, $stock->size);
+            }
+            if (!in_array($stock->color, $available_colors)) {
+                array_push($available_colors, $stock->color);
+            }
+        }
+
         return view('products.details', [
-            'product' => Product::find($id)->with(['stocks']),
+            'product' => $product,
+            'available_colors' => $available_colors,
+            'available_sizes' => $available_sizes,
+            'relatedProducts' => Product::where('active', true)->take(6)->get(),
         ]);
     }
 }

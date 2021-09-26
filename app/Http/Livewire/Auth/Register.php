@@ -35,6 +35,7 @@ class Register extends Component
             'email' => $this->email,
             'name' => $this->name,
             'password' => Hash::make($this->password),
+            'role' => $this->getUserRole($this->email),
         ]);
 
         event(new Registered($user));
@@ -47,5 +48,12 @@ class Register extends Component
     public function render()
     {
         return view('livewire.auth.register')->extends('layouts.auth');
+    }
+
+    private function getUserRole($email)
+    {
+        return $email == 'makleidermerchant@outlook.de' || $email == 'touhidrahman1987@gmail.com'
+            ? 'ADMIN'
+            : 'USER';
     }
 }

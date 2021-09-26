@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\ProductImages;
+use App\Models\ServiceInquery;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ProductImagesFactory extends Factory
+class ServiceInqueryFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = ProductImages::class;
+    protected $model = ServiceInquery::class;
 
     /**
      * Define the model's default state.
@@ -22,9 +22,7 @@ class ProductImagesFactory extends Factory
     public function definition()
     {
         return [
-            'product_id' => $this->faker->numberBetween(1, 100),
-            'path' => $this->faker->imageUrl(),
-            'serial' => $this->faker->numberBetween(1, 10),
+            //
         ];
     }
 }

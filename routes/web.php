@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\SubcategoryController;
@@ -7,6 +8,7 @@ use App\Http\Controllers\Admin\SubsubcategoryController;
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Admin\ColorController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\FeaturedImageController;
 use App\Http\Controllers\HomeController;
@@ -32,10 +34,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/shop', [HomeController::class, 'shop'])->name('shop');
-Route::get('/product/{product}', [HomeController::class, 'productDetails'])->name('productDetails');
+Route::get('/products/{product}', [HomeController::class, 'productDetails'])->name('product.details');
 
-Route::get('/checkout', [CheckoutController::class, 'show'])->name('checkout.show');
-Route::post('/checkout', [CheckoutController::class, 'pay'])->name('checkout.pay');
+Route::get('/cart', [CheckoutController::class, 'cart'])->name('cart');
+Route::post('/cart', [CartController::class, 'addToCart'])->name('add-to-cart');
+
+Route::post('/checkout-confirm', [CheckoutController::class, 'confirm'])->name('checkout.confirm');
+Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
+Route::post('/pay', [CheckoutController::class, 'pay'])->name('checkout.pay');
+Route::get('/stripe-checkout', [CheckoutController::class, 'goToStripe'])->name('checkout.stripe');
+Route::get('/checkout-success', [CheckoutController::class, 'checkoutSuccess'])->name('checkout.success');
+Route::get('/checkout-cancel', [CheckoutController::class, 'show'])->name('checkout.cancel');
 
 Route::middleware('guest')->group(function () {
     Route::get('login', Login::class)
@@ -58,6 +67,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('password/confirm', Confirm::class)
         ->name('password.confirm');
+
+    Route::get('account', [AccountController::class, 'index'])->name('account');
 });
 
 Route::middleware('auth')->group(function () {
@@ -69,7 +80,7 @@ Route::middleware('auth')->group(function () {
         ->name('logout');
 });
 
-// Route::middleware('admin')->group(function() {
+Route::middleware('admin')->group(function() {
     Route::get('admin', function () {
         return view('admin.dashboard');
     })->name('admin');
@@ -119,4 +130,4 @@ Route::middleware('auth')->group(function () {
     Route::post('admin/featured-images', [FeaturedImageController::class, 'store'])->name('admin.featured-images.store');
     Route::delete('admin/featured-images/{id}', [FeaturedImageController::class, 'destroy'])->name('admin.featured-images.destroy');
 
-// });
+});

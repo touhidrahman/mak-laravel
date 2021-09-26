@@ -32,7 +32,11 @@ class Login extends Component
             return;
         }
 
-        return redirect()->intended(route('home'));
+        $role = Auth::user()->role;
+
+        return 'ADMIN' == strtoupper($role)
+            ? redirect()->intended(route('admin'))
+            : redirect()->intended(route('home'));
     }
 
     public function render()

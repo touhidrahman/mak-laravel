@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class MustBeAdmin
 {
@@ -17,7 +18,7 @@ class MustBeAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()?->email !== 'a@b.com')
+        if (Auth::user()?->role !== 'ADMIN')
         {
             abort(Response::HTTP_FORBIDDEN);
         }

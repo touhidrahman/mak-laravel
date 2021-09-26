@@ -50,10 +50,10 @@ class Product extends Model
         return $this->stocks()->distinct('color_id')->select('color_id');
     }
 
-    // public function colors()
-    // {
-    //     return $this->hasManyThrough(Color::class, Stock::class, 'color_id', )
-    // }
+    public function images()
+    {
+        return $this->hasMany(ProductImage::class);
+    }
 
     /**
      * Get the options for generating the slug.
