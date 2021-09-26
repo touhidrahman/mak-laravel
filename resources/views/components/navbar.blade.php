@@ -100,13 +100,16 @@ $subsubcategories = Cache::remember('subsubcategories', 3600 * 24, function () {
                                     @if ($subcategory->category_id == $category->id)
                                         <div class="flex-1 relative z-20">
                                             <h4 class="font-hkbold text-base text-secondary mb-2">
-                                                {{ $subcategory->name }}</h4>
+                                                <a href="/shop?subcategory_id={{$subcategory->id}}">
+                                                    {{ $subcategory->name }}
+                                                </a>
+                                            </h4>
 
                                             <ul>
                                                 @foreach ($subsubcategories as $subsubcategory)
                                                     @if ($subsubcategory->subcategory_id == $subcategory->id)
                                                         <li>
-                                                            <a href="/shop"
+                                                            <a href="/shop?subsubcategory_id={{$subsubcategory->id}}"
                                                                 class="text-sm font-hk text-secondary-lighter leading-loose border-b border-transparent hover:border-secondary-lighter">
                                                                 {{ $subsubcategory->name }}
                                                             </a>
@@ -160,14 +163,14 @@ $subsubcategories = Cache::remember('subsubcategories', 3600 * 24, function () {
                         <div class="flex items-center pt-3" @click="isAccordionOpen = !isAccordionOpen">
                             <i class="bx text-xl pr-3 transition-colors"
                                 :class="isAccordionOpen ? 'bx-chevron-down text-secondary' : 'bx-chevron-right text-grey-darkest'"></i>
-                            <a href="/collection-grid.html" class="font-hk font-medium transition-colors"
+                            <a href="/shop?category_id={{$category->id}}" class="font-hk font-medium transition-colors"
                                 :class="isAccordionOpen ? 'text-primary' : 'text-grey-darkest'">{{ $category->name }}</a>
                         </div>
                         <div class="pl-12 transition-all"
                             :class="isAccordionOpen ? 'max-h-infinite' : 'max-h-0 overflow-hidden'">
                             @foreach ($subcategories as $subcategory)
                                 @if ($subcategory->category_id == $category->id)
-                                    <a href="/shop"
+                                    <a href="/shop?subcategory_id={{ $subcategory->id }}"
                                         class="font-hk font-medium text-secondary block mt-2">{{ $subcategory->name }}</a>
                                 @endif
                             @endforeach
