@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->foreignId('subsubcategory_id')->nullable();
             $table->foreignId('product_familiy_id')->nullable();
             $table->string('name');
+            $table->string('sku')->unique();
             $table->string('brand');
             $table->string('season');
             $table->string('material');

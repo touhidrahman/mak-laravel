@@ -21,6 +21,7 @@ class AddAddressToUsersTable extends Migration
             $table->string('country')->nullable();
             $table->string('zipcode')->nullable();
             $table->string('phone')->nullable();
+            $table->string('role')->default('USER');
         });
     }
 
@@ -39,7 +40,7 @@ class AddAddressToUsersTable extends Migration
             $table->dropColumn('country');
             $table->dropColumn('zipcode');
             $table->dropColumn('phone');
-
+            $table->dropColumn('role');
         });
     }
 }

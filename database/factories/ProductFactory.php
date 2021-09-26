@@ -4,6 +4,8 @@ namespace Database\Factories;
 
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
+
 
 class ProductFactory extends Factory
 {
@@ -28,6 +30,7 @@ class ProductFactory extends Factory
             'season' => $this->faker->word(),
             'material' => $this->faker->word(),
             'slug' => $this->faker->slug(),
+            'sku' => Str::random(10),
             'code' => $this->faker->word(),
             'tags' => $this->faker->word(),
             'thumb_1' => $this->faker->imageUrl(),
