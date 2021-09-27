@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
+    public function cart()
+    {
+        return view('checkout.cart');
+    }
+
     public function addToCart(Request $request)
     {
         // validate

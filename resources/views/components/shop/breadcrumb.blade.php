@@ -1,17 +1,36 @@
-    <div class="flex items-center space-x-2 text-gray-400 text-sm">
-        <a href="#" class="hover:underline hover:text-gray-600">Home</a>
-        <span>
-            <svg class="h-5 w-5 leading-none text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none"
-                viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-        </span>
-        <a href="#" class="hover:underline hover:text-gray-600">Electronics</a>
-        <span>
-            <svg class="h-5 w-5 leading-none text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none"
-                viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-        </span>
-        <span>Headphones</span>
-    </div>
+<div class="container border-t border-grey-dark pt-10 sm:pt-12">
+    <div class="flex flex-wrap items-center">
+
+
+    <a href="/cart/index"
+       class="transition-all border-b border-transparent hover:border-primary text-sm text-secondary hover:text-primary font-hk
+         font-bold ">
+        Cart
+    </a>
+    <i class="bx bx-chevron-right text-sm text-secondary px-2"></i>
+
+
+    <a href="/cart/customer-info"
+       class="transition-all border-b border-transparent hover:border-primary text-sm text-secondary hover:text-primary font-hk
+        ">
+        Customer information
+    </a>
+    <i class="bx bx-chevron-right text-sm text-secondary px-2"></i>
+
+
+    <a href="/cart/shipping-method"
+       class="transition-all border-b border-transparent hover:border-primary text-sm text-secondary hover:text-primary font-hk
+        ">
+        Shipping method
+    </a>
+    <i class="bx bx-chevron-right text-sm text-secondary px-2"></i>
+
+
+    <a href="/cart/payment-method"
+       class="transition-all border-b border-transparent hover:border-primary text-sm text-secondary hover:text-primary font-hk
+        ">
+        Payment method
+    </a>
+    <i class="bx bx-chevron-right text-sm text-transparent px-2"></i>
+
+</div>

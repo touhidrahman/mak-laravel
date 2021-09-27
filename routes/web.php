@@ -37,15 +37,12 @@ Route::get('/home', [HomeController::class, 'index']); // temp
 Route::get('/shop', [HomeController::class, 'shop'])->name('shop');
 Route::get('/products/{product}', [HomeController::class, 'productDetails'])->name('product.details');
 
-Route::get('/cart', [CheckoutController::class, 'cart'])->name('cart');
+Route::get('/cart', [CartController::class, 'cart'])->name('cart');
 Route::post('/cart', [CartController::class, 'addToCart'])->name('add-to-cart');
 
-Route::post('/checkout-confirm', [CheckoutController::class, 'confirm'])->name('checkout.confirm');
-Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
-Route::post('/pay', [CheckoutController::class, 'pay'])->name('checkout.pay');
-Route::get('/stripe-checkout', [CheckoutController::class, 'goToStripe'])->name('checkout.stripe');
+Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
 Route::get('/checkout-success', [CheckoutController::class, 'checkoutSuccess'])->name('checkout.success');
-Route::get('/checkout-cancel', [CheckoutController::class, 'show'])->name('checkout.cancel');
+Route::get('/checkout-cancel', [CheckoutController::class, 'checkoutCancel'])->name('checkout.cancel');
 
 Route::middleware('guest')->group(function () {
     Route::get('login', Login::class)
