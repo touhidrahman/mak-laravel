@@ -37,9 +37,6 @@ Route::get('/home', [HomeController::class, 'index']); // temp
 Route::get('/shop', [HomeController::class, 'shop'])->name('shop');
 Route::get('/products/{product}', [HomeController::class, 'productDetails'])->name('product.details');
 
-Route::get('/cart', [CartController::class, 'cart'])->name('cart');
-Route::post('/cart', [CartController::class, 'addToCart'])->name('add-to-cart');
-
 Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
 Route::get('/checkout-success', [CheckoutController::class, 'checkoutSuccess'])->name('checkout.success');
 Route::get('/checkout-cancel', [CheckoutController::class, 'checkoutCancel'])->name('checkout.cancel');
@@ -67,6 +64,9 @@ Route::middleware('auth')->group(function () {
         ->name('password.confirm');
 
     Route::get('account', [AccountController::class, 'index'])->name('account');
+
+    Route::get('cart', [CartController::class, 'cart'])->name('cart');
+    Route::post('cart', [CartController::class, 'addToCart'])->name('add-to-cart');
 });
 
 Route::middleware('auth')->group(function () {

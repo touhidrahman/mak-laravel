@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\Stock;
 use Illuminate\Http\Request;
@@ -21,31 +23,37 @@ class CartController extends Controller
         // validate
         $data = $request->validate([
             'product_id' => 'required',
-            'selected_color_id' => 'required',
-            'selected_size' => 'required',
+            'color_id' => 'required',
+            'size' => 'required',
+            'qty' => 'required|integer|min:1|max:20',
+            'unit_price' => 'integer',
         ]);
-
-        // choose correct stock
-        $stock = Stock::where('size', '=', $data['selected_size'])
-            ->where('color_id', '=', $data['selected_color_id'])
-            ->where('product_id', '=', $data['product_id'])
-            ->first();
 
         // get user
         $user = Auth::user();
-        // create an order if not exists
-        $order = $request->input('order_id')
-            ? Order::findOrFail($request->input('order_id'))
-            : Order::create(['user_id' => $user ? $user->id : null, 'price' => 0 ]);
+        // check cart exists in session
+        $cart = Cart::findOrFail($request->session()->get('cart_id'));
+        if (!$cart) {
+            $cart = Cart::create(['user_id' => $user->id, 'checked_out_at' => null]);
+            // add to session
+            $request->session()->put('cart_id', $cart->id);
+        }
 
-        // add cart item
-        $order->orderItems()->create([
-            'product_id' => $data['product_id'],
-            'stock_id' => $stock->id,
-        ]);
-        // calculate total
-        $order->increment('price', Product::findOrFail($request->input('product_id'))->selling_price);
-        // add to session
-        $request->session()->put('cart', $order);
+        // check if cart item exists, then increase qty
+        $existingCartItem = $cart->cartItems()
+            ->where('product_id', '=', $data['product_id'])
+            ->where('color_id', '=', $data['color_id'])
+            ->where('size', '=', $data['size'])
+            ->first();
+
+        if ($existingCartItem) {
+            $existingCartItem->increment('qty', $data['qty']);
+        } else {
+            // otherwise add cart item
+            $cart->cartItems()->create($data);
+        }
+
+        alert('Added to cart', 'Test', 'success');
+        return back();
     }
 }
