@@ -1,5 +1,9 @@
-<form action="{{ route('checkout') }}" method="POST" class="flex flex-col-reverse lg:flex-row justify-between pb-16 sm:pb-20 lg:pb-24">
+<form action="{{ route('checkout') }}" method="POST"
+    class="flex flex-col-reverse lg:flex-row justify-between pb-16 sm:pb-20 lg:pb-24">
     @csrf
+
+    <input type="hidden" name="cart_id" value="{{$cart->id}}">
+
     <div class="lg:w-3/5">
         <div class="pt-10">
             <h1 class="font-hkbold text-secondary text-2xl pb-3 text-center sm:text-left">Cart Items</h1>
@@ -19,43 +23,55 @@
                     </div>
                 </div>
 
-                <div class="py-3 border-b border-grey-dark flex-row justify-between items-center mb-0 hidden md:flex">
-                    <i class="bx bx-x text-grey-darkest text-2xl sm:text-3xl mr-6 cursor-pointer"></i>
+                @foreach ($cart->cartItems as $cartItem)
                     <div
-                        class="w-1/2 lg:w-3/5 xl:w-1/2 flex flex-row items-center border-b-0 border-grey-dark pt-0 pb-0 text-left">
-                        <div class="w-20 mx-0 relative pr-0">
-                            <div class="h-20 rounded flex items-center justify-center">
-                                <div class="aspect-w-1 aspect-h-1 w-full">
-                                    <img src="https://source.unsplash.com/1000x640/?oes-3" alt="product image"
-                                        class="object-cover" />
+                        class="py-3 border-b border-grey-dark flex-row justify-between items-center mb-0 hidden md:flex">
+                        <i class="bx bx-x text-grey-darkest text-2xl sm:text-3xl mr-6 cursor-pointer"></i>
+                        <div
+                            class="w-1/2 lg:w-3/5 xl:w-1/2 flex flex-row items-center border-b-0 border-grey-dark pt-0 pb-0 text-left">
+                            <div class="w-20 mx-0 relative pr-0">
+                                <div class="h-20 rounded flex items-center justify-center">
+                                    <div class="aspect-w-1 aspect-h-1 w-full">
+                                        <img src="{{ $cartItem->product->thumb_1 }}" alt="product image"
+                                            class="object-cover" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="font-hk text-secondary text-base mt-2 ml-4">
+                                {{ $cartItem->product->name }}
+                                <div class="text-gray-300">
+                                    Color: {{ $cartItem->color->name }} | Size: {{ $cartItem->size }}
                                 </div>
                             </div>
                         </div>
-                        <span class="font-hk text-secondary text-base mt-2 ml-4">Classic Beige</span>
-                    </div>
-                    <div class="w-full sm:w-1/5 xl:w-1/4 text-center border-b-0 border-grey-dark pb-0">
-                        <div class="mx-auto mr-8 xl:mr-4">
-                            <div class="flex justify-center" x-data="{ productQuantity: 1 }">
-                                <input type="number" id="quantity-form-desktop"
-                                    class="form-input form-quantity rounded-r-none w-16 py-0 px-2 text-center"
-                                    x-model="productQuantity" min="1" />
-                                <div class="flex flex-col">
-                                    <span
-                                        class="px-1 bg-white border border-l-0 border-grey-darker flex-1 rounded-tr cursor-pointer"
-                                        @click="productQuantity++"><i
-                                            class="bx bxs-up-arrow text-xs text-primary pointer-events-none"></i></span>
-                                    <span
-                                        class="px-1 bg-white flex-1 border border-t-0 border-l-0 rounded-br border-grey-darker cursor-pointer"
-                                        @click="productQuantity > 1 ? productQuantity-- : productQuanity = 1"><i
-                                            class="bx bxs-down-arrow text-xs text-primary pointer-events-none"></i></span>
+                        <div class="w-full sm:w-1/5 xl:w-1/4 text-center border-b-0 border-grey-dark pb-0">
+                            <div class="mx-auto mr-8 xl:mr-4">
+                                <div class="flex justify-center"
+                                    x-data="{ productQuantity: parseInt('{{ $cartItem->qty }}', 10) }">
+                                    <input type="number" id="quantity-form-desktop"
+                                        class="form-input form-quantity rounded-r-none w-16 py-0 px-2 text-center"
+                                        x-model="productQuantity" min="1" />
+                                    <div class="flex flex-col">
+                                        <span
+                                            class="px-1 bg-white border border-l-0 border-grey-darker flex-1 rounded-tr cursor-pointer"
+                                            @click="productQuantity++"><i
+                                                class="bx bxs-up-arrow text-xs text-primary pointer-events-none"></i></span>
+                                        <span
+                                            class="px-1 bg-white flex-1 border border-t-0 border-l-0 rounded-br border-grey-darker cursor-pointer"
+                                            @click="productQuantity > 1 ? productQuantity-- : productQuanity = 1"><i
+                                                class="bx bxs-down-arrow text-xs text-primary pointer-events-none"></i></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="w-1/4 lg:w-1/5 xl:w-1/4 text-right pr-10 xl:pr-10 pb-4">
+                            <span class="font-hk text-secondary">
+                                {{ $cartItem->unit_price * $cartItem->qty }}
+                            </span>
+                        </div>
                     </div>
-                    <div class="w-1/4 lg:w-1/5 xl:w-1/4 text-right pr-10 xl:pr-10 pb-4">
-                        <span class="font-hk text-secondary">$1045</span>
-                    </div>
-                </div>
+                @endforeach
+
             </div>
         </div>
 
@@ -74,15 +90,19 @@
 
             <div class="pt-4 md:pt-5 pb-10">
                 <div class="flex justify-between w-full">
-                    <input type="text" placeholder="First Name" class="form-input mb-4 w-1/2 sm:mb-5 mr-2" id="first_name" />
-                    <input type="text" placeholder="Last Name" class="form-input mb-4  w-1/2 sm:mb-5 ml-1" id="last_name" />
+                    <input type="text" placeholder="First Name" class="form-input mb-4 w-1/2 sm:mb-5 mr-2"
+                        id="first_name" />
+                    <input type="text" placeholder="Last Name" class="form-input mb-4  w-1/2 sm:mb-5 ml-1"
+                        id="last_name" />
                 </div>
 
                 <input type="text" placeholder="Your address" class="form-input w-full mb-4 sm:mb-5" id="address" />
 
-                <input type="text" placeholder="Apartment, Suite, etc (optional)" class="form-input w-full mb-4 sm:mb-5" id="address2" />
+                <input type="text" placeholder="Apartment, Suite, etc (optional)" class="form-input w-full mb-4 sm:mb-5"
+                    id="address2" />
                 <div class="flex justify-between w-full">
-                    <input type="text" placeholder="Post code" class="form-input w-1/2 mb-4 sm:mb-5 mr-2" id="post_code" />
+                    <input type="text" placeholder="Post code" class="form-input w-1/2 mb-4 sm:mb-5 mr-2"
+                        id="post_code" />
                     <input type="text" placeholder="City" class="form-input w-1/2 mb-4 sm:mb-5 ml-1" id="city" />
                 </div>
                 <input type="text" placeholder="Country" class="form-input w-full mb-4 sm:mb-5" id="country" />

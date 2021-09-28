@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\CartItem;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
@@ -15,7 +16,10 @@ class CartController extends Controller
 {
     public function cart()
     {
-        return view('checkout.cart');
+        $cart = Cart::where('user_id', '=', Auth::user()->id)->whereNull('checked_out_at')->latest()->first();
+        return view('checkout.cart', [
+            'cart' => $cart,
+        ]);
     }
 
     public function addToCart(Request $request)
