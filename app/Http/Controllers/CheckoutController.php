@@ -37,6 +37,7 @@ class CheckoutController extends Controller
                     'product_id' => $product->id,
                     'stock_id' => $stock->id,
                     'qty' => $cartItem['qty'],
+                    'unit_price' => $cartItem['unit_price'],
                 ];
 
                 array_push($toSaveOrderItems, $orderItem);
@@ -65,7 +66,9 @@ class CheckoutController extends Controller
                 array_push($stripeLineItems, $item);
             }
         }
-        $orderItems = $order->orderItems()->insert($toSaveOrderItems);
+        $order->orderItems()->insert($toSaveOrderItems);
+        // save order id to session
+        $request->session()->put('order_id', $order->id);
 
         // redirect to payment form
         return $request->user()->checkout($stripeLineItems, [
@@ -76,10 +79,16 @@ class CheckoutController extends Controller
 
     public function checkoutSuccess(Request $request)
     {
-        $session = Session::retrieve($request->get('session_id'));
-        $customer = User::retrieve($session->customer);
+        $stripeCheckoutSessionId = $request->get('session_id');
+        $order = Order::findOrFail($request->session()->get('order_id'));
+        $order->update(['stripe_checkout_session_id' => $stripeCheckoutSessionId]);
 
-        return view('checkout.success', ['customerName' => $customer->name]);
+        // clear session cart
+        $request->session()->remove('cart_id');
+        $request->session()->remove('order_id');
+
+        alert('Payment Complete', 'Thank you for your order', 'success');
+        return redirect()->route('home');
     }
 
     public function checkoutCancel(Request $request)

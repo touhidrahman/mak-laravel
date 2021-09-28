@@ -130,3 +130,5 @@ Route::middleware('admin')->group(function() {
     Route::delete('admin/featured-images/{id}', [FeaturedImageController::class, 'destroy'])->name('admin.featured-images.destroy');
 
 });
+
+Route::stripeWebhooks('webhook');

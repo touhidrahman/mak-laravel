@@ -18,7 +18,12 @@ class CreateOrdersTable extends Migration
             $table->foreignId('user_id')->nullable();
             $table->integer('price')->default(0);
             $table->timestamp('paid_at')->nullable();
+            $table->timestamp('dispatched_at')->nullable();
             $table->timestamp('delivered_at')->nullable();
+            $table->string('shipping_carrier')->nullable();
+            $table->string('shipping_tracking')->nullable();
+            $table->string('stripe_checkout_session_id')->nullable();
+            $table->string('status')->default('NOT_PAID_YET');
             $table->timestamps();
         });
     }

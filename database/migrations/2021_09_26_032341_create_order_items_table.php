@@ -19,8 +19,7 @@ class CreateOrderItemsTable extends Migration
             $table->foreignId('product_id');
             $table->foreignId('stock_id');
             $table->integer('qty')->default(1);
-            $table->timestamp('paid_at')->nullable();
-            $table->timestamp('dispatched_at')->nullable();
+            $table->integer('unit_price');
 
             $table->timestamps();
         });
