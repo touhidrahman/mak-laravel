@@ -36,7 +36,7 @@ class CartController extends Controller
         // get user
         $user = Auth::user();
         // check cart exists in session
-        $cart = Cart::findOrFail($request->session()->get('cart_id'));
+        $cart = Cart::find($request->session()->get('cart_id'));
         if (!$cart) {
             $cart = Cart::create(['user_id' => $user->id, 'checked_out_at' => null]);
             // add to session
@@ -58,6 +58,18 @@ class CartController extends Controller
         }
 
         alert('Added to cart', 'Test', 'success');
+        $request->session()->put('cart_items_count', $cart->cartItems()->sum('qty'));
+
+        return back();
+    }
+
+    public function deleteFromCart(Request $request, $id)
+    {
+        // CartItem::findOrFail($id)->delete();
+        $cart = Cart::findOrFail($request->session()->get('cart_id'));
+        $cart->cartItems()->where('id', '=', $id)->delete();
+        $request->session()->put('cart_items_count', $cart->cartItems()->sum('qty'));
+
         return back();
     }
 }

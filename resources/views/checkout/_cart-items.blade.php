@@ -1,8 +1,4 @@
-<form action="{{ route('checkout') }}" method="POST"
-    class="flex flex-col-reverse lg:flex-row justify-between pb-16 sm:pb-20 lg:pb-24">
-    @csrf
-
-    <input type="hidden" name="cart_id" value="{{$cart->id}}">
+<div class="flex flex-col-reverse lg:flex-row justify-between pb-16 sm:pb-20 lg:pb-24">
 
     <div class="lg:w-3/5">
         <div class="pt-10">
@@ -26,7 +22,12 @@
                 @foreach ($cart->cartItems as $cartItem)
                     <div
                         class="py-3 border-b border-grey-dark flex-row justify-between items-center mb-0 hidden md:flex">
-                        <i class="bx bx-x text-grey-darkest text-2xl sm:text-3xl mr-6 cursor-pointer"></i>
+                        <form action="{{ route('cart.items.delete', $cartItem->id) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="bg-transparent">
+                                <i class="bx bx-x text-grey-darkest text-2xl sm:text-3xl mr-6 cursor-pointer"></i>
+                            </button>
+                        </form>
                         <div
                             class="w-1/2 lg:w-3/5 xl:w-1/2 flex flex-row items-center border-b-0 border-grey-dark pt-0 pb-0 text-left">
                             <div class="w-20 mx-0 relative pr-0">
@@ -83,7 +84,9 @@
     </div>
 
     {{-- cart info --}}
-    <div class="sm:w-2/3 md:w-full lg:w-1/3 mx-auto lg:mx-0 mt-16 lg:mt-0">
+    <form action="{{ route('checkout') }}" method="POST"
+        class="sm:w-2/3 md:w-full lg:w-1/3 mx-auto lg:mx-0 mt-16 lg:mt-0">
+        @csrf
         <div class="bg-grey-light py-8 px-8">
 
             <h4 class="font-hkbold text-secondary text-2xl pb-3 text-center sm:text-left">Shipping Address</h4>
@@ -142,5 +145,5 @@
                 Proceed to checkout
             </button>
         </div>
-    </div>
-</form>
+    </form>
+</div>

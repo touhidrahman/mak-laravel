@@ -43,11 +43,16 @@ $subsubcategories = Cache::remember('subsubcategories', 3600 * 24, function () {
 
             <div class="flex items-center">
                 <a href="/cart"
-                    class="hidden lg:block border-2 transition-all border-transparent hover:border-primary rounded-full p-2 sm:p-4 ml-2 sm:ml-3 md:ml-5 lg:ml-8 group">
+                    class="hidden relative lg:block border-2 transition-all border-transparent hover:border-primary rounded-full p-2 sm:p-4 ml-2 sm:ml-3 md:ml-5 lg:ml-8 group">
                     <img src="/img/icons/icon-cart.svg"
                         class="w-5 sm:w-6 md:w-8 h-5 sm:h-6 md:h-8 block group-hover:hidden" alt="icon cart" />
                     <img src="/img/icons/icon-cart-hover.svg"
                         class="w-5 sm:w-6 md:w-8 h-5 sm:h-6 md:h-8 hidden group-hover:block" alt="icon cart hover" />
+                        @if (session('cart_items_count') > 0)
+                        <span class="absolute inset-0 w-8 h-8 bg-primary rounded-full -mt-2 -ml-2 text-white inline-grid place-content-center">
+                            {{ session('cart_items_count') }}
+                        </span>
+                        @endif
                 </a>
 
                 <span @click="mobileCart = !mobileCart"

@@ -86,6 +86,7 @@ class CheckoutController extends Controller
         // clear session cart
         $request->session()->remove('cart_id');
         $request->session()->remove('order_id');
+        $request->session()->remove('cart_items_count');
 
         alert('Payment Complete', 'Thank you for your order', 'success');
         return redirect()->route('home');
