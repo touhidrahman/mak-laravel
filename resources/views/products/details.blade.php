@@ -44,14 +44,13 @@
                     @csrf
                     <div class="border-b border-grey-dark mb-8">
                         <div class="flex items-center">
-                            <h2 class=" font-butler text-3xl md:text-4xl lg:text-4.5xl">{{ $product->name }}</h2>
-                            <p
-                                class="bg-primary rounded-full ml-8 px-5 py-2 leading-none font-hk font-bold text-white uppercase text-sm">
-                                20% off</p>
+                            <h2 class=" font-butler text-2xl md:text-3xl lg:text-4xl">{{ $product->name }}</h2>
+                            {{-- <p class="bg-primary rounded-full ml-8 px-5 py-2 leading-none font-hk font-bold text-white uppercase text-sm">
+                                20% off</p> --}}
                         </div>
                         <div class="flex items-center pt-3">
-                            <span class="font-hk text-secondary text-2xl">€{{ $product->selling_price / 100 }}</span>
-                            <span class="font-hk text-grey-darker text-xl line-through pl-5">€35.0</span>
+                            <span class="font-hk text-primary text-2xl">€{{ $product->selling_price / 100 }}</span>
+                            {{-- <span class="font-hk text-grey-darker text-xl line-through pl-5">€35.0</span> --}}
                         </div>
                     </div>
 

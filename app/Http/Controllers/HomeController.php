@@ -17,6 +17,16 @@ class HomeController extends Controller
         return view('coming-soon');
     }
 
+    public function b2b()
+    {
+        return view('under-maintenance');
+    }
+
+    public function services()
+    {
+        return view('under-maintenance');
+    }
+
     public function index()
     {
         return view('welcome', [
