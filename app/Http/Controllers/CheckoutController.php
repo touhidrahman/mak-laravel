@@ -16,7 +16,20 @@ class CheckoutController extends Controller
 {
     public function checkout(Request $request)
     {
+        // check shipping address filled
+        $data = $request->validate([
+            'name' => 'required',
+            'street' => 'required',
+            'house_no' => 'required',
+            'city' => 'required',
+            'zipcode' => 'required',
+            'country' => 'required',
+            'phone' => '',
+            'state' => '',
+        ]);
+
         $user = Auth::user();
+        $user->update($data);
         // move cart to unpaid order
         $cart = Cart::findOrFail($request->session()->get('cart_id'));
 
@@ -94,9 +107,7 @@ class CheckoutController extends Controller
 
     public function checkoutCancel(Request $request)
     {
-        $session = Session::retrieve($request->get('session_id'));
-        $customer = User::retrieve($session->customer);
-
-        return view('checkout.cancel', ['customerName' => $customer->name]);
+        alert('Payment Failed!', 'Your order was not successful. Please try again.', 'error');
+        return redirect()->route('cart');
     }
 }

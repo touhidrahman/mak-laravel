@@ -111,23 +111,37 @@
             <h4 class="font-hkbold text-secondary text-2xl pb-3 text-center sm:text-left">Shipping Address</h4>
 
             <div class="pt-4 md:pt-5">
+                <x-form.input name="name" value="{{ auth()->user()->name ?? '' }}" placeholder="Your name"></x-form.input>
+
                 <div class="flex justify-between w-full">
-                    <input type="text" placeholder="First Name" class="form-input mb-4 w-1/2 sm:mb-5 mr-2"
-                        id="first_name" />
-                    <input type="text" placeholder="Last Name" class="form-input mb-4  w-1/2 sm:mb-5 ml-1"
-                        id="last_name" />
+                    <div class="w-2/3 mr-2">
+                        <x-form.input name="street" placeholder="Your Address"></x-form.input>
+                    </div>
+                    <div class="w-1/3 ml-1">
+                        <x-form.input name="house_no" label="House No" placeholder=""></x-form.input>
+                    </div>
                 </div>
 
-                <input type="text" placeholder="Your address" class="form-input w-full mb-4 sm:mb-5" id="address" />
-
-                <input type="text" placeholder="Apartment, Suite, etc (optional)" class="form-input w-full mb-4 sm:mb-5"
-                    id="address2" />
                 <div class="flex justify-between w-full">
-                    <input type="text" placeholder="Post code" class="form-input w-1/2 mb-4 sm:mb-5 mr-2"
-                        id="post_code" />
-                    <input type="text" placeholder="City" class="form-input w-1/2 mb-4 sm:mb-5 ml-1" id="city" />
+                    <div class="w-1/2 mr-2">
+                        <x-form.input name="zipcode" label="Postcode" placeholder="PLZ"></x-form.input>
+                    </div>
+                    <div class="w-1/2 ml-1">
+                        <x-form.input name="city" label="City" placeholder="Your City"></x-form.input>
+                    </div>
                 </div>
-                <input type="text" placeholder="Country" class="form-input w-full mb-4 sm:mb-5" id="country" />
+
+                <div class="flex justify-between w-full">
+                    <div class="w-1/2 mr-2">
+                        <x-form.input name="state" label="State" placeholder="(optional)"></x-form.input>
+                    </div>
+                    <div class="w-1/2 ml-1">
+                        <x-form.input name="country" placeholder="Country"></x-form.input>
+                    </div>
+                </div>
+
+                <x-form.input name="phone" label="Phone" placeholder="Your Phone (optional)"></x-form.input>
+
             </div>
 
 
