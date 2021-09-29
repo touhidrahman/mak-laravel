@@ -27,8 +27,13 @@ class Cart extends Model
         return $this->hasMany(CartItem::class);
     }
 
-    public function getItemTotalAttribute() {
-        return $this->qty * $this->unit_price;
+    public function getTotalAttribute() {
+        $total = 0;
+        foreach($this->cartItems as $cartItem) {
+            $total += $cartItem->item_total;
+        }
+
+        return $total;
     }
 
 }

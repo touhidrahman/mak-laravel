@@ -1,7 +1,7 @@
-<div class="flex flex-col-reverse lg:flex-row justify-between pb-16 sm:pb-20 lg:pb-24">
+<div class="flex flex-col lg:flex-row justify-between pb-16 sm:pb-10 lg:pb-24">
 
     <div class="lg:w-3/5">
-        <div class="pt-10">
+        <div class="sm:pt-10">
             <h1 class="font-hkbold text-secondary text-2xl pb-3 text-center sm:text-left">Cart Items</h1>
 
             <div class="pt-8">
@@ -20,16 +20,14 @@
                 </div>
 
                 @foreach ($cart->cartItems as $cartItem)
-                    <div
-                        class="py-3 border-b border-grey-dark flex-row justify-between items-center mb-0 hidden md:flex">
-                        <form action="{{ route('cart.items.delete', $cartItem->id) }}" method="POST">
+                    <div class="py-3 border-b border-grey-dark flex justify-between items-center mb-0 md:flex-row">
+                        <form action="{{ route('cart.items.delete', $cartItem->id) }}" method="POST" class="inline-block">
                             @csrf
                             <button type="submit" class="bg-transparent">
                                 <i class="bx bx-x text-grey-darkest text-2xl sm:text-3xl mr-6 cursor-pointer"></i>
                             </button>
                         </form>
-                        <div
-                            class="w-1/2 lg:w-3/5 xl:w-1/2 flex flex-row items-center border-b-0 border-grey-dark pt-0 pb-0 text-left">
+                        <div class="w-1/2 lg:w-3/5 xl:w-1/2 flex flex-row items-center border-b-0 border-grey-dark pt-0 pb-0 text-left">
                             <div class="w-20 mx-0 relative pr-0">
                                 <div class="h-20 rounded flex items-center justify-center">
                                     <div class="aspect-w-1 aspect-h-1 w-full">
@@ -42,6 +40,9 @@
                                 {{ $cartItem->product->name }}
                                 <div class="text-gray-300">
                                     Color: {{ $cartItem->color->name }} | Size: {{ $cartItem->size }}
+                                </div>
+                                <div class="text-gray-300">
+                                    Unit Price: €{{ $cartItem->unit_price / 100 }}
                                 </div>
                             </div>
                         </div>
@@ -67,7 +68,7 @@
                         </div>
                         <div class="w-1/4 lg:w-1/5 xl:w-1/4 text-right pr-10 xl:pr-10 pb-4">
                             <span class="font-hk text-secondary">
-                                {{ $cartItem->unit_price * $cartItem->qty }}
+                                €{{ ($cartItem->unit_price * $cartItem->qty) / 100 }}
                             </span>
                         </div>
                     </div>
@@ -77,8 +78,8 @@
         </div>
 
         <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center pt-8 sm:pt-12">
-            <a href="/shop" class="btn btn-outline">Continue Shopping</a>
-            <a href="/" class="btn btn-primary mt-5 sm:mt-0">Update Cart
+            <a href="/shop" class="bg-transparent border border-primary border-solid text-primary hover:bg-primary-light font-hk font-semibold transition-colors text-sm hover:text-white px-5 md:px-8 py-4 md:py-5 rounded uppercase focus:outline-none inline-block tracking-wide mt-5 sm:mt-0">Continue Shopping</a>
+            <a href="/" class="bg-transparent border border-primary border-solid text-primary hover:bg-primary-light font-hk font-semibold transition-colors text-sm hover:text-white px-5 md:px-8 py-4 md:py-5 rounded uppercase focus:outline-none inline-block tracking-wide mt-5 sm:mt-0">Update Cart
             </a>
         </div>
     </div>
@@ -87,11 +88,29 @@
     <form action="{{ route('checkout') }}" method="POST"
         class="sm:w-2/3 md:w-full lg:w-1/3 mx-auto lg:mx-0 mt-16 lg:mt-0">
         @csrf
+
         <div class="bg-grey-light py-8 px-8">
+
+            <h4 class="font-hkbold text-secondary text-2xl pb-3 text-center sm:text-left">Cart Totals</h4>
+
+            <div class="mb-12 pt-4">
+                <div class="border-b border-grey-darker pb-1 flex justify-between">
+                    <span class="font-hk text-secondary">Subtotal</span>
+                    <span class="font-hk text-secondary">€{{ $cart->total / 100 }}</span>
+                </div>
+                <div class="border-b border-grey-darker pt-2 pb-1 flex justify-between">
+                    <span class="font-hk text-secondary">VAT</span>
+                    <span class="font-hk text-secondary">19%</span>
+                </div>
+                <div class="pt-3 flex justify-between">
+                    <span class="font-hkbold text-secondary">Total</span>
+                    <span class="font-hkbold text-secondary">€{{ $cart->total / 100 }}</span>
+                </div>
+            </div>
 
             <h4 class="font-hkbold text-secondary text-2xl pb-3 text-center sm:text-left">Shipping Address</h4>
 
-            <div class="pt-4 md:pt-5 pb-10">
+            <div class="pt-4 md:pt-5">
                 <div class="flex justify-between w-full">
                     <input type="text" placeholder="First Name" class="form-input mb-4 w-1/2 sm:mb-5 mr-2"
                         id="first_name" />
@@ -111,7 +130,6 @@
                 <input type="text" placeholder="Country" class="form-input w-full mb-4 sm:mb-5" id="country" />
             </div>
 
-            <h4 class="font-hkbold text-secondary text-2xl pb-3 text-center sm:text-left">Cart Totals</h4>
 
             {{-- Coupon --}}
             {{-- <div class="pt-4">
@@ -124,21 +142,6 @@
                         aria-label="Apply button">Apply</button>
                 </div>
             </div> --}}
-
-            <div class="mb-12 pt-4">
-                <div class="border-b border-grey-darker pb-1 flex justify-between">
-                    <span class="font-hk text-secondary">Subtotal</span>
-                    <span class="font-hk text-secondary">$236</span>
-                </div>
-                <div class="border-b border-grey-darker pt-2 pb-1 flex justify-between">
-                    <span class="font-hk text-secondary">VAT</span>
-                    <span class="font-hk text-secondary">19%</span>
-                </div>
-                <div class="pt-3 flex justify-between">
-                    <span class="font-hkbold text-secondary">Total</span>
-                    <span class="font-hkbold text-secondary">$200</span>
-                </div>
-            </div>
 
             <button type="submit"
                 class="bg-primary w-full hover:bg-primary-light font-hk font-semibold transition-colors text-sm text-white px-5 md:px-8 py-4 md:py-5 rounded uppercase focus:outline-none inline-block tracking-wide">
