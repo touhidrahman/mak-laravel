@@ -22,11 +22,12 @@ class CreateProductsTable extends Migration
             $table->foreignId('product_familiy_id')->nullable();
             $table->string('name');
             $table->string('sku')->unique();
-            $table->string('brand');
-            $table->string('season');
-            $table->string('material');
+            $table->string('brand')->nullable();
+            $table->string('season')->nullable();
+            $table->string('material')->nullable();
+            $table->string('dimension')->nullable();
+            $table->string('weight')->nullable();
             $table->string('slug')->unique();
-            $table->string('code')->nullable();
             $table->string('tags')->nullable();
             $table->string('thumb_1')->nullable();
             $table->string('thumb_2')->nullable();

@@ -43,12 +43,12 @@ class ProductsController extends Controller
             'description' => 'string',
             'seo_text' => 'string',
             'slug' => '',
-            'code' => '',
+            'sku' => 'unique:products,sku',
             'tags' => '',
-            'size' => '',
-            'color' => '',
+            'dimension' => '',
+            'weight' => '',
             'selling_price' => 'integer',
-            'discount_price' => 'integer',
+            'discounted_price' => 'integer',
         ]);
 
         Product::create($data);
