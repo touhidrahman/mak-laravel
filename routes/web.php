@@ -43,32 +43,25 @@ Route::get('/checkout-success', [CheckoutController::class, 'checkoutSuccess'])-
 Route::get('/checkout-cancel', [CheckoutController::class, 'checkoutCancel'])->name('checkout.cancel');
 
 Route::middleware('guest')->group(function () {
-    Route::get('login', Login::class)
-        ->name('login');
-
-    Route::get('register', Register::class)
-        ->name('register');
+    Route::get('login', Login::class)->name('login');
+    Route::get('register', Register::class)->name('register');
 });
 
-Route::get('password/reset', Email::class)
-    ->name('password.request');
-
-Route::get('password/reset/{token}', Reset::class)
-    ->name('password.reset');
+Route::get('password/reset', Email::class)->name('password.request');
+Route::get('password/reset/{token}', Reset::class)->name('password.reset');
 
 Route::middleware('auth')->group(function () {
     Route::get('email/verify', Verify::class)
         ->middleware('throttle:6,1')
         ->name('verification.notice');
 
-    Route::get('password/confirm', Confirm::class)
-        ->name('password.confirm');
-
+    Route::get('password/confirm', Confirm::class)->name('password.confirm');
     Route::get('account', [AccountController::class, 'index'])->name('account');
 
     Route::get('cart', [CartController::class, 'cart'])->name('cart');
-    Route::post('cart', [CartController::class, 'addToCart'])->name('add-to-cart');
+    Route::post('cart', [CartController::class, 'addToCart'])->name('cart.items.add');
     Route::post('cart-delete/{id}', [CartController::class, 'deleteFromCart'])->name('cart.items.delete');
+    Route::post('cart-change/{id}/ajax', [CartController::class, 'changeQty'])->name('cart.items.delete');
 
     Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
 });

@@ -40,7 +40,7 @@
                 {{-- end gallery --}}
 
                 {{-- product details --}}
-                <form action="{{ route('add-to-cart') }}" method="POST" class="lg:w-1/2 pt-8 lg:pt-0 px-5 block">
+                <form action="{{ route('cart.items.add') }}" method="POST" class="lg:w-1/2 pt-8 lg:pt-0 px-5 block">
                     @csrf
                     <div class="border-b border-grey-dark mb-8">
                         <div class="flex items-center">
