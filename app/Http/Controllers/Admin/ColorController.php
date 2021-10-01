@@ -20,7 +20,7 @@ class ColorController extends Controller
     {
         $data = request()->validate([
             'name'=> 'required',
-            'hex' => 'required|max:6',
+            'hex' => 'required|max:7',
         ]);
 
         Color::create($data);

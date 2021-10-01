@@ -14,7 +14,7 @@
             <div class="pt-16 pb-24 flex flex-col lg:flex-row justify-between -mx-5">
                 {{-- gallery --}}
                 <div class="lg:w-1/2 flex flex-col-reverse sm:flex-row-reverse lg:flex-row justify-between px-5"
-                    x-data="{ selectedImage: '{{ $product->images[0]->path }}' }">
+                    x-data="{ selectedImage: '{{ $product->images[0]->path ?? '' }}' }">
                     <div class="sm:pl-5 md:pl-4 lg:pl-0 lg:pr-2 xl:pr-3 flex flex-row sm:flex-col">
 
                         @foreach ($product->images as $image)
@@ -33,7 +33,7 @@
                         <div
                             class="bg-v-pink border border-grey relative rounded flex items-center justify-center aspect-w-1 aspect-h-1">
                             <img class="object-cover" alt="product image" :src="selectedImage"
-                                src="{{ $product->images[0]->path }}">
+                                src="{{ $product->images[0]->path ?? ''}}">
                         </div>
                     </div>
                 </div>
@@ -152,7 +152,7 @@
                     <div class="tab-pane active bg-grey-light py-10 md:py-16 transition-opacity active" role="tabpanel">
                         <div class="w-5/6 mx-auto text-center sm:text-left">
                             <div class="font-hk text-secondary text-base">
-                                {{ $product->description }}
+                                {!! $product->description !!}
                             </div>
                         </div>
                     </div>
