@@ -21,7 +21,7 @@
 
                 @foreach ($cart->cartItems as $cartItem)
                     <div class="py-3 border-b border-grey-dark flex justify-between items-center mb-0 md:flex-row">
-                        <form action="{{ route('cart.items.delete', $cartItem->id) }}" method="POST" class="inline-block">
+                        <form action="{{ route('cart.items.delete', ['id' => $cart->id, 'cartItemId' => $cartItem->id]) }}" method="POST" class="inline-block">
                             @csrf
                             <button type="submit" class="bg-transparent">
                                 <i class="bx bx-x text-grey-darkest text-2xl sm:text-3xl mr-6 cursor-pointer"></i>
@@ -48,7 +48,8 @@
                         </div>
                         <div class="w-full sm:w-1/5 xl:w-1/4 text-center border-b-0 border-grey-dark pb-0">
                             <div class="mx-auto mr-8 xl:mr-4">
-                                <div class="flex justify-center"
+                                {{-- up/down input disabled --}}
+                                {{-- <div class="flex justify-center"
                                     x-data="{ productQuantity: parseInt('{{ $cartItem->qty }}', 10) }">
                                     <input type="number" id="quantity-form-desktop"
                                         class="form-input form-quantity rounded-r-none w-16 py-0 px-2 text-center"
@@ -63,7 +64,26 @@
                                             @click="productQuantity > 1 ? productQuantity-- : productQuanity = 1"><i
                                                 class="bx bxs-down-arrow text-xs text-primary pointer-events-none"></i></span>
                                     </div>
+                                </div> --}}
+
+
+                                {{-- workaround input: temp --}}
+                                <div class="flex justify-center">
+                                    <form action="{{route('cart.items.reduce', ['id' => $cart->id, 'cartItemId' => $cartItem->id])}}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="px-3 py-1 hover:bg-primary hover:text-white border-primary border-solid bg-transparent border rounded-md text-primary">
+                                            -
+                                        </button>
+                                    </form>
+                                    <div class="inline-flex justify-center align-center px-8">{{ $cartItem->qty }}</div>
+                                    <form action="{{route('cart.items.increase', ['id' => $cart->id, 'cartItemId' => $cartItem->id])}}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="px-3 py-1 hover:bg-primary hover:text-white border-primary border-solid bg-transparent border rounded-md text-primary">
+                                            +
+                                        </button>
+                                    </form>
                                 </div>
+
                             </div>
                         </div>
                         <div class="w-1/4 lg:w-1/5 xl:w-1/4 text-right pr-10 xl:pr-10 pb-4">
@@ -78,9 +98,12 @@
         </div>
 
         <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center pt-8 sm:pt-12">
-            <a href="/shop" class="bg-transparent border border-primary border-solid text-primary hover:bg-primary-light font-hk font-semibold transition-colors text-sm hover:text-white px-5 md:px-8 py-4 md:py-5 rounded uppercase focus:outline-none inline-block tracking-wide mt-5 sm:mt-0">Continue Shopping</a>
-            <a href="/" class="bg-transparent border border-primary border-solid text-primary hover:bg-primary-light font-hk font-semibold transition-colors text-sm hover:text-white px-5 md:px-8 py-4 md:py-5 rounded uppercase focus:outline-none inline-block tracking-wide mt-5 sm:mt-0">Update Cart
+            <a href="/shop" class="bg-transparent border border-primary border-solid text-primary hover:bg-primary-light font-hk font-semibold transition-colors text-sm hover:text-white px-5 md:px-8 py-4 md:py-5 rounded uppercase focus:outline-none inline-block tracking-wide mt-5 sm:mt-0">
+                Continue Shopping
             </a>
+            {{-- <a href="/" class="bg-transparent border border-primary border-solid text-primary hover:bg-primary-light font-hk font-semibold transition-colors text-sm hover:text-white px-5 md:px-8 py-4 md:py-5 rounded uppercase focus:outline-none inline-block tracking-wide mt-5 sm:mt-0">
+                Update Cart
+            </a> --}}
         </div>
     </div>
 
@@ -136,7 +159,7 @@
                         <x-form.input name="state" label="State" value="{{ auth()->user()->state ?? '' }}" placeholder="(optional)"></x-form.input>
                     </div>
                     <div class="w-1/2 ml-1">
-                        <x-form.input name="country" value="{{ auth()->user()->country ?? '' }}" placeholder="Country"></x-form.input>
+                        <x-form.input name="country" value="{{ auth()->user()->country ?? 'Deutschland' }}" placeholder="Country"></x-form.input>
                     </div>
                 </div>
 

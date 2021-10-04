@@ -6,35 +6,43 @@
                 <ul class="list-reset">
 
                     <li class="pb-2 block">
-                        <a href="mailto:test.email0123@elyssi.com"
+                        <a href="mailto:makleidermerchant@outlook.de"
                             class="font-hk text-white transition-colors hover:text-primary text-base tracking-wide">makleidermerchant@outlook.de</a>
                     </li>
 
                     <li class="pb-2 block">
-                        <a href="tel:0123234222"
-                            class="font-hk text-white transition-colors hover:text-primary text-base tracking-wide">0123
-                            234 222</a>
+                        <a href="tel:+4915122336282" class="font-hk text-white transition-colors hover:text-primary text-base tracking-wide">+4915122336282</a>
                     </li>
 
                     <li class="pb-2 block">
-                        <a href="https://elyssi.tailwindmade.com"
-                            class="font-hk text-white transition-colors hover:text-primary text-base tracking-wide">M&A Kleid</a>
+                        <div class="font-hk text-white transition-colors hover:text-primary text-base tracking-wide">
+                            M&A Kleider Merchant UG <br>
+                            Lahnstr. 31 <br>
+                            51105 Köln, Deutschland
+                        </div>
                     </li>
 
                 </ul>
             </div>
             <div class="text-center py-16 lg:py-0">
-                <a href="/" class="font-butler text-white text-4xl uppercase tracking-wider">Elyssi.</a>
+                <a href="/" class="font-butler text-white text-4xl uppercase tracking-wider">M&A Kleid</a>
                 <div class="flex items-center justify-center pt-5">
 
-                    <a href="https://www.google.com" class="group">
+                    <a href="https://www.facebook.com/makleidermerchant" class="group">
                         <div
                             class="bg-white group-hover:bg-primary rounded-full px-2 py-2 flex items-center mr-5 transition-colors">
                             <i class="bx bxl-facebook text-secondary transition-colors group-hover:text-white"></i>
                         </div>
                     </a>
 
-                    <a href="https://www.google.com" class="group">
+                    <a href="https://wa.link/6u8ot3" class="group">
+                        <div
+                            class="bg-white group-hover:bg-primary rounded-full px-2 py-2 flex items-center mr-5 transition-colors">
+                            <i class="bx bxl-whatsapp text-secondary transition-colors group-hover:text-white"></i>
+                        </div>
+                    </a>
+
+                    {{-- <a href="https://www.google.com" class="group">
                         <div
                             class="bg-white group-hover:bg-primary rounded-full px-2 py-2 flex items-center mr-5 transition-colors">
                             <i class="bx bxl-twitter text-secondary transition-colors group-hover:text-white"></i>
@@ -53,7 +61,7 @@
                             class="bg-white group-hover:bg-primary rounded-full px-2 py-2 flex items-center mr-5 transition-colors">
                             <i class="bx bxl-pinterest text-secondary transition-colors group-hover:text-white"></i>
                         </div>
-                    </a>
+                    </a> --}}
 
                 </div>
             </div>
@@ -62,18 +70,18 @@
                 <ul class="list-reset">
 
                     <li class="pb-2 block">
-                        <a href="/collection-list"
+                        <a href="/shop"
                             class="font-hk transition-colors text-white hover:text-primary text-base tracking-wide">Shop</a>
                     </li>
 
                     <li class="pb-2 block">
-                        <a href="/contact"
+                        <a href="{{ route('maintenance') }}"
                             class="font-hk transition-colors text-white hover:text-primary text-base tracking-wide">Contact
                             Us</a>
                     </li>
 
                     <li class="pb-2 block">
-                        <a href="/single"
+                        <a href="{{ route('maintenance') }}"
                             class="font-hk transition-colors text-white hover:text-primary text-base tracking-wide">Terms
                             & Conditions</a>
                     </li>

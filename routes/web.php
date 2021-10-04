@@ -32,7 +32,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'comingSoon'])->name('home'); // temp
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/maint', [HomeController::class, 'maint'])->name('maintenance'); // temp
 Route::get('/home', [HomeController::class, 'index']); // temp
 Route::get('/shop', [HomeController::class, 'shop'])->name('shop');
 Route::get('/service', [HomeController::class, 'services'])->name('services');
@@ -60,8 +61,10 @@ Route::middleware('auth')->group(function () {
 
     Route::get('cart', [CartController::class, 'cart'])->name('cart');
     Route::post('cart', [CartController::class, 'addToCart'])->name('cart.items.add');
-    Route::post('cart-delete/{id}', [CartController::class, 'deleteFromCart'])->name('cart.items.delete');
     Route::post('cart-change/{id}/ajax', [CartController::class, 'changeQty'])->name('cart.items.change');
+    Route::post('cart/{id}/items/{cartItemId}/del', [CartController::class, 'deleteFromCart'])->name('cart.items.delete');
+    Route::post('cart/{id}/items/{cartItemId}/dec', [CartController::class, 'reduceQty'])->name('cart.items.reduce');
+    Route::post('cart/{id}/items/{cartItemId}/inc', [CartController::class, 'increaseQty'])->name('cart.items.increase');
 
     Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
 });

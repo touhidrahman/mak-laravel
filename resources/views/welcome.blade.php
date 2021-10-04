@@ -67,7 +67,7 @@
                 {{-- <x-shop.feature></x-shop.feature>
                 <x-product.grid></x-product.grid> --}}
 
-                <div class="pb-20 md:pb-24 lg:pb-32">
+                <div class="py-20 md:py-24 lg:py-32">
                     <div class="flex flex-col sm:flex-row justify-between items-center sm:pb-4 lg:pb-0 mb-12 sm:mb-10">
                         <div class="text-center sm:text-left">
                             <h2 class=" font-butler  text-secondary text-3xl md:text-4xl lg:text-4.5xl">New Arrivals!
@@ -82,14 +82,13 @@
                     </div>
 
                     <x-product.slider :products="$trendingProducts"></x-product.slider>
-
                 </div>
             </div>
 
             {{-- <x-shop.slider-with-grid></x-shop.slider-with-grid> --}}
 
             <div class="container">
-                <x-product.new-arrival></x-product.new-arrival>
+                {{-- <x-product.new-arrival></x-product.new-arrival> --}}
 
                 <div class="pb-20 md:pb-32">
                     <x-product.slider-title>

@@ -70,13 +70,32 @@ class CartController extends Controller
         return back();
     }
 
-    public function deleteFromCart(Request $request, $id)
+    public function deleteFromCart(Request $request, $id, $cartItemId)
     {
-        // CartItem::findOrFail($id)->delete();
-        $cart = Cart::findOrFail($request->session()->get('cart_id'));
-        $cart->cartItems()->where('id', '=', $id)->delete();
+        $cartItem = CartItem::where('cart_id', '=', $id)->where('id', '=', $cartItemId)->first();
+        $cartItem->delete();
+        $cart = Cart::findOrFail($id);
         $request->session()->put('cart_items_count', $cart->cartItems()->sum('qty'));
 
+        return back();
+    }
+
+    public function reduceQty(Request $request, $id, $cartItemId)
+    {
+        $cartItem = CartItem::where('cart_id', '=', $id)->where('id', '=', $cartItemId)->first();
+        if ($cartItem->qty > 1) {
+            $cartItem->increment('qty', -1);
+            $cart = Cart::findOrFail($id);
+            $request->session()->put('cart_items_count', $cart->cartItems()->sum('qty'));
+        }
+        return back();
+    }
+
+    public function increaseQty(Request $request, $id, $cartItemId)
+    {
+        CartItem::where('cart_id', '=', $id)->where('id', '=', $cartItemId)->first()->increment('qty', 1);
+        $cart = Cart::findOrFail($id);
+        $request->session()->put('cart_items_count', $cart->cartItems()->sum('qty'));
         return back();
     }
 
@@ -85,4 +104,5 @@ class CartController extends Controller
         // TODO
         return back();
     }
+
 }
