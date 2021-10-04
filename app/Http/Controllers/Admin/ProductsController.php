@@ -119,7 +119,7 @@ class ProductsController extends Controller
     public function manage(Request $request)
     {
         $data = $request->validate([
-            'active' => 'required|boolean',
+            'active' => 'required',
         ]);
 
         Product::find($request->id)->update($data);

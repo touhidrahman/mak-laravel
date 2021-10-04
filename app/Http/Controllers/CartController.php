@@ -17,8 +17,15 @@ class CartController extends Controller
     public function cart()
     {
         $cart = Cart::where('user_id', '=', Auth::user()->id)->whereNull('checked_out_at')->latest()->first();
+        $cartTotal = $cart->total / 100;
+        $vatAmount = $cartTotal * 19 / 100;
+        $cartTotalWithoutVat = $cartTotal - $vatAmount;
+
         return view('checkout.cart', [
             'cart' => $cart,
+            'cartTotal' => number_format($cartTotal, 2, ',', '.'),
+            'vatAmount' => number_format($vatAmount, 2, ',', '.'),
+            'cartTotalWithoutVat' => number_format($cartTotalWithoutVat, 2, ',', '.'),
         ]);
     }
 
@@ -70,6 +77,12 @@ class CartController extends Controller
         $cart->cartItems()->where('id', '=', $id)->delete();
         $request->session()->put('cart_items_count', $cart->cartItems()->sum('qty'));
 
+        return back();
+    }
+
+    public function changeQty(Request $request, $id)
+    {
+        // TODO
         return back();
     }
 }

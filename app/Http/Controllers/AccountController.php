@@ -8,6 +8,6 @@ class AccountController extends Controller
 {
     public function index()
     {
-        return view('under-maintenance');
+        return view('account.index');
     }
 }

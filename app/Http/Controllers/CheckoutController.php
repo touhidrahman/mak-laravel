@@ -87,6 +87,8 @@ class CheckoutController extends Controller
         return $request->user()->checkout($stripeLineItems, [
             'success_url' => route('checkout.success') . '?session_id={CHECKOUT_SESSION_ID}',
             'cancel_url' => route('checkout.cancel'),
+            'payment_method_types' => ['card'],
+            'client_reference_id' => $order->id
         ]);
     }
 

@@ -11,10 +11,8 @@
                 <div class="w-64">
                     <x-form.select name="active" label="">
                         <option value="" disabled>Please select</option>
-                        @foreach ([true, false] as $item)
-                            <option value="{{ $item }}" {{ $product->active == $item ? 'selected' : '' }}>
-                                {{ $item ? 'Active' : 'Disabled' }}</option>
-                        @endforeach
+                        <option value="true" {{ $product->active ? 'selected' : '' }}>Active</option>
+                        <option value="false" {{ !$product->active ? 'selected' : '' }}>Disabled</option>
                     </x-form.select>
                 </div>
 

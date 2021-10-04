@@ -35,8 +35,8 @@ class CheckoutSessionSucceededJob implements ShouldQueue
     public function handle()
     {
         $object = $this->webhookCall->payload['data']['object'];
-        $stripe_session_id = $object['id'];
-        $order = Order::where('stripe_checkout_session_id', '=', $stripe_session_id)->first();
+        $orderId = $object['client_reference_id'];
+        $order = Order::where('id', '=', $orderId)->first();
         if ($order) {
             $order->update(['paid_at' => now(), 'status' => 'CREATED']);
         }
