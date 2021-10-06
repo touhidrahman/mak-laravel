@@ -1,4 +1,4 @@
-<div class="bg-center bg-no-repeat bg-cover" style="background-image:url({{asset('img/bg-footer.png')}})">
+<div class="bg-gray-900">
     <div class="container py-16 sm:py-20 md:py-24">
         <div class="w-5/6 mx-auto flex flex-col lg:flex-row items-center justify-between">
             <div class="text-center lg:text-left">
