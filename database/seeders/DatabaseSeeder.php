@@ -25,5 +25,7 @@ class DatabaseSeeder extends Seeder
         } catch (\Throwable $th) {
         }
         \App\Models\FeaturedImage::factory(5)->create();
+        \App\Models\Order::factory(100)->create();
+        \App\Models\OrderItem::factory(1000)->create();
     }
 }

@@ -2,7 +2,12 @@
 
 @section('content')
     <header class="flex justify-between">
-        <h2 class="font-semibold text-3xl text-gray-600">Manage {{ $product->name }}</h2>
+
+        <div class="overflow-hidden flex">
+            <img src="{{ $product->thumb_1 }}" class="h-24 w-auto object-cover block mr-8">
+            <h2 class="font-semibold text-3xl text-gray-600">{{ $product->name }}</h2>
+        </div>
+
         <form class="" action=" {{ route('admin.products.manage', $product->id) }}" method="POST">
             @csrf
             <input type="hidden" name="id" value="{{ $product->id }}">

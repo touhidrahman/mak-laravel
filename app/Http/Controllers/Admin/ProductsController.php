@@ -112,7 +112,7 @@ class ProductsController extends Controller
             'product' => Product::find($id),
             'colors' => Color::orderBy('name', 'ASC')->get(),
             'sizes' => ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
-            'stocks' => Stock::where('product_id', $id)->orderBy('size', 'ASC')->get(),
+            'stocks' => Stock::where('product_id', $id)->get(),
         ]);
     }
 

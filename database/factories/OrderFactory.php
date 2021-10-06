@@ -22,7 +22,10 @@ class OrderFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'user_id' => $this->faker->numberBetween(1, 11),
+            'price' => $this->faker->numberBetween(1, 9999),
+            'paid_at' => $this->faker->date(),
+            'status' => ['NOT_PAID_YET', 'CREATED'][random_int(0, 1)],
         ];
     }
 }

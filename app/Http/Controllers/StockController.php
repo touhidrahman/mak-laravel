@@ -20,7 +20,7 @@ class StockController extends Controller
 
         try {
             Stock::insert($data);
-            toast('Stock created', 'success');
+            // toast('Stock created', 'success');
         } catch (\Illuminate\Database\QueryException $th) {
             alert('Combination already exists', '', 'error');
         }

@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\SubsubcategoryController;
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Admin\ColorController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\FeaturedImageController;
@@ -20,17 +21,6 @@ use App\Http\Livewire\Auth\Passwords\Reset;
 use App\Http\Livewire\Auth\Register;
 use App\Http\Livewire\Auth\Verify;
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/maint', [HomeController::class, 'maint'])->name('maintenance'); // temp
@@ -74,8 +64,7 @@ Route::middleware('auth')->group(function () {
         ->middleware('signed')
         ->name('verification.verify');
 
-    Route::post('logout', LogoutController::class)
-        ->name('logout');
+    Route::post('logout', LogoutController::class)->name('logout');
 });
 
 Route::middleware('admin')->group(function() {
@@ -94,6 +83,9 @@ Route::middleware('admin')->group(function() {
     Route::post('admin/products/{product}/stocks', [StockController::class, 'store'])->name('admin.stocks.store');
     Route::get('admin/products/{product_id}/stocks/{id}', [StockController::class, 'edit'])->name('admin.stocks.edit');
     Route::post('admin/products/{product_id}/stocks/{id}', [StockController::class, 'update'])->name('admin.stocks.update');
+
+    Route::get('admin/orders', [OrderController::class, 'index'])->name('admin.orders');
+    Route::get('admin/orders/{id}', [OrderController::class, 'manage'])->name('admin.orders.manage');
 
     Route::get('admin/categories', [CategoriesController::class, 'index'])->name('admin.categories');
     Route::get('admin/categories/create', [CategoriesController::class, 'show'])->name('admin.categories.show');
