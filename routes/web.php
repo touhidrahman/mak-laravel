@@ -86,6 +86,8 @@ Route::middleware('admin')->group(function() {
 
     Route::get('admin/orders', [OrderController::class, 'index'])->name('admin.orders');
     Route::get('admin/orders/{id}', [OrderController::class, 'manage'])->name('admin.orders.manage');
+    Route::post('admin/orders/{id}/item/{orderItemId}', [OrderController::class, 'pick'])->name('admin.orders.pick');
+    Route::post('admin/orders/{id}/status', [OrderController::class, 'changeStatus'])->name('admin.orders.change-status');
 
     Route::get('admin/categories', [CategoriesController::class, 'index'])->name('admin.categories');
     Route::get('admin/categories/create', [CategoriesController::class, 'show'])->name('admin.categories.show');

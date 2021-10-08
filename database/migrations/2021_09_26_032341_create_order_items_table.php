@@ -20,6 +20,7 @@ class CreateOrderItemsTable extends Migration
             $table->foreignId('stock_id');
             $table->integer('qty')->default(1);
             $table->integer('unit_price');
+            // $table->integer('picked_qty')->default(0); // in later migration
 
             $table->timestamps();
         });

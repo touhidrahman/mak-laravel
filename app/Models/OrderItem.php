@@ -26,8 +26,8 @@ class OrderItem extends Model
         return $this->belongsTo(Stock::class);
     }
 
-    public function color()
-    {
-        return $this->belongsTo(Color::class);
-    }
+    // public function color()
+    // {
+    //     return $this->hasOneThrough(Color::class, Stock::class);
+    // }
 }

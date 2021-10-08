@@ -1,6 +1,6 @@
 @props([
     'label' => '',
-    'name', 'type' => 'text', 'placeholder' => '', 'message' => '', 'required' => false
+    'name', 'type' => 'text', 'placeholder' => '', 'message' => '', 'required' => false,
     ])
 
 <x-form.field>

@@ -4,6 +4,7 @@
 
     <h1 class="text-3xl font-bold">Orders</h1>
 
+    @include('admin.orders._toolbar')
 
     <section class="mt-10">
 
@@ -13,7 +14,9 @@
                     <tr>
                         <th>ID</th>
                         <th>Shipping Address</th>
+                        <th>Total Price</th>
                         <th>Status</th>
+                        <th>Created At</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -24,9 +27,12 @@
 
                             <td>
                                 {{
-                                    $order->user->street . ' ' . $order->user->house_no . ', ' .
                                     $order->user->zipcode . ' ' . $order->user->city . ', ' . $order->user->country
                                 }}
+                            </td>
+
+                            <td>
+                                {{ $order->priceFormatted }}
                             </td>
 
                             <td>
@@ -35,6 +41,10 @@
                                 @else
                                 <span class="bg-red-100 text-red-600 rounded-full px-3 py-1 text-xs">{{ $order->status }}</span>
                                 @endif
+                            </td>
+
+                            <td>
+                                {{ $order->created_at }}
                             </td>
 
                             <th>

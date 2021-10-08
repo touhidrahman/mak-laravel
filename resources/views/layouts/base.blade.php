@@ -16,6 +16,8 @@
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css"
+        integrity="sha256-imWjOiEEAcjWdL1+inhBu1dWYFyXuiO9vpJVEQd3y/c=" crossorigin="anonymous" />
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ url(mix('css/app.css')) }}">

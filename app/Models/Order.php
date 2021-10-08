@@ -20,4 +20,8 @@ class Order extends Model
     public function user() {
         return $this->belongsTo(User::class);
     }
+
+    public function getPriceFormattedAttribute() {
+        return '€' . number_format($this->price / 100, 2, ',', '.');
+    }
 }
