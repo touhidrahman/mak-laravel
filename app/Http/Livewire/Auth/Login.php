@@ -2,8 +2,10 @@
 
 namespace App\Http\Livewire\Auth;
 
+use App\Models\Cart;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
 class Login extends Component
@@ -32,7 +34,15 @@ class Login extends Component
             return;
         }
 
-        $role = Auth::user()->role;
+        $user = Auth::user();
+        $role = $user->role;
+
+        // check for old cart item
+        $cart = Cart::where('user_id', '=', $user->id)->whereNull('checked_out_at')->latest()->first();
+        if ($cart) {
+            Session::put('cart_id', $cart->id);
+            Session::put('cart_items_count', $cart->cartItems()->sum('qty'));
+        }
 
         return 'ADMIN' == strtoupper($role)
             ? redirect()->intended(route('admin'))

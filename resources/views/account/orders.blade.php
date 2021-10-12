@@ -2,6 +2,6 @@
 
 @section('account-content')
 
-    <h1 class="text-xl">Welcome, {{ auth()->user()->name }}!</h1>
+    @include('account._order-list')
 
 @endsection

@@ -38,6 +38,7 @@ class CheckoutController extends Controller
 
         $toSaveOrderItems = [];
         $stripeLineItems = [];
+        $subtotalByItem = [];
         foreach ($cart->cartItems as $cartItem) {
             $product = Product::findOrFail($cartItem['product_id']);
             $stock = Stock::where('color_id', '=', $cartItem['color_id'])
@@ -54,6 +55,9 @@ class CheckoutController extends Controller
                 ];
 
                 array_push($toSaveOrderItems, $orderItem);
+
+                $price = $cartItem['unit_price'] * $cartItem['qty'];
+                array_push($subtotalByItem, $price);
 
                 // make stripe line items
                 $item = [
@@ -79,7 +83,10 @@ class CheckoutController extends Controller
                 array_push($stripeLineItems, $item);
             }
         }
+        // update order and order items
         $order->orderItems()->insert($toSaveOrderItems);
+        $order->update(['price' => array_sum($subtotalByItem)]);
+
         // save order id to session
         $request->session()->put('order_id', $order->id);
 
@@ -87,7 +94,7 @@ class CheckoutController extends Controller
         return $request->user()->checkout($stripeLineItems, [
             'success_url' => route('checkout.success') . '?session_id={CHECKOUT_SESSION_ID}',
             'cancel_url' => route('checkout.cancel'),
-            'payment_method_types' => ['card'],
+            'payment_method_types' => ['card', 'sepa_debit', 'sofort', 'giropay'],
             'client_reference_id' => $order->id
         ]);
     }
@@ -95,8 +102,11 @@ class CheckoutController extends Controller
     public function checkoutSuccess(Request $request)
     {
         $stripeCheckoutSessionId = $request->get('session_id');
-        $order = Order::findOrFail($request->session()->get('order_id'));
+        $order = Order::findOrFail($request->session()->get('order_id')); // TODO check if request/session exists when returning from stripe checkout
         $order->update(['stripe_checkout_session_id' => $stripeCheckoutSessionId]);
+
+        $cart = Cart::find($request->session()->get('cart_id'))->update(['checked_out_at' => now()]);
+        $cart->cartItems()->delete();
 
         // clear session cart
         $request->session()->remove('cart_id');

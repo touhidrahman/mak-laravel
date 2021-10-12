@@ -45,9 +45,13 @@ Route::middleware('auth')->group(function () {
     Route::get('email/verify', Verify::class)
         ->middleware('throttle:6,1')
         ->name('verification.notice');
+    Route::get('email/verify/{id}/{hash}', EmailVerificationController::class)
+        ->middleware('signed')
+        ->name('verification.verify');
 
     Route::get('password/confirm', Confirm::class)->name('password.confirm');
     Route::get('account', [AccountController::class, 'index'])->name('account');
+    Route::get('account/orders', [AccountController::class, 'orders'])->name('account.orders');
 
     Route::get('cart', [CartController::class, 'cart'])->name('cart');
     Route::post('cart', [CartController::class, 'addToCart'])->name('cart.items.add');
@@ -57,12 +61,6 @@ Route::middleware('auth')->group(function () {
     Route::post('cart/{id}/items/{cartItemId}/inc', [CartController::class, 'increaseQty'])->name('cart.items.increase');
 
     Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
-});
-
-Route::middleware('auth')->group(function () {
-    Route::get('email/verify/{id}/{hash}', EmailVerificationController::class)
-        ->middleware('signed')
-        ->name('verification.verify');
 
     Route::post('logout', LogoutController::class)->name('logout');
 });
