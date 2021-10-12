@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\OrderItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AccountController extends Controller
 {
@@ -14,9 +16,20 @@ class AccountController extends Controller
 
     public function orders()
     {
-        $orders = Order::paginate(5); // TODO: only for user
+        $user = Auth::user();
+        $orders = Order::where('user_id', '=', $user->id)->latest()->paginate(5);
         return view('account.orders', [
             'orders' => $orders,
+        ]);
+    }
+
+    public function show(Request $request, $id)
+    {
+        $order = Order::findOrFail($id);
+        $orderItems = OrderItem::where('order_id', '=', $id)->with(['product', 'stock'])->orderBy('id', 'ASC')->get();
+        return view('account.show', [
+            'order' => $order,
+            'orderItems' => $orderItems,
         ]);
     }
 }

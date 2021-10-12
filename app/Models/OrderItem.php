@@ -30,4 +30,12 @@ class OrderItem extends Model
     // {
     //     return $this->hasOneThrough(Color::class, Stock::class);
     // }
+
+    public function getUnitPriceFormattedAttribute() {
+        return '€' . number_format($this->unit_price / 100, 2, ',', '.');
+    }
+
+    public function getSubtotalPriceFormattedAttribute() {
+        return '€' . number_format($this->unit_price * $this->qty / 100, 2, ',', '.');
+    }
 }

@@ -52,6 +52,7 @@ Route::middleware('auth')->group(function () {
     Route::get('password/confirm', Confirm::class)->name('password.confirm');
     Route::get('account', [AccountController::class, 'index'])->name('account');
     Route::get('account/orders', [AccountController::class, 'orders'])->name('account.orders');
+    Route::get('account/orders/{order}', [AccountController::class, 'show'])->name('account.orders.show');
 
     Route::get('cart', [CartController::class, 'cart'])->name('cart');
     Route::post('cart', [CartController::class, 'addToCart'])->name('cart.items.add');
