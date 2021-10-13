@@ -119,6 +119,8 @@ Route::middleware('admin')->group(function() {
     Route::get('admin/featured-images', [FeaturedImageController::class, 'index'])->name('admin.featured-images');
     Route::get('admin/featured-images/create', [FeaturedImageController::class, 'show'])->name('admin.featured-images.show');
     Route::post('admin/featured-images', [FeaturedImageController::class, 'store'])->name('admin.featured-images.store');
+    Route::get('admin/featured-images/{id}', [FeaturedImageController::class, 'edit'])->name('admin.featured-images.edit');
+    Route::post('admin/featured-images/{id}', [FeaturedImageController::class, 'update'])->name('admin.featured-images.update');
     Route::delete('admin/featured-images/{id}', [FeaturedImageController::class, 'destroy'])->name('admin.featured-images.destroy');
 
 });

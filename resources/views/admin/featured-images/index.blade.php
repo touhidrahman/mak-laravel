@@ -39,6 +39,10 @@
                         <td>{{ $featuredImage->page_path }}</td>
                         <td>{{ $featuredImage->button_label }}</td>
                         <td>
+                            <a href="{{ route('admin.featured-images.edit', $featuredImage->id) }}"
+                                class="ml-2 mr-4 bg-transparent text-indigo-600 hover:text-indigo-900">
+                                Edit
+                            </a>
                             <button @click="showModal = true"
                                 class="ml-2 bg-transparent text-indigo-600 hover:text-indigo-900">
                                 Delete

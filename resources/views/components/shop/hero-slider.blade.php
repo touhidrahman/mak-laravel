@@ -23,14 +23,14 @@ $featuredImages = Cache::remember('featuredimages', 3600, function () {
                         style="background-image:url({{ Illuminate\Support\Facades\Storage::disk('s3')->url($featuredImage->image_url) }})">
                         <div
                             class="py-48 px-5 sm:px-10 md:px-12 xl:px-24 text-center sm:text-left sm:w-5/6 lg:w-3/4 xl:w-2/3">
-                            <h3 class="font-butler font-medium text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
+                            <h3 class="font-butler font-medium text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-8">
                                 <span @class([ 'text-white'=> $featuredImage->title_color == 'light',
                                     'text-secondary' => $featuredImage->title_color == 'dark' ])>
                                     {{ $featuredImage->title }}
                                 </span>
                             </h3>
                             <a href="{{ $featuredImage->page_path }}"
-                                class="bg-primary hover:bg-primary-light font-hk font-semibold transition-colors text-sm text-white px-5 md:px-8 py-4 md:py-5 rounded uppercase focus:outline-none inline-block tracking-wide">View
+                                class="bg-primary hover:bg-primary-light font-hk font-semibold transition-colors text-sm text-white px-5 md:px-8 py-4 md:py-5 rounded uppercase focus:outline-none inline-block tracking-wide">
                                 {{ $featuredImage->button_label }}
                             </a>
                         </div>

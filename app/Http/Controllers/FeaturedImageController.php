@@ -23,7 +23,6 @@ class FeaturedImageController extends Controller
 
     public function store(Request $request)
     {
-
         $data = $request->validate([
             'image' => 'mimes:jpg,png,jpeg|max:2048',
             'title' => 'required|max:120',
@@ -47,6 +46,42 @@ class FeaturedImageController extends Controller
 
         toast('Uploading images failed', 'error');
         return back();
+    }
+
+    public function edit(Request $request, int $id)
+    {
+        $featuredImage = FeaturedImage::find($id);
+        return view('admin.featured-images.edit', [
+            'featuredImage' => $featuredImage,
+        ]);
+    }
+
+    public function update(Request $request, int $id)
+    {
+        $data = $request->validate([
+            'image' => 'mimes:jpg,png,jpeg|max:2048',
+            'title' => 'required|max:120',
+            'title_color' => 'required',
+            'page_path' => 'required',
+            'button_label' => 'required|string|max:40',
+        ]);
+
+        $item = FeaturedImage::find($id);
+
+        if ($request->hasFile('image')) {
+            // remove old image
+            $this->deleteFile($item->image_url);
+
+            $file = $request->file('image');
+            $url = $this->doUpload($file);
+            $data['image_url'] = $url;
+        }
+
+        unset($data['image']);
+        $item->update($data);
+
+        alert('Image uploaded', 'Featured image uploaded and set properly', 'success');
+        return redirect()->route('admin.featured-images');
     }
 
     public function destroy($id)
