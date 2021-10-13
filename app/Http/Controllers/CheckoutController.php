@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\CartItem;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Stock;
@@ -105,8 +106,12 @@ class CheckoutController extends Controller
         $order = Order::findOrFail($request->session()->get('order_id')); // TODO check if request/session exists when returning from stripe checkout
         $order->update(['stripe_checkout_session_id' => $stripeCheckoutSessionId]);
 
-        $cart = Cart::find($request->session()->get('cart_id'))->update(['checked_out_at' => now()]);
-        $cart->cartItems()->delete();
+        try {
+            $cart = Cart::find($request->session()->get('cart_id'))->update(['checked_out_at' => now()]);
+            CartItem::where('cart_id', '=', $cart->id)->delete();
+        } catch (\Throwable $th) {
+
+        }
 
         // clear session cart
         $request->session()->remove('cart_id');
