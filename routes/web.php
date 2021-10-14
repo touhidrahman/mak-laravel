@@ -23,6 +23,7 @@ use App\Http\Livewire\Auth\Verify;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/vue', [HomeController::class, 'vue'])->name('vue');
 Route::get('/maint', [HomeController::class, 'maint'])->name('maintenance'); // temp
 Route::get('/home', [HomeController::class, 'index']); // temp
 Route::get('/shop', [HomeController::class, 'shop'])->name('shop');

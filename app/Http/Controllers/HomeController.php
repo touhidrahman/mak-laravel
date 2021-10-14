@@ -9,9 +9,15 @@ use App\Models\Subcategory;
 use App\Models\Subsubcategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Inertia\Inertia;
 
 class HomeController extends Controller
 {
+    public function vue()
+    {
+        return Inertia::render('Home/Index');
+    }
+
     public function comingSoon()
     {
         return view('coming-soon');
