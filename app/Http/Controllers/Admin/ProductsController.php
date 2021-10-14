@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductStoreRequest;
 use App\Models\Category;
 use App\Models\Color;
 use App\Models\Product;
@@ -29,32 +30,13 @@ class ProductsController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(ProductStoreRequest $request)
     {
-        $data = $request->validate([
-            'name' => 'required',
-            'category_id' => 'required|integer',
-            'subcategory_id' => 'required|integer',
-            'subsubcategory_id' => 'integer',
-            'product_family_id' => 'integer',
-            'brand' => 'string',
-            'season' => 'string',
-            'material' => 'string',
-            'description' => 'string',
-            'seo_text' => 'string',
-            'slug' => '',
-            'sku' => 'unique:products,sku',
-            'tags' => '',
-            'dimension' => '',
-            'weight' => '',
-            'selling_price' => 'integer',
-            'discounted_price' => 'integer',
-        ]);
-
-        Product::create($data);
+        $data = $request->validated();
+        $product = Product::create($data);
 
         toast('Product created', 'success');
-        return redirect()->route('admin.products');
+        return redirect()->route('admin.products.manage', $product->id);
     }
 
     public function showUploadForm($id)

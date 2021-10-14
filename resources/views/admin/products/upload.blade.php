@@ -2,7 +2,6 @@
 
 @section('content')
     <h2 class="font-semibold text-3xl text-gray-600">Upload Photos for {{ $product->name }}</h2>
-    <p class="text-gray-500">Upload product pictures, add related products and so on</p>
 
     @include('admin.products._products-toolbar')
 
