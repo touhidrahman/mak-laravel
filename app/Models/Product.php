@@ -40,11 +40,6 @@ class Product extends Model
         return $this->stocks()->distinct('size')->select('size');
     }
 
-    public function available_colors()
-    {
-        return $this->colors();
-    }
-
     public function color()
     {
         return $this->stocks()->distinct('color_id')->select('color_id');

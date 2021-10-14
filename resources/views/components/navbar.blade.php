@@ -4,13 +4,13 @@ use App\Models\Subcategory;
 use App\Models\Subsubcategory;
 use Illuminate\Support\Facades\Cache;
 
-$categories = Cache::remember('categories', 3600 * 24, function () {
+$categories = Cache::remember('categories', 3600 * 2, function () {
     return Category::all();
 });
-$subcategories = Cache::remember('subcategories', 3600 * 24, function () {
+$subcategories = Cache::remember('subcategories', 3600 * 2, function () {
     return Subcategory::all();
 });
-$subsubcategories = Cache::remember('subsubcategories', 3600 * 24, function () {
+$subsubcategories = Cache::remember('subsubcategories', 3600 * 2, function () {
     return Subsubcategory::all();
 });
 @endphp
@@ -83,15 +83,13 @@ $subsubcategories = Cache::remember('subsubcategories', 3600 * 24, function () {
                     <li class="mr-10 hidden lg:block group">
                         <div
                             class="border-b-2 border-white transition-colors group-hover:border-primary flex items-center">
-                            <span
+                            <a href="{{ route('shop') }}?category_id={{$category->id}}"
                                 class="cursor-pointer text-lg font-hk group-hover:font-bold text-secondary group-hover:text-primary px-2 transition-all">
                                 {{ $category->name }}
-                            </span>
-                            <i
-                                class="bx bx-chevron-down text-secondary group-hover:text-primary pl-2 px-2 transition-colors"></i>
+                            </a>
+                            <i class="bx bx-chevron-down text-secondary group-hover:text-primary pl-2 px-2 transition-colors"></i>
                         </div>
-                        <div
-                            class="pt-10 absolute mt-40 top-0 left-0 right-0 z-50 w-2/3 mx-auto opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto ">
+                        <div class="pt-10 absolute mt-40 top-0 left-0 right-0 z-50 w-2/3 mx-auto opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto ">
                             <div class="transition-all flex bg-white shadow-lg p-8 rounded-b relative ">
 
                                 @foreach ($subcategories as $subcategory)

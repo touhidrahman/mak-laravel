@@ -55,7 +55,7 @@ class HomeController extends Controller
 
         return view('products.list', [
             'products' => $products,
-            'relatedProducts' => Product::where('active', true)->take(6)->get(),
+            'relatedProducts' => $query->take(6)->get(),
         ]);
     }
 
@@ -73,11 +73,15 @@ class HomeController extends Controller
             }
         }
 
+        $relatedProducts = Product::where('active', true)
+            ->where('subcategory_id', $product->subcategory_id)
+            ->latest()->take(6)->get();
+
         return view('products.details', [
             'product' => $product,
             'available_colors' => $available_colors,
             'available_sizes' => $available_sizes,
-            'relatedProducts' => Product::where('active', true)->take(6)->get(),
+            'relatedProducts' => $relatedProducts,
         ]);
     }
 }

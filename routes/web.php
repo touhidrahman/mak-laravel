@@ -76,6 +76,7 @@ Route::middleware('admin')->group(function() {
     Route::post('admin/products/create', [ProductsController::class, 'store'])->name('admin.products.store');
     Route::get('admin/products/{product}/upload', [ProductsController::class, 'showUploadForm'])->name('admin.products.showUploadForm');
     Route::post('admin/products/{product}/upload', [ProductsController::class, 'uploadImages'])->name('admin.products.uploadImages');
+    Route::delete('admin/products/{productId}/images/{imageId}', [ProductsController::class, 'deleteImage'])->name('admin.products.deleteImage');
     Route::get('admin/products/{product}/manage', [ProductsController::class, 'showManageForm'])->name('admin.products.showManageForm');
     Route::post('admin/products/{product}/manage', [ProductsController::class, 'manage'])->name('admin.products.manage');
 

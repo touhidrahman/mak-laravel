@@ -79,14 +79,20 @@ class ProductsController extends Controller
         if (count($toSave) > 0) {
             Product::findOrFail($request->id)->update($toSave);
 
-            toast('Images uploaded', 'success');
             return back();
         }
 
-        toast('Uploading images failed', 'error');
         return back();
     }
 
+    public function deleteImage(Request $request, $productId, $imageId)
+    {
+        $image = ProductImage::find($imageId);
+        Storage::disk('s3')->delete($image->path);
+        $image->delete();
+
+        return back();
+    }
 
     public function showManageForm($id)
     {
