@@ -113,8 +113,7 @@ Route::middleware('admin')->group(function() {
     Route::post('admin/subsubcategories/{subsubcategory}/edit', [SubsubcategoryController::class, 'update'])->name('admin.subsubcategories.update');
     Route::delete('admin/subsubcategories/{subsubcategory}', [SubsubcategoryController::class, 'destroy'])->name('admin.subsubcategories.delete');
 
-    Route::get('admin/settings', [ColorController::class, 'index'])->name('admin.settings');
-
+    Route::get('admin/colors', [ColorController::class, 'index'])->name('admin.colors');
     Route::post('admin/colors', [ColorController::class, 'store'])->name('admin.colors.store');
     Route::delete('admin/colors/{color}', [ColorController::class, 'destroy'])->name('admin.colors.destroy');
 

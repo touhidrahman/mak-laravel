@@ -8,33 +8,35 @@
             <table class="table w-full">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>S.No</th>
                         <th>Name</th>
                         <th>Hex</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
+                    @php
+                        $i = 1;
+                    @endphp
                     @foreach ($colors as $color)
                         <tr>
-                            <th>{{ $color->id }}</th>
+                            <th>{{ $i++ }}</th>
                             <td>{{ $color->name }}</td>
                             <td>{{ $color->hex }}</td>
                             <td>
-                                <button @click="showModal = true"
-                                    class="ml-2 bg-transparent text-indigo-600 hover:text-indigo-900">
-                                    Delete
-                                </button>
-                                <x-modal.delete title="Delete {{ $color->name }}?"
-                                    actionRoute="{{ route('admin.colors.destroy', $color->id) }}">
-                                </x-modal.delete>
+                                <form action="{{ route('admin.colors.destroy', $color->id) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"
+                                        class="ml-2 bg-transparent text-indigo-600 hover:text-indigo-900">
+                                        Delete
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
-
-            {{ $colors->links() }}
 
         </div>
 
