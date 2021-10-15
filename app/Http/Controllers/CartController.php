@@ -18,7 +18,7 @@ class CartController extends Controller
     public function cart()
     {
         $cart = Cart::where('user_id', '=', Auth::user()->id)->whereNull('checked_out_at')->latest()->first();
-        $chargeRecord = Charge::find(1);
+        $chargeRecord = Charge::latest()->first();
 
         $shippingChargeCent = $cart->total >= $chargeRecord->min_order_amount
             ? 0

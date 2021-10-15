@@ -9,7 +9,7 @@ class ChargeController extends Controller
 {
     public function index(Request $request)
     {
-        $charge = Charge::find(1);
+        $charge = Charge::latest()->first();
         return view('admin.charges.index', [
             'charge' => $charge,
         ]);
