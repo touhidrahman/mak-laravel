@@ -14,9 +14,18 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::with(['category', 'subcategory', 'subsubcategory', 'stocks'])->orderBy('created_at', 'DESC')->paginate(20);
+        $isActive = true;
+        if ($request->input('active') && $request->input('active') != 'true') {
+            $isActive = false;
+        }
+        $query = Product::where('active', '=', $isActive);
+        $products = $query
+            ->with(['category', 'subcategory', 'subsubcategory', 'stocks'])
+            ->orderBy('created_at', 'DESC')
+            ->paginate(20);
+
         return view('admin.products.index', [
             'products' => $products,
         ]);
@@ -37,6 +46,17 @@ class ProductsController extends Controller
 
         toast('Product created', 'success');
         return redirect()->route('admin.products.manage', $product->id);
+    }
+
+    public function delete(Request $request, $id)
+    {
+        $product = Product::find($id);
+        if (!$product->active) {
+            $product->stocks()->delete();
+            $product->delete();
+            return redirect()->route('admin.products');
+        }
+        return back();
     }
 
     public function showUploadForm($id)
