@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\CartItem;
+use App\Models\Charge;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Stock;
@@ -86,18 +87,27 @@ class CheckoutController extends Controller
         }
         // update order and order items
         $order->orderItems()->insert($toSaveOrderItems);
-        $order->update(['price' => array_sum($subtotalByItem)]);
+        $subTotal = array_sum($subtotalByItem);
+        $chargeRecord = Charge::find(1);
+        $shippingCost = $subTotal >= $chargeRecord->min_order_amount ? 0 : $chargeRecord->amount;
+        $order->update(['price' => $subTotal, 'shipping_cost' => $shippingCost]);
 
         // save order id to session
         $request->session()->put('order_id', $order->id);
 
-        // redirect to payment form
-        return $request->user()->checkout($stripeLineItems, [
+        // make stripe checkout config, add shipping rate if applicable
+        $stripeCheckoutConfig = [
             'success_url' => route('checkout.success') . '?session_id={CHECKOUT_SESSION_ID}',
             'cancel_url' => route('checkout.cancel'),
             'payment_method_types' => ['card', 'sepa_debit', 'sofort', 'giropay'],
             'client_reference_id' => $order->id
-        ]);
+        ];
+        if ($shippingCost > 0) {
+            $stripeCheckoutConfig['shipping_rates'] = [$chargeRecord->name]; // charge->name is stripe charge id
+        }
+
+        // redirect to payment form
+        return $request->user()->checkout($stripeLineItems, $stripeCheckoutConfig);
     }
 
     public function checkoutSuccess(Request $request)

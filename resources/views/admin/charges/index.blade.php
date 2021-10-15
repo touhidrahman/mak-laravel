@@ -9,7 +9,7 @@
             @csrf
             @method('PUT')
 
-            <x-form.input name="name" value="{{$charge->name}}"></x-form.input>
+            <x-form.input name="name" label="Stripe Shipping ID" value="{{$charge->name}}"></x-form.input>
             <x-form.input name="amount" label="Amount (Eurocent)" type="number" value="{{$charge->amount}}"></x-form.input>
             <x-form.input name="min_order_amount" label="Free When Minimum Order Amount Is (Eurocent)" type="number" value="{{$charge->min_order_amount}}"></x-form.input>
 
@@ -19,7 +19,7 @@
         <form action="{{ route('admin.charges.store') }}" method="post">
             @csrf
 
-            <x-form.input name="name" value="{{'Shipping'}}"></x-form.input>
+            <x-form.input name="name" label="Stripe Shipping ID" value="{{'Shipping'}}"></x-form.input>
             <x-form.input name="amount" label="Amount (Eurocent)" type="number"></x-form.input>
             <x-form.input name="min_order_amount" label="Free When Minimum Order Amount Is (Eurocent)" type="number"></x-form.input>
 

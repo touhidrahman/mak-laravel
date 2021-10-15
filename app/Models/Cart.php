@@ -30,7 +30,7 @@ class Cart extends Model
     public function getTotalAttribute() {
         $total = 0;
         foreach($this->cartItems as $cartItem) {
-            $total += $cartItem->item_total;
+            $total += ($cartItem->qty * $cartItem->unit_price);
         }
 
         return $total;

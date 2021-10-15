@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\CartItem;
+use App\Models\Charge;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
@@ -17,15 +18,23 @@ class CartController extends Controller
     public function cart()
     {
         $cart = Cart::where('user_id', '=', Auth::user()->id)->whereNull('checked_out_at')->latest()->first();
-        $cartTotal = $cart->total / 100;
-        $vatAmount = $cartTotal * 19 / 100;
-        $cartTotalWithoutVat = $cartTotal - $vatAmount;
+        $chargeRecord = Charge::find(1);
+
+        $shippingChargeCent = $cart->total >= $chargeRecord->min_order_amount
+            ? 0
+            : $chargeRecord->amount;
+        $cartTotalCent = $cart->total;
+        $vatAmountCent = $cartTotalCent * 19 / 100;
+        $cartTotalWithoutVatCent = $cartTotalCent - $vatAmountCent;
+        $grandTotalCent = $cartTotalCent + $shippingChargeCent;
 
         return view('checkout.cart', [
             'cart' => $cart,
-            'cartTotal' => number_format($cartTotal, 2, ',', '.'),
-            'vatAmount' => number_format($vatAmount, 2, ',', '.'),
-            'cartTotalWithoutVat' => number_format($cartTotalWithoutVat, 2, ',', '.'),
+            'cartTotal' => $this->centToFormatted($cartTotalCent),
+            'grandTotal' => $this->centToFormatted($grandTotalCent),
+            'vatAmount' => $this->centToFormatted($vatAmountCent),
+            'cartTotalWithoutVat' => $this->centToFormatted($cartTotalWithoutVatCent),
+            'shippingCharge' => $this->centToFormatted($shippingChargeCent),
         ]);
     }
 
@@ -103,6 +112,11 @@ class CartController extends Controller
     {
         // TODO
         return back();
+    }
+
+    public function centToFormatted(int $cent)
+    {
+        return number_format($cent / 100, 2, ',', '.');
     }
 
 }
