@@ -21,6 +21,7 @@
                             <span class="text-xl font-bold">{{ $stock->size }}</span>
                         </td>
                         <td>
+                            <i class="bx bxs-circle mr-2 text-2xl" style="color: {{$stock->color->hex}}"></i>
                             {{ $stock->color->name }}
                         </td>
                         <td>

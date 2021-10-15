@@ -21,8 +21,13 @@
                     @foreach ($colors as $color)
                         <tr>
                             <th>{{ $i++ }}</th>
-                            <td>{{ $color->name }}</td>
-                            <td>{{ $color->hex }}</td>
+                            <td>
+                                {{ $color->name }}
+                            </td>
+                            <td>
+                                <i class="bx bxs-circle mr-2 text-2xl" style="color: {{$color->hex}}"></i>
+                                {{ $color->hex }}
+                            </td>
                             <td>
                                 <form action="{{ route('admin.colors.destroy', $color->id) }}" method="post">
                                     @csrf

@@ -49,6 +49,16 @@ class CartController extends Controller
             'unit_price' => 'integer',
         ]);
 
+        // check size color combination exists
+        $stock = Stock::where('product_id', '=', $data['product_id'])
+            ->where('color_id', '=', $data['color_id'])
+            ->where('size', '=', $data['size'])
+            ->first();
+        if (!$stock || $stock->qty < $data['qty']) {
+            alert('Out of stock!', 'Unfortunately the selected size & color is no longer available. Please try a different combination.', 'error');
+            return back();
+        }
+
         // get user
         $user = Auth::user();
         // check cart exists in session
