@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ChargeController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\FeaturedImageController;
 use App\Http\Controllers\HomeController;
@@ -116,6 +117,10 @@ Route::middleware('admin')->group(function() {
     Route::get('admin/colors', [ColorController::class, 'index'])->name('admin.colors');
     Route::post('admin/colors', [ColorController::class, 'store'])->name('admin.colors.store');
     Route::delete('admin/colors/{color}', [ColorController::class, 'destroy'])->name('admin.colors.destroy');
+
+    Route::get('admin/charges', [ChargeController::class, 'index'])->name('admin.charges');
+    Route::post('admin/charges', [ChargeController::class, 'store'])->name('admin.charges.store');
+    Route::put('admin/charges/{charge}', [ChargeController::class, 'update'])->name('admin.charges.update');
 
     Route::get('admin/featured-images', [FeaturedImageController::class, 'index'])->name('admin.featured-images');
     Route::get('admin/featured-images/create', [FeaturedImageController::class, 'show'])->name('admin.featured-images.show');

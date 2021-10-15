@@ -16,6 +16,7 @@
         </x-admin.sidebar-link>
         <x-admin.sidebar-link label="Categories" url="/admin/subsubcategories"></x-admin.sidebar-link>
         <x-admin.sidebar-link label="Colors" url="/admin/colors"></x-admin.sidebar-link>
+        <x-admin.sidebar-link label="Shipping Charge" url="/admin/charges"></x-admin.sidebar-link>
         <x-admin.sidebar-link label="Featured Images" url="/admin/featured-images"></x-admin.sidebar-link>
     </nav>
 </aside>
