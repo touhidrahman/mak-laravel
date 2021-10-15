@@ -9,10 +9,7 @@
         </div>
 
         <div class="flex">
-            <button @click="showModal = true" class="btn btn-outline btn-error mr-4">Delete</button>
-            <x-modal.delete title="Delete Product {{ $product->name }}?"
-                actionRoute="{{ route('admin.products.delete', $product->id) }}">
-            </x-modal.delete>
+            <a href="{{route('admin.products.edit', $product->id)}}" class="btn btn-primary mr-4">Edit</a>
 
             <form class="flex" action=" {{ route('admin.products.manage', $product->id) }}" method="POST">
                 @csrf
