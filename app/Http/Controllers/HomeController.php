@@ -59,9 +59,9 @@ class HomeController extends Controller
         ]);
     }
 
-    public function productDetails($id)
+    public function productDetails($slug)
     {
-        $product =  Product::with(['stocks', 'images'])->find($id);
+        $product =  Product::with(['stocks', 'images'])->where('slug', '=', $slug)->first();
         $available_sizes = [];
         $available_colors = [];
         foreach($product->stocks as $stock) {

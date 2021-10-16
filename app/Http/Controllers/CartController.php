@@ -83,7 +83,7 @@ class CartController extends Controller
             $cart->cartItems()->create($data);
         }
 
-        toast('Added to cart', 'success');
+        toast('Added to cart', 'success', 'bottom-right');
         $request->session()->put('cart_items_count', $cart->cartItems()->sum('qty'));
 
         return back();

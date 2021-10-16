@@ -29,7 +29,7 @@ Route::get('/home', [HomeController::class, 'index']); // temp
 Route::get('/shop', [HomeController::class, 'shop'])->name('shop');
 Route::get('/service', [HomeController::class, 'services'])->name('services');
 Route::get('/b2b', [HomeController::class, 'b2b'])->name('b2b');
-Route::get('/products/{product}', [HomeController::class, 'productDetails'])->name('product.details');
+Route::get('/products/{product:slug}', [HomeController::class, 'productDetails'])->name('product.details');
 
 Route::get('/checkout-success', [CheckoutController::class, 'checkoutSuccess'])->name('checkout.success');
 Route::get('/checkout-cancel', [CheckoutController::class, 'checkoutCancel'])->name('checkout.cancel');
