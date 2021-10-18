@@ -61,13 +61,14 @@
                                         class="text-indigo-600 hover:text-indigo-900">
                                         Edit
                                     </a>
-                                    <button @click="showModal = true"
-                                        class="ml-2 bg-transparent text-indigo-600 hover:text-indigo-900">
-                                        Delete
-                                    </button>
-                                    <x-modal.delete title="Delete {{ $subcategory->name }}?"
-                                        actionRoute="{{ route('admin.subcategories.delete', $subcategory->id) }}">
-                                    </x-modal.delete>
+                                    <form class="inline-block" action="{{ route('admin.subcategories.delete', $subcategory) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            class="ml-2 bg-transparent text-indigo-600 hover:text-indigo-900">
+                                            Delete
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
