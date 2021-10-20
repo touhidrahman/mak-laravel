@@ -25,6 +25,7 @@ class ProductImageFactory extends Factory
             'product_id' => $this->faker->numberBetween(1, 100),
             'path' => $this->faker->imageUrl(),
             'serial' => $this->faker->numberBetween(1, 10),
+            'color_id' => $this->faker->numberBetween(1, 20),
         ];
     }
 }

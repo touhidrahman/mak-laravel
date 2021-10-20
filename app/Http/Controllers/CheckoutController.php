@@ -89,7 +89,7 @@ class CheckoutController extends Controller
         $order->orderItems()->insert($toSaveOrderItems);
         $subTotal = array_sum($subtotalByItem);
         $chargeRecord = Charge::latest()->first();
-        $shippingCost = $subTotal >= $chargeRecord->min_order_amount ? 0 : $chargeRecord->amount;
+        $shippingCost = $subTotal >= $chargeRecord?->min_order_amount ? 0 : $chargeRecord->amount;
         $order->update(['price' => $subTotal, 'shipping_cost' => $shippingCost]);
 
         // save order id to session
