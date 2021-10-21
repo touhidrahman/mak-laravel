@@ -81,9 +81,9 @@ Route::middleware('admin')->group(function() {
     Route::post('admin/products/{product}', [ProductsController::class, 'update'])->name('admin.products.update');
     Route::get('admin/products/{product}/thumbs', [ProductImagesController::class, 'thumbnails'])->name('admin.products.showThumbnails');
     Route::post('admin/products/{product}/thumbs', [ProductImagesController::class, 'uploadThumbnails'])->name('admin.products.uploadThumbnails');
-    Route::get('admin/products/{product}/upload', [ProductsController::class, 'showUploadForm'])->name('admin.products.showUploadForm');
-    Route::post('admin/products/{product}/upload', [ProductsController::class, 'uploadImages'])->name('admin.products.uploadImages');
-    Route::delete('admin/products/{productId}/images/{imageId}', [ProductsController::class, 'deleteImage'])->name('admin.products.deleteImage');
+    Route::get('admin/products/{product}/images', [ProductImagesController::class, 'images'])->name('admin.products.images');
+    Route::post('admin/products/{product}/images', [ProductImagesController::class, 'uploadImages'])->name('admin.products.uploadImages');
+    Route::delete('admin/products/{productId}/images/{imageId}', [ProductImagesController::class, 'deleteImage'])->name('admin.products.deleteImage');
     Route::get('admin/products/{product}/manage', [ProductsController::class, 'showManageForm'])->name('admin.products.showManageForm');
     Route::post('admin/products/{product}/manage', [ProductsController::class, 'manage'])->name('admin.products.manage');
 

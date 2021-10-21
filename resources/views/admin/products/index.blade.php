@@ -61,8 +61,6 @@
                             <th>
                                 <a href="{{ route('admin.products.manage', $product->id) }}"
                                     class="btn btn-ghost btn-xs">manage</a>
-                                <a href="{{ route('admin.products.showUploadForm', $product->id) }}"
-                                    class="btn btn-ghost btn-xs">Images</a>
                             </th>
                         </tr>
                     @endforeach

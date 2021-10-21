@@ -14,7 +14,7 @@ class AddColorColumInImagesTable extends Migration
     public function up()
     {
         Schema::table('product_images', function (Blueprint $table) {
-            $table->foreignId('color_id');
+            $table->foreignId('color_id')->nullable();
         });
     }
 

@@ -12,6 +12,7 @@ use App\Models\ProductImage;
 use App\Models\Stock;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 
 class ProductImagesController extends Controller
 {
@@ -46,17 +47,35 @@ class ProductImagesController extends Controller
         return back();
     }
 
-    public function otherImages(Request $request, $id)
+    public function images(Request $request, $id)
     {
-        return view('admin.products.upload', [
-            'product' => Product::find($id),
+        $product = Product::find($id);
+        $availableColorIds = Stock::select('color_id')->where('product_id', $id)->distinct()->get();
+        $availableColors = Color::whereIn('id', $availableColorIds)->get();
+
+        return view('admin.products.images', [
+            'product' => $product,
+            'availableColors' => $availableColors,
             'images' => ProductImage::where('product_id', $id)->get(),
         ]);
     }
 
-    public function uploadOtherImages(Request $request)
+    public function uploadImages(Request $request)
     {
+        $images = $request->file('images');
+        if ($images && count($images) > 0) {
+            $i = 0;
+            foreach($images as $image) {
+                ProductImage::insert([
+                    'product_id' => $request->id,
+                    'path' => $this->doUpload($image, $request->id),
+                    'serial' => $i,
+                ]);
+                $i++;
+            }
+        }
 
+        return back();
     }
 
     public function deleteImage(Request $request, $productId, $imageId)

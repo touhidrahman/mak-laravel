@@ -25,7 +25,7 @@
                 <x-form.error name="thumb_2"></x-form.error>
             </x-form.field>
 
-            <x-form.submit-cancel cancelRoute="{{ route('admin.products') }}"></x-form.submit-cancel>
+            <x-form.submit-cancel cancelRoute="{{ route('admin.products.manage', $product->id) }}"></x-form.submit-cancel>
         </form>
     </div>
 @endsection

@@ -11,7 +11,7 @@ use App\Models\ProductImage;
 use App\Models\Stock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Validation\Rule;
+
 
 class ProductsController extends Controller
 {
@@ -86,44 +86,13 @@ class ProductsController extends Controller
         $product = Product::find($id);
         if (!$product->active) {
             $product->stocks()->delete();
+            foreach($product->images() as $image) {
+                Storage::disk('s3')->delete($image->path);
+            }
+            $product->images()?->delete();
             $product->delete();
             return redirect()->route('admin.products');
         }
-        return back();
-    }
-
-    public function showUploadForm($id)
-    {
-        return view('admin.products.upload', [
-            'product' => Product::find($id),
-            'images' => ProductImage::where('product_id', $id)->get(),
-        ]);
-    }
-
-    public function uploadImages(Request $request)
-    {
-        $images = $request->file('images');
-        if ($images && count($images) > 0) {
-            $i = 0;
-            foreach($images as $image) {
-                ProductImage::insert([
-                    'product_id' => $request->id,
-                    'path' => $this->doUpload($image, $request->id),
-                    'serial' => $i,
-                ]);
-                $i++;
-            }
-        }
-
-        return back();
-    }
-
-    public function deleteImage(Request $request, $productId, $imageId)
-    {
-        $image = ProductImage::find($imageId);
-        Storage::disk('s3')->delete($image->path);
-        $image->delete();
-
         return back();
     }
 
@@ -149,11 +118,4 @@ class ProductsController extends Controller
         return back();
     }
 
-    private function doUpload($file, $productId)
-    {
-        $newName =  $productId . '/' . hexdec(uniqid()) . '.' . $file->getClientOriginalExtension();
-        $filepath = $file->storeAs('catalog_images', $newName, 's3');
-        Storage::disk('s3')->setVisibility($filepath, 'public');
-        return Storage::disk('s3')->url($filepath);
-    }
 }
