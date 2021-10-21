@@ -26,6 +26,7 @@
     </header>
 
     @include('admin.products._products-toolbar')
+    @include('admin.products._product-images-toolbar')
 
     <section class="grid gap-8 grid-cols-4">
         @include('admin.products._product-stocks')

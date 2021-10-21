@@ -102,20 +102,6 @@ class ProductsController extends Controller
 
     public function uploadImages(Request $request)
     {
-        $data = $request->validate([
-            'thumb_1' => 'mimes:jpg,png,jpeg|max:2048',
-            'thumb_2' => 'mimes:jpg,png,jpeg|max:2048',
-        ]);
-
-        $toSave = [];
-        foreach(['thumb_1', 'thumb_2'] as $key) {
-            if ($request->hasFile($key)) {
-                $file = $request->file($key);
-                $url = $this->doUpload($file, $request->id);
-                $toSave[$key] = $url;
-            }
-        }
-
         $images = $request->file('images');
         if ($images && count($images) > 0) {
             $i = 0;
@@ -127,12 +113,6 @@ class ProductsController extends Controller
                 ]);
                 $i++;
             }
-        }
-
-        if (count($toSave) > 0) {
-            Product::findOrFail($request->id)->update($toSave);
-
-            return back();
         }
 
         return back();

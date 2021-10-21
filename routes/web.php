@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ProductImagesController;
 use App\Http\Controllers\ChargeController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\FeaturedImageController;
@@ -78,6 +79,8 @@ Route::middleware('admin')->group(function() {
     Route::delete('admin/products/{product}', [ProductsController::class, 'delete'])->name('admin.products.delete');
     Route::get('admin/products/{product}', [ProductsController::class, 'edit'])->name('admin.products.edit');
     Route::post('admin/products/{product}', [ProductsController::class, 'update'])->name('admin.products.update');
+    Route::get('admin/products/{product}/thumbs', [ProductImagesController::class, 'thumbnails'])->name('admin.products.showThumbnails');
+    Route::post('admin/products/{product}/thumbs', [ProductImagesController::class, 'uploadThumbnails'])->name('admin.products.uploadThumbnails');
     Route::get('admin/products/{product}/upload', [ProductsController::class, 'showUploadForm'])->name('admin.products.showUploadForm');
     Route::post('admin/products/{product}/upload', [ProductsController::class, 'uploadImages'])->name('admin.products.uploadImages');
     Route::delete('admin/products/{productId}/images/{imageId}', [ProductsController::class, 'deleteImage'])->name('admin.products.deleteImage');
