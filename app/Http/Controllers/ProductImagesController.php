@@ -70,6 +70,7 @@ class ProductImagesController extends Controller
                     'product_id' => $request->id,
                     'path' => $this->doUpload($image, $request->id),
                     'serial' => $i,
+                    'color_id' => $request->input('color_id') ?? null,
                 ]);
                 $i++;
             }
