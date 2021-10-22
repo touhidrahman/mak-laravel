@@ -25,7 +25,7 @@
         </div>
         <div x-data="{ color_id: '' }" class="w-2/3 sm:w-5/6 flex items-center">
             @foreach ($available_colors as $color)
-                <i @click="color_id = '{{ $color->id }}'"
+                <i @click="$dispatch('colorselected', { id: {{$color->id}} }); color_id = '{{$color->id}}'"
                     class="bx bxs-circle text-3xl rounded-full mr-4 border-2 border-transparent hover:border-black transition-colors cursor-pointer"
                     x-bind:class="color_id == '{{ $color->id }}' ? 'border-primary' : ''"
                     style="color: {{ $color->hex }}"></i>
