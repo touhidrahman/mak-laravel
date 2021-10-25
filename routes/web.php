@@ -75,9 +75,9 @@ Route::middleware('admin')->group(function() {
 
     Route::get('admin/products', [ProductsController::class, 'index'])->name('admin.products');
     Route::get('admin/products/create', [ProductsController::class, 'show'])->name('admin.products.show');
-    Route::post('admin/products/create', [ProductsController::class, 'store'])->name('admin.products.store');
+    Route::post('admin/products', [ProductsController::class, 'store'])->name('admin.products.store');
     Route::delete('admin/products/{product}', [ProductsController::class, 'delete'])->name('admin.products.delete');
-    Route::get('admin/products/{product}', [ProductsController::class, 'edit'])->name('admin.products.edit');
+    Route::get('admin/products/{product}/edit', [ProductsController::class, 'edit'])->name('admin.products.edit');
     Route::post('admin/products/{product}', [ProductsController::class, 'update'])->name('admin.products.update');
     Route::get('admin/products/{product}/thumbs', [ProductImagesController::class, 'thumbnails'])->name('admin.products.showThumbnails');
     Route::post('admin/products/{product}/thumbs', [ProductImagesController::class, 'uploadThumbnails'])->name('admin.products.uploadThumbnails');

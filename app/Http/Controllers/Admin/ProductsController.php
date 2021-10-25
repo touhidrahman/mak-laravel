@@ -56,7 +56,7 @@ class ProductsController extends Controller
         return view('admin.products.edit', ['product' => $product]);
     }
 
-    public function update(ProductStoreRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $product = Product::find($id);
         $data = $request->validate([
@@ -66,14 +66,12 @@ class ProductsController extends Controller
             'material' => 'nullable|string',
             'description' => 'string',
             'seo_text' => 'string',
-            // 'sku' => [Rule::unique('products')->ignore($product->sku)],
             'tags' => 'nullable|string',
             'dimension' => 'nullable|string',
             'weight' => 'nullable|string',
             'selling_price' => 'integer',
             'discounted_price' => 'nullable|integer',
         ]);
-        dd($data);
 
         $product->update($data);
 

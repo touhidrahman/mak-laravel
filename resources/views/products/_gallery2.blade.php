@@ -2,8 +2,10 @@
     x-data="{ selectedImage: '{{ $product->images[0]->path ?? '' }}', selectedColor: '' }">
 
     <div class="w-full relative pb-5 sm:pb-0 mb-4">
-        <div class="bg-v-pink border border-grey relative rounded flex items-center justify-center aspect-w-1 aspect-h-1">
-            <img class="object-cover" alt="product image" :src="selectedImage"
+        <div class="bg-white border border-grey relative rounded flex items-center justify-center aspect-w-1 aspect-h-1">
+            <img class="object-contain"
+                alt="product image"
+                :src="selectedImage"
                 @colorselected.window="selectedImage = document.querySelector('#color_id_' + $event.detail.id)?.src || '{{ $product->images[0]->path }}'"
                 src="{{ $product->images[0]->path ?? '' }}">
         </div>
