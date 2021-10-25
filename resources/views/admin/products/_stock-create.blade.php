@@ -1,5 +1,4 @@
-<h2 class=" text-2xl font-semibold mb-6">Create Stock</h2>
-<form action="{{ route('admin.stocks.store', $product->id) }}" method="POST">
+<form class="block" action="{{ route('admin.stocks.store', $product->id) }}" method="POST">
     @csrf
     <input type="hidden" name="product_id" value="{{ $product->id }}">
 

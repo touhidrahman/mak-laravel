@@ -1,7 +1,9 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h2 class="font-semibold text-3xl text-gray-600">Thumbnail Photos for {{ $product->name }}</h2>
+    <x-admin.product.header :product="$product"></x-admin.product.header>
+
+    <h2 class="font-semibold text-2xl text-indigo-500 my-10">Thumbnail Photos for {{ $product->name }}</h2>
 
     <div class="grid grid-cols-3 gap-8" >
         <form class="block"

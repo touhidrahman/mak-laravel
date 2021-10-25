@@ -1,3 +1,3 @@
-<h2 class="font-semibold text-xl text-gray-600">
+<h2 {{ $attributes(['class' => 'text-2xl font-semibold text-indigo-500']) }}>
     {{ $slot }}
 </h2>

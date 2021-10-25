@@ -1,9 +1,9 @@
 @extends('layouts.admin')
 
 @section('content')
-    <x-admin.product.header :product="$product"></x-admin.product.header>
+<x-admin.product.header :product="$product"></x-admin.product.header>
 
-    <h2 class="font-semibold text-xl text-gray-600 mt-12">Upload Photos</h2>
+<x-admin.section-heading class="mt-10 mb-6">Product Images</x-admin.section-heading>
 
     <div class="grid grid-cols-3 gap-8">
         <form class="block" action="{{ route('admin.products.uploadImages', $product->id) }}" method="POST"
@@ -24,7 +24,7 @@
             </x-form.field>
 
             <x-form.field>
-                <x-form.label name="Default Images" required=""></x-form.label>
+                <x-form.label name="Images" required=""></x-form.label>
                 <input type="file" name="images[]" id="images" multiple />
                 <x-form.error name="images"></x-form.error>
             </x-form.field>
@@ -33,7 +33,7 @@
         </form>
 
         <div class="col-span-2">
-            <h1 class="text-2xl  mb-8">Images</h1>
+            <h1 class="text-2xl  mb-8">Default Images</h1>
             <div class="grid grid-cols-6 gap-4 mb-12">
                 @foreach ($images as $image)
                     @if (!$image->color_id)

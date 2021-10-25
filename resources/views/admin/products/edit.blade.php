@@ -8,9 +8,7 @@
         </x-modal.delete>
     </x-admin.product.header>
 
-    <div class="flex space-x-6 my-8 bg-gray-50 rounded shadow-md px-4 py-3">
-        @include('admin.products._product-actions')
-    </div>
+    <x-admin.section-heading class="mt-10 mb-6">Edit Product</x-admin.section-heading>
 
     <form class="grid grid-cols-3 gap-8 mt-12" action="{{ route('admin.products.update', $product->id) }}" method="POST">
         @csrf

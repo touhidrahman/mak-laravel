@@ -1,4 +1,3 @@
-<h1 class="text-2xl font-bold mt-10 mb-6">Stocks</h1>
 <div class="overflow-x-auto">
     <table class="table w-full">
         <thead>
