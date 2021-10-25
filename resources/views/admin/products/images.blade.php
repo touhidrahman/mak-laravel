@@ -1,9 +1,9 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h2 class="font-semibold text-3xl text-gray-600">Upload Photos for {{ $product->name }}</h2>
+    <x-admin.product.header :product="$product"></x-admin.product.header>
 
-    @include('admin.products._product-images-toolbar')
+    <h2 class="font-semibold text-xl text-gray-600 mt-12">Upload Photos</h2>
 
     <div class="grid grid-cols-3 gap-8">
         <form class="block" action="{{ route('admin.products.uploadImages', $product->id) }}" method="POST"
@@ -33,7 +33,7 @@
         </form>
 
         <div class="col-span-2">
-            <h1 class="text-2xl  mb-8">Default Images</h1>
+            <h1 class="text-2xl  mb-8">Images</h1>
             <div class="grid grid-cols-6 gap-4 mb-12">
                 @foreach ($images as $image)
                     @if (!$image->color_id)
@@ -43,7 +43,7 @@
             </div>
 
             @foreach ($availableColors as $availableColor)
-                <h1 class="text-2xl mb-8">{{$availableColor->name}}</h1>
+                <h1 class="text-2xl mb-8">{{ $availableColor->name }}</h1>
 
                 <div class="grid grid-cols-6 gap-4 mb-12">
                     @foreach ($images as $image)
