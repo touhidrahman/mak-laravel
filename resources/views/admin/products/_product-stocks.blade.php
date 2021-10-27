@@ -35,6 +35,7 @@
                             'product_id' => $stock->product->id,
                             'id' => $stock->id,
                         ]) }}">Edit</a>
+                        {{-- <button onclick="Livewire.emit('openModal', 'edit-stock')">Open Modal</button> --}}
                     </td>
                 </tr>
             @endforeach

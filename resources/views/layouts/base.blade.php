@@ -38,6 +38,8 @@
 
     @include('sweetalert::alert')
 
+
+    @livewire('livewire-ui-modal')
     @livewireScripts
 
 
