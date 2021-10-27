@@ -21,6 +21,7 @@ class CheckoutController extends Controller
         // check shipping address filled
         $data = $request->validate([
             'name' => 'required',
+            'email' => 'required',
             'street' => 'required',
             'house_no' => 'required',
             'city' => 'required',
@@ -31,7 +32,19 @@ class CheckoutController extends Controller
         ]);
 
         $user = Auth::user();
-        $user->update($data);
+        if (!$user) {
+            // check if the email exists
+            $userByEmail = User::where('email', $data['email'])->first();
+            // use random password to create a temp user
+            $data['password'] = Str::random(10);
+            $user = $userByEmail
+                ? $userByEmail
+                : User::create($data);
+        } else {
+            unset($data['email']);
+            $user->update($data);
+        }
+
         // move cart to unpaid order
         $cart = Cart::findOrFail($request->session()->get('cart_id'));
 
@@ -107,7 +120,7 @@ class CheckoutController extends Controller
         }
 
         // redirect to payment form
-        return $request->user()->checkout($stripeLineItems, $stripeCheckoutConfig);
+        return $user->checkout($stripeLineItems, $stripeCheckoutConfig);
     }
 
     public function checkoutSuccess(Request $request)

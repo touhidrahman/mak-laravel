@@ -15,16 +15,18 @@ use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
-    public function cart()
+    public $VAT_PERCENT = 19;
+
+    public function cart(Request $request)
     {
-        $cart = Cart::where('user_id', '=', Auth::user()->id)->whereNull('checked_out_at')->latest()->first();
+        $cart = Cart::find($request->session()->get('cart_id'));
         $chargeRecord = Charge::latest()->first();
 
         $shippingChargeCent = $cart->total >= $chargeRecord?->min_order_amount
             ? 0
             : $chargeRecord->amount;
         $cartTotalCent = $cart->total;
-        $vatAmountCent = $cartTotalCent * 19 / 100;
+        $vatAmountCent = $cartTotalCent * $this->VAT_PERCENT / 100;
         $cartTotalWithoutVatCent = $cartTotalCent - $vatAmountCent;
         $grandTotalCent = $cartTotalCent + $shippingChargeCent;
 
@@ -59,12 +61,10 @@ class CartController extends Controller
             return back();
         }
 
-        // get user
-        $user = Auth::user();
         // check cart exists in session
         $cart = Cart::find($request->session()->get('cart_id'));
         if (!$cart) {
-            $cart = Cart::create(['user_id' => $user->id, 'checked_out_at' => null]);
+            $cart = Cart::create(['user_id' => Auth::user()?->id, 'checked_out_at' => null]);
             // add to session
             $request->session()->put('cart_id', $cart->id);
         }

@@ -32,6 +32,14 @@ Route::get('/service', [HomeController::class, 'services'])->name('services');
 Route::get('/b2b', [HomeController::class, 'b2b'])->name('b2b');
 Route::get('/products/{product:slug}', [HomeController::class, 'productDetails'])->name('product.details');
 
+Route::get('cart', [CartController::class, 'cart'])->name('cart');
+Route::post('cart', [CartController::class, 'addToCart'])->name('cart.items.add');
+Route::post('cart-change/{id}/ajax', [CartController::class, 'changeQty'])->name('cart.items.change');
+Route::post('cart/{id}/items/{cartItemId}/del', [CartController::class, 'deleteFromCart'])->name('cart.items.delete');
+Route::post('cart/{id}/items/{cartItemId}/dec', [CartController::class, 'reduceQty'])->name('cart.items.reduce');
+Route::post('cart/{id}/items/{cartItemId}/inc', [CartController::class, 'increaseQty'])->name('cart.items.increase');
+
+Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
 Route::get('/checkout-success', [CheckoutController::class, 'checkoutSuccess'])->name('checkout.success');
 Route::get('/checkout-cancel', [CheckoutController::class, 'checkoutCancel'])->name('checkout.cancel');
 
@@ -55,15 +63,6 @@ Route::middleware('auth')->group(function () {
     Route::get('account', [AccountController::class, 'index'])->name('account');
     Route::get('account/orders', [AccountController::class, 'orders'])->name('account.orders');
     Route::get('account/orders/{order}', [AccountController::class, 'show'])->name('account.orders.show');
-
-    Route::get('cart', [CartController::class, 'cart'])->name('cart');
-    Route::post('cart', [CartController::class, 'addToCart'])->name('cart.items.add');
-    Route::post('cart-change/{id}/ajax', [CartController::class, 'changeQty'])->name('cart.items.change');
-    Route::post('cart/{id}/items/{cartItemId}/del', [CartController::class, 'deleteFromCart'])->name('cart.items.delete');
-    Route::post('cart/{id}/items/{cartItemId}/dec', [CartController::class, 'reduceQty'])->name('cart.items.reduce');
-    Route::post('cart/{id}/items/{cartItemId}/inc', [CartController::class, 'increaseQty'])->name('cart.items.increase');
-
-    Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
 
     Route::post('logout', LogoutController::class)->name('logout');
 });

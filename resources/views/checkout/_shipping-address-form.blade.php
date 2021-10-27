@@ -2,6 +2,7 @@
 
 <div class="pt-4 md:pt-5">
     <x-form.input name="name" value="{{ auth()->user()->name ?? '' }}" placeholder="Your name"></x-form.input>
+    <x-form.input name="email" value="{{ auth()->user()->email ?? '' }}" disabled="{{ !!auth()->user()?->email }}" placeholder="Your email address"></x-form.input>
 
     <div class="flex justify-between w-full">
         <div class="w-2/3 mr-2">
