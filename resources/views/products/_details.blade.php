@@ -23,12 +23,18 @@
         <div class="w-1/3 sm:w-1/5">
             <p class="font-hk text-secondary">Color</p>
         </div>
-        <div x-data="{ color_id: '' }" class="w-2/3 sm:w-5/6 flex items-center">
+        <div x-data="{ color_id: '' }" class="w-2/3 sm:w-5/6 flex flex-wrap items-center">
             @foreach ($available_colors as $color)
-                <i @click="$dispatch('colorselected', { id: {{$color->id}} }); color_id = '{{$color->id}}'"
-                    class="bx bxs-circle text-3xl rounded-full mr-4 border-2 border-transparent hover:border-black transition-colors cursor-pointer"
+                <button
+                    type="button"
+                    @click="$dispatch('colorselected', { id: {{$color->id}} }); color_id = '{{$color->id}}'"
                     x-bind:class="color_id == '{{ $color->id }}' ? 'border-primary' : ''"
-                    style="color: {{ $color->hex }}"></i>
+                    class="border border-gray-200 bg-white text-sm font-medium px-3 py-1 hover:bg-gray-200 hover:text-primary focus:z-10 focus:ring-2 focus:ring-primary focus:text-primary mr-3 mb-3">
+                    <div class="flex justify-center items-center">
+                        <i class="bx bxs-circle text-3xl mr-3" style="color: {{ $color->hex }}"></i>
+                        <span class="block">{{ $color->name }}</span>
+                    </div>
+                </button>
             @endforeach
             <input x-model="color_id" type="hidden" name="color_id" name="color_id" value="">
         </div>
