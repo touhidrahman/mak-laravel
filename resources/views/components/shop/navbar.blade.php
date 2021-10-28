@@ -8,6 +8,7 @@
     <div class="shadow-xs py-6 lg:py-10 z-50 relative">
         <div class="flex justify-between items-center">
             <div class="flex items-center">
+                {{-- trigger for mobile menu  --}}
                 <div class="block lg:hidden">
                     <i class="bx bx-menu text-primary text-4xl" @click="mobileMenu = !mobileMenu"></i>
                 </div>
@@ -34,7 +35,8 @@
                     @endif
                 </a>
 
-                <span @click="mobileCart = !mobileCart"
+                {{-- @click="mobileCart = !mobileCart" --}}
+                <a href="/cart"
                     class="block relative lg:hidden border-2 transition-all border-transparent hover:border-primary rounded-full p-2 sm:p-4 ml-2 sm:ml-3 md:ml-5 lg:ml-8 group">
                     <img src="/img/icons/icon-cart.svg" class="w-5 sm:w-6 md:w-8 h-5 sm:h-6 md:h-8 block group-hover:hidden" alt="icon cart" />
                     <img src="/img/icons/icon-cart-hover.svg" class="w-5 sm:w-6 md:w-8 h-5 sm:h-6 md:h-8 hidden group-hover:block" alt="icon cart hover" />
@@ -43,7 +45,7 @@
                             {{ session('cart_items_count') }}
                         </span>
                     @endif
-                </span>
+                </a>
             </div>
 
             <div class="hidden">
@@ -166,3 +168,58 @@
         </div>
     </div>
 </div>
+
+{{-- mobile cart popup
+<div class="absolute inset-x-0 opacity-0 pointer-events-none z-50"
+    :class="{ 'opacity-100 pointer-events-auto': mobileCart }">
+    <div class="w-full sm:w-1/2 absolute right-0 top-0 px-6 py-6 z-10 bg-white shadow-sm rounded">
+        <div class="flex justify-between items-center border-b border-grey-dark pb-2">
+            <div class="flex items-center">
+                <i class="bx bx-x text-grey-darkest text-2xl sm:text-3xl mr-2 cursor-pointer"></i>
+                <div class="w-20 mx-0 h-20 rounded flex items-center justify-center">
+                    <div class="w-16 h-16 mx-auto bg-center bg-no-repeat bg-cover"
+                        style="background-image: url(/img/unlicensed/backpack-1.png);">
+                    </div>
+                </div>
+                <div class="pl-2">
+                    <span class="font-hk text-grey-darkest text-base block">Winter Bag</span>
+                    <span class="font-hk text-secondary text-base mt-2">$19</span>
+                </div>
+            </div>
+            <div class="flex pl-3 items-center">
+                <span class="border border-primary rounded-full h-6 w-6 flex items-center justify-center"><i
+                        class="bx bx-minus text-primary"></i></span>
+                <span class="font-hkbold text-primary text-lg block px-2">1</span>
+                <span class="border border-primary rounded-full h-6 w-6 flex items-center justify-center"><i
+                        class="bx bx-plus text-primary"></i></span>
+            </div>
+        </div>
+        <div class="flex justify-between items-center border-b border-grey-dark pb-2">
+            <div class="flex items-center">
+                <i class="bx bx-x text-grey-darkest text-2xl sm:text-3xl mr-2 cursor-pointer"></i>
+                <div class="w-20 mx-0 h-20 rounded flex items-center justify-center">
+                    <div class="w-16 h-16 mx-auto bg-center bg-no-repeat bg-cover"
+                        style="background-image: url(/img/unlicensed/backpack-1.png);">
+                    </div>
+                </div>
+                <div class="pl-2">
+                    <span class="font-hk text-grey-darkest text-base block">Winter Bag</span>
+                    <span class="font-hk text-secondary text-base mt-2">$19</span>
+                </div>
+            </div>
+            <div class="flex pl-3 items-center">
+                <span class="border border-primary rounded-full h-6 w-6 flex items-center justify-center"><i
+                        class="bx bx-minus text-primary"></i></span>
+                <span class="font-hkbold text-primary text-lg block px-2">1</span>
+                <span class="border border-primary rounded-full h-6 w-6 flex items-center justify-center"><i
+                        class="bx bx-plus text-primary"></i></span>
+            </div>
+        </div>
+        <div class="flex justify-between pt-4">
+            <span class="font-hkbold text-secondary text-lg">Total</span>
+            <span class="font-hkbold text-secondary text-lg">$38</span>
+        </div>
+        <button type="submit" class="btn btn-primary w-full mt-5" aria-label="Login button">Checkout</button>
+        <a href="/cart" class="font-hk text-secondary md:text-lg pl-3 underline text-center block mt-4">Go to cart page</a>
+    </div>
+</div> --}}

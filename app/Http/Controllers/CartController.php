@@ -20,6 +20,10 @@ class CartController extends Controller
     public function cart(Request $request)
     {
         $cart = Cart::find($request->session()->get('cart_id'));
+        if (!$cart) {
+            toast('Cart is empty!', 'info');
+            return back();
+        }
         $chargeRecord = Charge::latest()->first();
 
         $shippingChargeCent = $cart->total >= $chargeRecord?->min_order_amount
