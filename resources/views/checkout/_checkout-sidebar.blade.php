@@ -1,5 +1,5 @@
 <form action="{{ route('checkout') }}" method="POST"
-class="sm:w-2/3 md:w-full lg:w-1/3 mx-auto lg:mx-0 mt-16 lg:mt-0">
+class="block w-full">
 @csrf
 
 <div class="bg-grey-light py-8 px-8">
