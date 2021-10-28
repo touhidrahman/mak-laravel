@@ -72,6 +72,8 @@ class HomeController extends Controller
                 array_push($available_colors, $stock->color);
             }
         }
+        $sizeSorted = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+        $sizes = array_intersect($sizeSorted, $available_sizes);
 
         $relatedProducts = Product::where('active', true)
             ->where('subcategory_id', $product->subcategory_id)
@@ -80,7 +82,7 @@ class HomeController extends Controller
         return view('products.details', [
             'product' => $product,
             'available_colors' => $available_colors,
-            'available_sizes' => $available_sizes,
+            'available_sizes' => $sizes,
             'relatedProducts' => $relatedProducts,
         ]);
     }
