@@ -3,7 +3,7 @@
 @section('body')
 
     <main id="main">
-        <x-navbar></x-navbar>
+        <x-shop.navbar></x-shop.navbar>
 
         <section class="container mt-16 mb-24">
 

@@ -3,7 +3,7 @@
 @section('body')
 
     <div id="main">
-        <x-navbar></x-navbar>
+        <x-shop.navbar></x-shop.navbar>
 
         <div class="mt-12 md:flex md:flex-row flex-col container">
             <div class="lg:w-1/4 md:pr-8">

@@ -3,7 +3,7 @@
 @section('body')
 
     <div id="main">
-        <x-navbar></x-navbar>
+        <x-shop.navbar></x-shop.navbar>
 
         {{-- <div class="container py-6">
             <x-shop.breadcrumb></x-shop.breadcrumb>

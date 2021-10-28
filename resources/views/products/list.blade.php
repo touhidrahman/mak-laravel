@@ -3,7 +3,7 @@
 @section('body')
 
     <div id="main">
-        <x-navbar></x-navbar>
+        <x-shop.navbar></x-shop.navbar>
 
         <div class="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 md:mt-16">
             @foreach ($products as $product)
