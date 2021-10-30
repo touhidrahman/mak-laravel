@@ -11,7 +11,7 @@
                     </li>
 
                     <li class="pb-2 block">
-                        <a href="tel:+4915122336282" class="font-hk text-white transition-colors hover:text-primary text-base tracking-wide">+4915122336282</a>
+                        <a href="tel:+491781855959" class="font-hk text-white transition-colors hover:text-primary text-base tracking-wide">+491781855959</a>
                     </li>
 
                     <li class="pb-2 block">
