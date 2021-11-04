@@ -11,14 +11,14 @@ class AccountController extends Controller
 {
     public function index()
     {
-        return view('account.index');
+        return view('shop.account.index');
     }
 
     public function orders()
     {
         $user = Auth::user();
         $orders = Order::where('user_id', '=', $user->id)->latest()->paginate(5);
-        return view('account.orders', [
+        return view('shop.account.orders', [
             'orders' => $orders,
         ]);
     }
@@ -27,7 +27,7 @@ class AccountController extends Controller
     {
         $order = Order::findOrFail($id);
         $orderItems = OrderItem::where('order_id', '=', $id)->with(['product', 'stock'])->orderBy('id', 'ASC')->get();
-        return view('account.show', [
+        return view('shop.account.show', [
             'order' => $order,
             'orderItems' => $orderItems,
         ]);

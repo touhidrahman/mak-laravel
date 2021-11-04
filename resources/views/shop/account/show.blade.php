@@ -1,4 +1,4 @@
-@extends('account._account-layout')
+@extends('shop.account._account-layout')
 
 @section('account-content')
 

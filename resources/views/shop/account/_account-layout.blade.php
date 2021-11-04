@@ -7,7 +7,7 @@
 
         <div class="mt-12 md:flex md:flex-row flex-col container">
             <div class="lg:w-1/4 md:pr-8">
-                @include('account._account-sidebar')
+                @include('shop.account._account-sidebar')
             </div>
 
             <div class="lg:w-3/4 mt-12 md:mt-0">
