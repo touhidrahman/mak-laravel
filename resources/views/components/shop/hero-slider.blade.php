@@ -22,8 +22,8 @@ $featuredImages = Cache::remember('featuredimages', 3600, function () {
                     <div class="bg-left sm:bg-center bg-no-repeat bg-cover"
                         style="background-image:url({{ Illuminate\Support\Facades\Storage::disk('s3')->url($featuredImage->image_url) }})">
                         <div
-                            class="py-48 px-5 sm:px-10 md:px-12 xl:px-24 text-center sm:text-left sm:w-5/6 lg:w-3/4 xl:w-2/3">
-                            <h3 class="font-butler font-medium text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-8">
+                            class="py-36 sm:py-48 px-5 sm:px-10 md:px-12 xl:px-24 text-center sm:text-left sm:w-5/6 lg:w-3/4 xl:w-2/3">
+                            <h3 class="font-butler font-medium text-2xl sm:text-4xl md:text-5xl lg:text-6xl mb-8">
                                 <span @class([ 'text-white'=> $featuredImage->title_color == 'light',
                                     'text-secondary' => $featuredImage->title_color == 'dark' ])>
                                     {{ $featuredImage->title }}
@@ -42,9 +42,9 @@ $featuredImages = Cache::remember('featuredimages', 3600, function () {
     </div>
     <div class="absolute bottom-0 inset-x-0 mb-6 z-30 text-center" data-glide-el="controls[nav]">
 
-            @php
-                $i = 0;
-            @endphp
+        @php
+            $i = 0;
+        @endphp
         @foreach ($featuredImages as $featuredImage)
             <span
                 class="inline-block border border-primary transition-colors hover:bg-secondary-lighter p-1 rounded-full mr-1 focus:outline-none cursor-pointer"
