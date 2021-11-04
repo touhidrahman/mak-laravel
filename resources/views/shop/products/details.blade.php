@@ -12,9 +12,9 @@
         <div class="container">
 
             <div class="pt-16 pb-24 flex flex-col lg:flex-row justify-between -mx-5">
-                @include('products._gallery2')
+                @include('shop.products._gallery')
 
-                @include('products._details')
+                @include('shop.products._details')
             </div>
 
         </div>

@@ -53,7 +53,7 @@ class HomeController extends Controller
         }
         $products = $query->with(['stocks'])->paginate(24);
 
-        return view('products.list', [
+        return view('shop.products.list', [
             'products' => $products,
             'relatedProducts' => $query->take(6)->get(),
         ]);
@@ -79,7 +79,7 @@ class HomeController extends Controller
             ->where('subcategory_id', $product->subcategory_id)
             ->latest()->take(6)->get();
 
-        return view('products.details', [
+        return view('shop.products.details', [
             'product' => $product,
             'available_colors' => $available_colors,
             'available_sizes' => $sizes,
