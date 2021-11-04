@@ -36,7 +36,6 @@ class ProductsController extends Controller
     {
         return view('admin.products.create', [
             'categories' => Category::orderBy('name', 'ASC')->get(),
-            'colors' => Color::orderBy('name', 'ASC')->get(),
         ]);
     }
 
@@ -58,7 +57,6 @@ class ProductsController extends Controller
 
     public function update(Request $request, $id)
     {
-        $product = Product::find($id);
         $data = $request->validate([
             'name' => 'string',
             'brand' => 'nullable|string',
@@ -73,6 +71,7 @@ class ProductsController extends Controller
             'discounted_price' => 'nullable|integer',
         ]);
 
+        $product = Product::findOrFail($id);
         $product->update($data);
 
         toast('Product updated', 'success');

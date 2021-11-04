@@ -77,7 +77,7 @@ Route::middleware('admin')->group(function() {
     Route::post('admin/products', [ProductsController::class, 'store'])->name('admin.products.store');
     Route::delete('admin/products/{product}', [ProductsController::class, 'delete'])->name('admin.products.delete');
     Route::get('admin/products/{product}/edit', [ProductsController::class, 'edit'])->name('admin.products.edit');
-    Route::post('admin/products/{product}', [ProductsController::class, 'update'])->name('admin.products.update');
+    Route::patch('admin/products/{product}', [ProductsController::class, 'update'])->name('admin.products.update');
     Route::get('admin/products/{product}/thumbs', [ProductImagesController::class, 'thumbnails'])->name('admin.products.showThumbnails');
     Route::post('admin/products/{product}/thumbs', [ProductImagesController::class, 'uploadThumbnails'])->name('admin.products.uploadThumbnails');
     Route::get('admin/products/{product}/images', [ProductImagesController::class, 'images'])->name('admin.products.images');

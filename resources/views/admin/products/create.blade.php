@@ -6,7 +6,7 @@
 
     @include('admin.products._products-toolbar')
 
-    <form class="grid grid-cols-3 gap-8" action="/admin/products/create" method="POST" enctype="multipart/form-data">
+    <form class="grid grid-cols-3 gap-8" action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="">

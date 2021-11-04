@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @hasSection('title')
-
         <title>@yield('title') - {{ config('app.name') }}</title>
     @else
         <title>{{ config('app.name') }}</title>
@@ -15,9 +14,7 @@
     <link rel="shortcut icon" href="{{ url(asset('favicon.ico')) }}">
 
     <!-- Fonts -->
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css"
-        integrity="sha256-imWjOiEEAcjWdL1+inhBu1dWYFyXuiO9vpJVEQd3y/c=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" integrity="sha256-imWjOiEEAcjWdL1+inhBu1dWYFyXuiO9vpJVEQd3y/c=" crossorigin="anonymous" />
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ url(mix('css/app.css')) }}">
@@ -31,6 +28,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    @bukStyles
 </head>
 
 <body x-data="{ 'showModal': false }" @keydown.escape="showModal = false" x-cloak>
@@ -38,13 +36,11 @@
 
     @include('sweetalert::alert')
 
-
     @livewire('livewire-ui-modal')
     @livewireScripts
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
-
     <script type="text/javascript">
         $(document).ready(function() {
             var categorySelector = $('select[name="category_id"]');
@@ -95,6 +91,7 @@
         });
     </script>
 
+    @bukScripts
 </body>
 
 </html>
