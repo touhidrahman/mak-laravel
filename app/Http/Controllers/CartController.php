@@ -34,7 +34,7 @@ class CartController extends Controller
         $cartTotalWithoutVatCent = $cartTotalCent - $vatAmountCent;
         $grandTotalCent = $cartTotalCent + $shippingChargeCent;
 
-        return view('checkout.cart', [
+        return view('shop.cart.index', [
             'cart' => $cart,
             'cartTotal' => $this->centToFormatted($cartTotalCent),
             'grandTotal' => $this->centToFormatted($grandTotalCent),
