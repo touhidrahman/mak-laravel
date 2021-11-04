@@ -14,27 +14,27 @@ class HomeController extends Controller
 {
     public function comingSoon()
     {
-        return view('coming-soon');
+        return view('shop.coming-soon');
     }
 
     public function maint()
     {
-        return view('under-maintenance');
+        return view('shop.under-maintenance');
     }
 
     public function b2b()
     {
-        return view('under-maintenance');
+        return view('shop.under-maintenance');
     }
 
     public function services()
     {
-        return view('under-maintenance');
+        return view('shop.under-maintenance');
     }
 
     public function index()
     {
-        return view('welcome', [
+        return view('shop.home', [
             'trendingProducts' => Product::where('active', true)->take(6)->get(),
         ]);
     }
