@@ -21,13 +21,13 @@ class Navbar extends Component
      */
     public function __construct()
     {
-        $this->categories = Cache::remember('categories', 3600 * 2, function () {
+        $this->categories = Cache::remember('categories', 3600, function () {
             return Category::all();
         });
-        $this->subcategories = Cache::remember('subcategories', 3600 * 2, function () {
+        $this->subcategories = Cache::remember('subcategories', 3600, function () {
             return Subcategory::all();
         });
-        $this->subsubcategories = Cache::remember('subsubcategories', 3600 * 2, function () {
+        $this->subsubcategories = Cache::remember('subsubcategories', 3600, function () {
             return Subsubcategory::all();
         });
     }

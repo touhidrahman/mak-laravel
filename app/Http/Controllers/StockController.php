@@ -53,4 +53,11 @@ class StockController extends Controller
 
         return redirect()->route('admin.products.manage', $product_id);
     }
+
+    public function delete($product_id, $id)
+    {
+        Stock::find($id)->delete();
+
+        return redirect()->route('admin.products.manage', $product_id);
+    }
 }

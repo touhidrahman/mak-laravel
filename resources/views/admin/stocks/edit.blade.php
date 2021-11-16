@@ -1,13 +1,33 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h2 class="font-semibold text-3xl text-gray-600">Edit Stock</h2>
+    <header class="flex justify-between">
 
-    <form class="w-96 mt-12" action="{{ route('admin.stocks.update', [
+        <div class="">
+            <h2 class="font-semibold text-2xl text-gray-600">Edit Stock</h2>
+        </div>
+
+        <div class="">
+            <button @click="showModal = true" class="btn btn-outline btn-error mr-4">Delete</button>
+            <x-modal.delete title="Delete stock?"
+                actionRoute="{{ route('admin.stocks.delete', [
+                    'product_id' => $stock->product->id,
+                    'id' => $stock->id,
+                ]) }}">
+            </x-modal.delete>
+        </div>
+
+    </header>
+
+
+    <form class="w-96 mt-12"
+        action="{{ route('admin.stocks.update', [
             'product_id' => $stock->product->id,
-            'id' => $stock->id
-        ]) }}" method="POST">
+            'id' => $stock->id,
+        ]) }}"
+        method="POST">
         @csrf
+
         <input type="hidden" name="id" value="{{ $stock->id }}">
 
         <x-form.select name="size" label="Size">

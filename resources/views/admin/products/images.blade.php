@@ -24,7 +24,7 @@
             </x-form.field>
 
             <x-form.field>
-                <x-form.label name="Images" required=""></x-form.label>
+                <x-form.label name="Images (800 X 1200px, ~200 kb)" required=""></x-form.label>
                 <input type="file" name="images[]" id="images" multiple />
                 <x-form.error name="images"></x-form.error>
             </x-form.field>

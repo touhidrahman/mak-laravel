@@ -8,53 +8,32 @@
         <a href="{{ route('admin.featured-images.show') }}" class="btn btn-primary">Add Featured Image</a>
     </div>
 
-    <section class="mt-10">
-        <table class="table w-full">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>ID</th>
-                    <th>Image</th>
-                    <th>Title</th>
-                    <th>Text Color</th>
-                    <th>Page Path</th>
-                    <th>Button Label</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($featuredImages as $featuredImage)
-                    <tr>
-                        <td></td>
-                        <td>{{ $featuredImage->id }}</td>
-                        <td>
-                            <div class="avatar">
-                                <div class="mb-8 rounded-btn w-24 h-24">
-                                    <img src="{{ Illuminate\Support\Facades\Storage::disk('s3')->url($featuredImage->image_url) }}">
-                                </div>
-                            </div>
-                        </td>
-                        <td>{{ $featuredImage->title }}</td>
-                        <td>{{ $featuredImage->title_color }}</td>
-                        <td>{{ $featuredImage->page_path }}</td>
-                        <td>{{ $featuredImage->button_label }}</td>
-                        <td>
-                            <a href="{{ route('admin.featured-images.edit', $featuredImage->id) }}"
-                                class="ml-2 mr-4 bg-transparent text-indigo-600 hover:text-indigo-900">
-                                Edit
-                            </a>
-                            <button @click="showModal = true"
-                                class="ml-2 bg-transparent text-indigo-600 hover:text-indigo-900">
-                                Delete
-                            </button>
-                            <x-modal.delete title="Delete {{ $featuredImage->title }}?"
-                                actionRoute="{{ route('admin.featured-images.destroy', $featuredImage->id) }}">
-                            </x-modal.delete>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+    <section class="mt-10 grid grid-col-2 gap-10">
+
+        @foreach ($featuredImages as $featuredImage)
+            <div class="bg-white p-6 shadow-md border border-gray-200 rounded-lg">
+                <h5 class="text-gray-900 font-bold text-2xl tracking-tight mb-2">{{ $featuredImage->title }}</h5>
+                <div class="font-normal text-gray-700 mb-3">
+                    <div class="mb-8 w-auto h-24 overflow-hidden">
+                        <img class="h-24 w-auto" src="{{ Illuminate\Support\Facades\Storage::disk('s3')->url($featuredImage->image_url) }}">
+                    </div>
+                    <div>Title color: <strong>{{ $featuredImage->title_color }}</strong></div>
+                    <div>Page link: <strong>{{ $featuredImage->page_path }}</strong></div>
+                    <div>Button label: <strong>{{ $featuredImage->button_label }}</strong></div>
+                </div>
+                <a href="{{ route('admin.featured-images.edit', $featuredImage->id) }}"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center">
+                    Edit
+                    <svg class="-mr-1 ml-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </a>
+            </div>
+        @endforeach
+
     </section>
 
 @endsection

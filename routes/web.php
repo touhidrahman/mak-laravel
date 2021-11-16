@@ -89,6 +89,7 @@ Route::middleware('admin')->group(function() {
     Route::post('admin/products/{product}/stocks', [StockController::class, 'store'])->name('admin.stocks.store');
     Route::get('admin/products/{product_id}/stocks/{id}', [StockController::class, 'edit'])->name('admin.stocks.edit');
     Route::post('admin/products/{product_id}/stocks/{id}', [StockController::class, 'update'])->name('admin.stocks.update');
+    Route::delete('admin/products/{product_id}/stocks/{id}', [StockController::class, 'delete'])->name('admin.stocks.delete');
 
     Route::get('admin/orders', [OrderController::class, 'index'])->name('admin.orders');
     Route::get('admin/orders/{id}', [OrderController::class, 'manage'])->name('admin.orders.manage');

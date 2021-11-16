@@ -3,7 +3,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\FeaturedImage;
 use Illuminate\Support\Facades\Cache;
 
-$featuredImages = Cache::remember('featuredimages', 3600, function () {
+$featuredImages = Cache::remember('featuredimages', 3600 * 3, function () {
     return FeaturedImage::all();
 });
 @endphp
@@ -13,13 +13,13 @@ $featuredImages = Cache::remember('featuredimages', 3600, function () {
 ])
 
 <div class="hero-slider relative" x-data
-    x-init="new Glide('.hero-slider', { autoplay: 3000, type: 'carousel' }).mount()">
+    x-init="new Glide('.hero-slider', { autoplay: 4000, type: 'carousel' }).mount()">
     <div class="glide__track" data-glide-el="track">
         <div class="glide__slides">
 
             @foreach ($featuredImages as $featuredImage)
                 <div class="glide__slide">
-                    <div class="bg-left sm:bg-center bg-no-repeat bg-cover"
+                    <div class="bg-left sm:bg-center bg-no-repeat bg-contain sm:bg-cover"
                         style="background-image:url({{ Illuminate\Support\Facades\Storage::disk('s3')->url($featuredImage->image_url) }})">
                         <div
                             class="py-36 sm:py-48 px-5 sm:px-10 md:px-12 xl:px-24 text-center sm:text-left sm:w-5/6 lg:w-3/4 xl:w-2/3">

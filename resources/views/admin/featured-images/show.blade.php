@@ -11,7 +11,7 @@
 
             <x-form.field>
                 <img id="image" src="" class="w-auto h-32 block">
-                <x-form.label name="Image" required="true"></x-form.label>
+                <x-form.label name="Image (1600 X 600 px, ~200 kb)" required="true"></x-form.label>
                 <input type="file" name="image" id="image" onChange="thumbnailPreview(this, 'image')" />
                 <x-form.error name="image"></x-form.error>
             </x-form.field>
