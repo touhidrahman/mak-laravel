@@ -14,15 +14,15 @@
             <input type="hidden" name="id" value="{{ $product->id }}">
 
             <x-form.field>
-                <img id="thumb_1_slot" src="{{ $product->thumb_1 }}" class="w-32 h-32 block">
-                <x-form.label name="Cover Image 1" required="true"></x-form.label>
+                <img id="thumb_1_slot" src="{{ $product->thumb_1 }}" class="w-32 h-48 block pb-6">
+                <x-form.label name="Thumbnail 1" required="true"></x-form.label>
                 <input type="file" name="thumb_1" id="thumb_1" onChange="thumbnailPreview(this, 'thumb_1_slot')" />
                 <x-form.error name="thumb_1"></x-form.error>
             </x-form.field>
 
             <x-form.field>
-                <img id="thumb_2_slot" src="{{ $product->thumb_2 }}" class="w-32 h-32 block">
-                <x-form.label name="Cover Image 2" required="true"></x-form.label>
+                <img id="thumb_2_slot" src="{{ $product->thumb_2 }}" class="w-32 h-48 block pb-6">
+                <x-form.label name="Thumbnail 2" required="true"></x-form.label>
                 <input type="file" name="thumb_2" id="thumb_2" onChange="thumbnailPreview(this, 'thumb_2_slot')" />
                 <x-form.error name="thumb_2"></x-form.error>
             </x-form.field>
@@ -39,7 +39,7 @@
         if (fileInputRef.files && fileInputRef.files[0]) {
             var reader = new FileReader();
             reader.onload = function(e) {
-                imgSlot.attr('src', e.target.result).width(80).height(80);
+                imgSlot.attr('src', e.target.result).width(80).height(120);
             };
             reader.readAsDataURL(fileInputRef.files[0]);
         }

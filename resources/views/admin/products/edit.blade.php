@@ -12,6 +12,7 @@
 
     <form class="grid grid-cols-3 gap-8 mt-12" action="{{ route('admin.products.update', $product->id) }}" method="POST">
         @csrf
+        @method('PATCH')
 
         <div class="">
             <x-form.input name="name" :required="true" placeholder="Product Name" value="{{ $product->name }}"></x-form.input>

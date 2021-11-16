@@ -13,7 +13,7 @@
 
             <x-form.field>
                 <x-form.select name="color_id" label="Color">
-                    <option value="" selected></option>
+                    <option class="text-gray-300" value="" selected>--(Default)--</option>
                     @foreach ($availableColors as $color)
                         <option value="{{ $color->id }}">
                             <i class="bx bx-circle mr-3" style="color: {{ $color->hex }}"></i>

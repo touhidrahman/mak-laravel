@@ -35,7 +35,6 @@
                     @endif
                 </a>
 
-                {{-- @click="mobileCart = !mobileCart" --}}
                 <a href="/cart"
                     class="block relative lg:hidden border-2 transition-all border-transparent hover:border-primary rounded-full p-2 sm:p-4 ml-2 sm:ml-3 md:ml-5 lg:ml-8 group">
                     <img src="/img/icons/icon-cart.svg" class="w-5 sm:w-6 md:w-8 h-5 sm:h-6 md:h-8 block group-hover:hidden" alt="icon cart" />
@@ -67,7 +66,7 @@
                             <i class="bx bx-chevron-down text-secondary group-hover:text-primary pl-2 px-2 transition-colors"></i>
                         </div>
 
-                        <div class="pt-10 absolute mt-40 top-0 left-0 right-0 z-50 w-2/3 mx-auto opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto ">
+                        <div class="pt-10 absolute mt-40 top-0 left-0 right-0 z-50 max-w-screen-xl mx-auto opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto ">
                             <div class="transition-all flex bg-white shadow-lg p-8 rounded-b relative ">
 
                                 @foreach ($subcategories as $subcategory)
