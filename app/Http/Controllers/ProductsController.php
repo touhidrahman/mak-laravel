@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductStoreRequest;
 use App\Models\Category;
+use App\Models\Subcategory;
+use App\Models\Subsubcategory;
 use App\Models\Color;
 use App\Models\Product;
 use App\Models\ProductImage;
@@ -55,6 +57,16 @@ class ProductsController extends Controller
         return view('admin.products.edit', ['product' => $product]);
     }
 
+    public function editCategories(Request $request, $id)
+    {
+        $product = Product::find($id);
+
+        return view('admin.products.edit-categories', [
+            'product' => $product,
+            'categories' => Category::orderBy('name', 'ASC')->get(),
+        ]);
+    }
+
     public function update(Request $request, $id)
     {
         $data = $request->validate([
@@ -78,12 +90,32 @@ class ProductsController extends Controller
         return redirect()->route('admin.products.manage', $product->id);
     }
 
+    public function updateCategories(Request $request, $id)
+    {
+        $product = Product::findOrFail($id);
+        $data = [];
+        if ($request->input('category_id')) {
+            $data['category_id'] = $request->input('category_id');
+        }
+        if ($request->input('subcategory_id')) {
+            $data['subcategory_id'] = $request->input('subcategory_id');
+        }
+        if ($request->input('subsubcategory_id')) {
+            $data['subsubcategory_id'] = $request->input('subsubcategory_id');
+        }
+
+        $product->update($data);
+
+        toast('Product updated', 'success');
+        return redirect()->route('admin.products.manage', $product->id);
+    }
+
     public function delete(Request $request, $id)
     {
         $product = Product::find($id);
         if (!$product->active) {
             $product->stocks()->delete();
-            foreach($product->images() as $image) {
+            foreach ($product->images() as $image) {
                 Storage::disk('s3')->delete($image->path);
             }
             $product->images()?->delete();
@@ -114,5 +146,4 @@ class ProductsController extends Controller
         toast('Product updated', 'success');
         return back();
     }
-
 }
